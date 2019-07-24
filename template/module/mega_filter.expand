@@ -1,0 +1,319 @@
+{% if settings['javascript'] %}
+	<script type="text/javascript">
+		{{ settings['javascript']|htmlspecialchars_decode }}
+	</script>
+{% endif %}
+
+{% if hide_container %}
+	<div style="display: none;">
+{% endif %}
+	
+<div class="block-product-sidebar-opt8 mfilter-box mfilter-{{ _position }}{{ hide_container ? ' mfilter-hide-container' : '' }}{{ _displayOptionsAs == 'modern_horizontal' ? ' mfilter-hide' : '' }}" id="mfilter-box-{{ _idx }}">
+	{% if heading_title %}
+	<div class="block-title heading-opt2"><span class="title">{{ heading_title }}</span></div>
+	{% endif %}
+	<div class="box-content filter-options-content block-content mfilter-content{% if not settings['calculate_number_of_products'] or not settings['show_number_of_products'] %} mfilter-hide-counter{% endif %}">
+		{{ buttons['top'] }}
+		<ul>
+			{% for kfilter, filter in filters %}
+				{% set base_type = (not filter['base_type']) ? filter['type'] : filter['base_type'] %}
+				{% set base_id = (not filter['id']) ? '' : filter['id'] %}
+
+            	{% set display_live_filter = settings['display_live_filter']['enabled'] ? '1' : '-1' %}
+				{% if filter['display_live_filter'] %}
+					{% set display_live_filter = filter['display_live_filter'] %}
+				{% endif %}
+
+				<li
+					data-type="{{ filter['type'] }}"
+					data-base-type="{{ base_type }}"
+					data-id="{{ base_id }}"
+					data-seo-name="{{ filter['seo_name'] }}"
+					data-display-options-as="{{ _displayOptionsAs ? _displayOptionsAs : '' }}"
+					{% if filter['auto_levels'] %}
+						data-auto-levels="{{ filter['auto_levels'] }}"
+					{% endif %}
+					data-display-live-filter="{% if display_live_filter == '1' and settings['display_live_filter']['items'] %}{{ settings['display_live_filter']['items'] }}{% else %}0{% endif %}"
+					data-display-list-of-items="{{ not filter['display_list_of_items'] ? '' : filter['display_list_of_items'] }}"
+					class="mfilter-filter-item mfilter-{{ filter['type'] }} mfilter-{{ base_type }}{% if base_type == 'attribute' %} mfilter-attributes{% else %}{% if base_type == 'option' %} mfilter-options{% else %}{% if base_type == 'filter' %} mfilter-filters{% endif %}{% endif %}{% endif %}">
+
+					{% if filter['collapsed'] != 'hide_header' and filter['name'] %}
+						<div class="mfilter-heading{% if filter['collapsed'] %}{% if filter['collapsed'] == '1' or ( is_mobile and filter['collapsed'] == 'mobile' ) or ( not is_mobile and filter['collapsed'] == 'pc' ) %}{% if not params[filter['seo_name']] %} mfilter-collapsed{% endif %}{% endif %}{% endif %}">
+							<div class="mfilter-heading-content">
+								<div class="mfilter-heading-text"><span>{{ filter['name'] }}</span></div>
+								<i class="mfilter-head-icon"></i>
+							</div>
+						</div>
+					{% endif %}
+					
+					<div class="mfilter-content-opts"{% if ( filter['collapsed'] == '1' or ( is_mobile and filter['collapsed'] == 'mobile' ) or ( not is_mobile and filter['collapsed'] == 'pc' ) ) and filter['collapsed'] != 'hide_header' and _position != 'content_top' %}{% if not params[filter['seo_name']] %} style="display:none"{% endif %}{% endif %}>
+						<div class="mfilter-opts-container">
+							<div class="mfilter-content-wrapper">
+								<div class="mfilter-options">
+									{% if base_type == 'categories' %}
+										<div class="mfilter-option mfilter-category mfilter-category-{{ filter['type'] }}">
+											{% if filter['type'] == 'related' %}
+												<ul data-labels="{{ (filter['labels']|join('#|#'))|replace({'"': '&quot;'}) }}">
+													{% set values = params[filter['seo_name']] %}
+													{% for level_id, level in filter['levels'] %}
+														{% set value = ( values[level_id] is empty ) ? '' : values[level_id] %}
+														<li>
+															<select data-type="category-{{ filter['type'] }}">
+																<option value="">{{ level['name'] }}</option>
+																{% for optKey, optVal in level['options'] %}
+																	<option value="{{ optKey }}"{{ value == optKey ? ' selected="selected"' : '' }}>{{ optVal }}</option>
+																{% endfor %}
+															</select>
+														</li>
+													{% endfor %}
+												</ul>
+											{% elseif filter['type'] == 'tree' %}
+												<input type="hidden" name="path" value="" />
+												<ul class="mfilter-tb" data-top-url="{{ filter['top_url'] }}" data-top-path="{{ filter['top_path'] }}">
+													{% for category in filter['categories'] if not (settings['hide_inactive_values'] is not empty and category['cnt'] is empty) %}
+														<li class="mfilter-tb-as-tr">
+															<div class="mfilter-tb-as-td">
+																<a href="#" data-id="{{ category['id'] }}" data-parent-id="{{ category['pid'] }}">{{ category['name'] }}</a>
+															</div>
+															<div class="mfilter-tb-as-td mfilter-col-count"><span class="mfilter-counter"{{ category['cnt'] < 0 ? ' style="display:none"' : '' }}>{{ category['cnt'] }}</span></div>
+														</li>
+													{% endfor %}
+												</ul>
+											{% endif %}
+											
+											{% if filter['show_button'] is not empty %}
+												<div class="mfilter-button">
+													<a href="#" class="button">{{ lang('text_button_apply') }}</a>
+												</div>
+											{% endif %}
+										</div>
+									{% elseif filter['type'] == 'search' or filter['type'] == 'search_oc' %}
+										<div class="mfilter-option mfilter-search{{ not (filter['button'] is empty) ? ' mfilter-search-button' : '' }}">
+											<input
+												id="mfilter-opts-search"
+												type="text"
+												data-refresh-delay="{{ filter['refresh_delay'] is defined ? filter['refresh_delay'] : '-1' }}"
+												value="{{ ( params['search'][0] is defined ) ? params['search'][0] : ( ( params['search_oc'][0] is defined ) ? params['search_oc'][0] : '' ) }}"
+												/>
+
+											{% if filter['button'] is not empty %}
+												<i
+													id="mfilter-opts-search_button"
+													type="submit"
+													></i>
+											{% endif %}
+										</div>
+									{% elseif filter['type'] == 'price' %}
+										<div class="mfilter-option mfilter-price">
+											<div class="mfilter-price-inputs">
+												{{ currency_symbol_left }}
+												<input
+													id="mfilter-opts-price-min"
+													type="text"
+													value="{{ ( params['price'][0] is defined ) ? params['price'][0] : '' }}"
+													/>
+													{{ currency_symbol_right }}
+													-
+												{{ currency_symbol_left }}
+												<input
+													id="mfilter-opts-price-max"
+													type="text"
+													value="{{ ( params['price'][1] is defined ) ? params['price'][1] : '' }}"
+													/>
+													{{ currency_symbol_right }}
+											</div>
+											<div class="mfilter-price-slider">
+												<div id="mfilter-price-slider"></div>
+											</div>
+										</div>
+									{% elseif filter['type'] == 'slider' %}
+										<div class="mfilter-option mfilter-slider">
+											<div class="mfilter-slider-inputs">
+												<input
+													class="mfilter-opts-slider-min"
+													type="text"
+													value=""
+													readonly="readonly"
+													/>
+													-
+												<input
+													class="mfilter-opts-slider-max"
+													type="text"
+													value=""
+													readonly="readonly"
+													/>
+											</div>
+											<div class="mfilter-slider-container">
+												<div class="mfilter-slider-slider"></div>
+											</div>
+											<div class="mfilter-slider-data" style="display: none;">
+												{% set tmp = {'keys': filter['options']|keys, 'options': filter['options']} %}
+												{{ tmp|base64_encode }}
+												</div>
+										</div>
+									{% elseif filter['type'] == 'rating' %}
+										<div class="mfilter-tb">
+											{% for i in 1..5 %}
+												<div class="mfilter-option mfilter-tb-as-tr">
+													<div class="mfilter-tb-as-td mfilter-col-input">
+														<input
+															id="mfilter-opts-rating-{{ _idx }}-{{ loop.revindex }}"
+															type="checkbox"
+															{{ (params['rating'] is not empty) and (loop.revindex in params['rating']) ? ' checked="checked"' : '' }}
+															value="{{ loop.revindex }}" />
+													</div>
+													<label class="mfilter-tb-as-td" for="mfilter-opts-rating-{{ _idx }}-{{ loop.revindex }}">
+                                                        {{ loop.revindex }} <img src="expandish/view/theme/default/image/stars-{{ loop.revindex }}.png" alt="" />
+													</label>
+													<div class="mfilter-tb-as-td mfilter-col-count"><span class="mfilter-counter">0</span></div>
+												</div>
+											{% endfor %}
+										</div>
+									{% elseif filter['type'] in ['stock_status', 'manufacturers', 'checkbox', 'radio', 'image_list_radio', 'image_list_checkbox'] %}
+										{% set _tmp_type = filter['type'] %}
+										{% if filter['type'] in ['stock_status', 'manufacturers'] %}
+											{% set _tmp_type = 'checkbox' %}
+										{% endif %}
+										<div class="mfilter-options-container">
+											<div class="mfilter-tb">
+											{% set options_tmp = [] %}
+											{% for option_id, option in filter['options'] if not (option['name'] == '' or options_tmp[option['key']] is defined ) %}
+												{% set key = option['key'] %}
+												{% set options_tmp = options_tmp|merge([{key: true}]) %}
+												{{ _position == 'content_top' ? '<div class="mfilter-tb">' : '' }}
+												<div class="mfilter-option mfilter-tb-as-tr">
+													<div class="mfilter-tb-as-td mfilter-col-input">
+														<input 
+															id="mfilter-opts-attribs-{{ _idx }}-{{ base_id }}-{{ option['key'] }}"
+															name="{{ filter['seo_name'] }}"
+															type="{{ _tmp_type == 'image_list_checkbox' ? 'checkbox' : ( _tmp_type == 'image_list_radio' ? 'radio' : _tmp_type ) }}"
+															{% if params[filter['seo_name']] is not empty and option['value'] in params[filter['seo_name']] %} checked="checked"{% endif %}
+															value="{{ option['value']|replace({'"': '&quot;'}) }}" />
+													</div>
+													<label class="mfilter-tb-as-td" for="mfilter-opts-attribs-{{ _idx }}-{{ base_id }}-{{ option['key'] }}">
+														{% if _tmp_type in ['image_list_radio', 'image_list_checkbox'] %}
+															<img src="{{ option['image'] }}" /> {{ option['name'] }}
+														{% else %}
+															{{ option['name'] }}
+														{% endif %}
+													</label>
+													<div class="mfilter-tb-as-td mfilter-col-count"><span class="mfilter-counter">0</span></div>
+												</div>
+												{{ _position == 'content_top' ? '</div>' : '' }}
+											{% endfor %}
+											</div>
+										</div>
+									{% elseif filter['type'] == 'select' %}
+										<div class="mfilter-tb">
+											<div class="mfilter-option mfilter-select">
+												<select>
+													<option value="">---</option>
+													{% for option_id, option in filter['options'] %}
+														<option 
+															id="mfilter-opts-select-{{ _idx }}-{{ base_id }}-{{ option['key'] }}"
+															value="{{ option['value']|replace({'"': '&quot;'}) }}"
+															data-name="{{ option['name'] }}"
+															{% if (params[filter['seo_name']] is not empty) and (option['value'] in params[filter['seo_name']]) %} selected="selected"{% endif %}
+															>{{ option['name'] }}</option>
+													{% endfor %}
+												</select>
+											</div>
+										</div>
+									{% elseif filter['type'] == 'image' %}
+										<div class="mfilter-tb">
+											<ul>
+												{% for option_id, option in filter['options'] %}
+													<li class="mfilter-option mfilter-image">
+														<input
+															id="mfilter-opts-attribs-{{ _idx }}-{{ base_id }}-{{ option['key'] }}"
+															name="{{ filter['seo_name'] }}"
+															type="checkbox" 
+															style="display:none"
+                                                        	{% if (params[filter['seo_name']] is not empty) and (option['value'] in params[filter['seo_name']]) %} checked="checked"{% endif %}
+															value="{{ option['value']|replace({'"': '&quot;'}) }}" />
+														<label for="mfilter-opts-attribs-{{ _idx }}-{{ base_id }}-{{ option['key'] }}" title="{{ option['name'] }}"><img src="{{ option['image'] }}" /></label>
+													</li>
+												{% endfor %}
+											</ul>
+										</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+		{{ buttons['bottom'] }}
+	</div>
+</div>
+
+{% if hide_container is not empty %}
+	</div>
+{% endif %}
+
+<script type="text/javascript">
+	MegaFilterLang.text_display = '{{ lang('text_display') }}';
+	MegaFilterLang.text_list	= '{{ lang('text_list') }}';
+	MegaFilterLang.text_grid	= '{{ lang('text_grid') }}';
+	MegaFilterLang.text_select	= '{{ lang('text_select') }}';
+	
+	jQuery().ready(function(){
+		jQuery('#mfilter-box-{{ _idx }}').each(function(){
+			var _t = jQuery(this).addClass('init'),
+				_p = { };
+
+			{% for k, v in _p %}
+				_p['{{ k }}'] = '{{ v }}';
+			{% endfor %}
+			
+			MegaFilterINSTANCES.push((new MegaFilter()).init( _t, {
+				'idx'					: '{{ _idx }}',
+				'route'					: '{{ _route }}',
+				'routeProduct'			: '{{ _routeProduct }}',
+				'routeHome'				: '{{ _routeHome }}',
+				'routeInformation'		: '{{ _routeInformation }}',
+				'routeManufacturerList'	: '{{ _routeManufacturerList }}',
+				'contentSelector'		: '{{ (settings['content_selector'] is empty ) ? '#mfilter-content-container' : (settings['content_selector']|htmlspecialchars_decode)|addslashes }}',
+				'refreshResults'		: '{{ ( settings["refresh_results"] is empty ) ? "immediately" : settings["refresh_results"] }}',
+				'refreshDelay'			: {{ ( settings["refresh_delay"] is empty ) ? 1000 : settings["refresh_delay"] }},
+				'autoScroll'			: {{ ( settings["auto_scroll_to_results"] is empty ) ? 'false' : 'true' }},
+				'ajaxInfoUrl'			: '{{ ajaxInfoUrl }}',
+				'ajaxResultsUrl'		: '{{ ajaxResultsUrl }}',
+				'ajaxCategoryUrl'		: '{{ ajaxCategoryUrl }}',
+				'priceMin'				: {{ price['min'] }},
+				'priceMax'				: {{ price['max'] }},
+				'mijoshop'				: {{ mijo_shop ? 'true' : 'false' }},
+				'aceshop'				: {{ ace_shop ? 'true' : 'false' }},
+				'showNumberOfProducts'	: {{ not settings['show_number_of_products'] ? 'false' : 'true' }},
+				'calculateNumberOfProducts' : {{ not settings['calculate_number_of_products'] ? 'false' : 'true' }},
+				'addPixelsFromTop'		: {{ not settings['add_pixels_from_top'] ? 0 : settings['add_pixels_from_top'] }},
+				'displayListOfItems'	: {
+					'type'				: '{{ not settings['display_list_of_items']['type'] ? 'scroll' : settings['display_list_of_items']['type'] }}',
+					'limit_of_items'	: {{ not settings['display_list_of_items']['limit_of_items'] ? 4 : settings['display_list_of_items']['limit_of_items'] }},
+					'maxHeight'			: {{ not settings['display_list_of_items']['max_height'] ? 155 : settings['display_list_of_items']['max_height'] }},
+					'textMore'			: '{{ lang('text_show_more') }}',
+					'textLess'			: '{{ lang('text_show_less') }}'
+				},
+				'smp'					: {
+					'isInstalled'			: {{ ( smp['isInstalled'] is empty ) ? 'false' : 'true' }},
+					'disableConvertUrls'	: {{ ( smp['disableConvertUrls'] is empty ) ? 'false' : 'true' }}
+				},
+				'params'				: _p,
+				'inStockDefaultSelected': {{ ( settings['in_stock_default_selected'] is empty ) ? 'false' : 'true' }},
+				'inStockStatus'			: '{{ ( settings['in_stock_status'] is empty ) ? 7 : settings['in_stock_status'] }}',
+				'showLoaderOverResults'	: {{ ( settings['show_loader_over_results'] is empty ) ? 'false' : 'true' }},
+				'showLoaderOverFilter'	: {{ ( settings['show_loader_over_filter'] is empty ) ? 'false' : 'true' }},
+				'hideInactiveValues'	: {{ ( settings['hide_inactive_values'] is empty ) ? 'false' : 'true' }},
+				'manualInit'			: {{ ( settings['manual_init'] is empty ) ? 'false' : 'true' }},
+				'displayOptionsAs'		: '{{ _displayOptionsAs ? _displayOptionsAs : '' }}',
+				'text'					: {
+					'loading'		: '{{ lang('text_loading') }}',
+					'go_to_top'		: '{{ lang('text_go_to_top') }}',
+					'init_filter'	: '{{ lang('text_init_filter') }}',
+					'initializing'	: '{{ lang('text_initializing') }}'
+				}
+			}));
+		});
+	});
+</script>

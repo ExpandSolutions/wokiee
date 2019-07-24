@@ -1,0 +1,86 @@
+
+{% if success %}
+    <br>
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ success }}
+    </div>
+{% endif %}
+
+<div id="content row" class="container">
+    <!-- Breadcrumb -->    
+    <div class="tt-breadcrumb">
+        <div class="container">
+            <ul>
+                {% for breadcrumb in breadcrumbs %}
+                    {% if loop.last %}
+                        <li class="active">{{ breadcrumb['text'] }}</li>
+                    {% else %}
+                        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb -->
+    <!--- Start Category --->
+    <div id="tt-pageContent">
+        <div class="container-indent">
+            <div class="container container-fluid-custom-mobile-padding">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-md-10 col-lg-8 col-md-auto">
+                        <div class="tt-post-single">                            
+                            <div class="tt-post-content">
+                                <img src="{{ category['category_image'] }}" data-src="{{ category['category_image'] }}" alt="">                            
+                            </div>                            
+                            <p>{{ category['description'] }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                
+        <div class="container-indent">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-md-10 col-lg-8 col-md-auto">
+                        <div class="comments-single-post">
+                            <h6 class="tt-title-border">{{ lang('blog_posts') }}</h6>
+                            <div class="tt-blog-thumb-list">
+                                <div class="row">
+                                    {% for post in categoryPosts %}
+                                    <div class="col-sm-6">
+                                        <div class="tt-blog-thumb">
+                                            <div class="tt-img">
+                                                <a href="{{ link('blog/post', '&post_id=' ~ post['post_id'], 'SSL') }}" target="_blank">
+                                                    <img src="{{ image(post['post_image']) }}" alt="{{ post['name'] }}">
+                                                </a>
+                                            </div>
+                                            <div class="tt-title-description">
+                                                <div class="tt-background"></div>
+                                                <div class="tt-tag">
+                                                    {{ post['created_at']|date("m/d/Y") }}                                                     
+                                                </div>
+                                                <div class="tt-title">
+                                                    <a href="{{ link('blog/post', '&post_id=' ~ post['post_id'], 'SSL') }}">
+                                                        {{ post['name'] }}
+                                                    </a>
+                                                </div>
+                                                <div class="">
+                                                    <p>{{ post['description']|slice(0, 200) }}</p>
+                                                </div>                                                
+                                                    <!-- <span class="label label-info">{{ lang('blog_post_visits') }}: {{ post['visits'] }}</span> -->
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <!--- End Category --->   
+</div>

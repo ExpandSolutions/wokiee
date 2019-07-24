@@ -1,0 +1,8 @@
+<table id="total">
+    {% for total in totals %}
+    <tr>
+        <td class="right"><b>{{ total['title'] }}:</b></td>
+        <td class="right">{{ total['text'] }}</td>
+    </tr>
+    {% endfor %}
+</table>

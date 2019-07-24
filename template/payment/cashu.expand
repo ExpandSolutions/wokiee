@@ -1,0 +1,29 @@
+{% if error %}
+<div class="warning">{{ error }}</div>
+{% endif %}
+{% if testmode %}
+  <div class="warning">{{ lang('text_testmode') }}</div>
+{% endif %}
+<form action="{{ action }}" method="post" id="checkout-form">
+  {% for key, value in fields %}
+    <input type="hidden" name="{{ key }}" value="{{ value }}" />
+  {% endfor %}
+</form>
+<div class="buttons">
+  <table>
+    <tr>
+      <td align="right"><a onclick="confirmSubmit();" class="button"><span>{{ lang('button_continue') }}</span></a></td>
+    </tr>
+  </table>
+</div>
+<script type="text/javascript"><!--
+function confirmSubmit() {
+	$.ajax({
+		type: 'GET',
+		url: 'index.php?route=payment/cashu/confirm',
+		success: function() {
+			$('#checkout-form').submit();
+		}
+	});
+}
+//--></script>

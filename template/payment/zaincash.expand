@@ -1,0 +1,28 @@
+<form action="{{ action }}" method="post">
+  <input type="hidden" name="orderid" value="{{ orderid }}" />
+  <input type="hidden" name="callbackurl" value="{{ callbackurl }}" />
+  <input type="hidden" name="orderdate" value="{{ orderdate }}" />
+  <input type="hidden" name="currency" value="{{ currency }}" />
+  <input type="hidden" name="orderamount" value="{{ orderamount }}" />
+  <input type="hidden" name="billemail" value="{{ billemail }}" />
+  <input type="hidden" name="billphone" value="{{ billphone }}" />
+  <input type="hidden" name="billaddress" value="{{ billaddress }}" />
+  <input type="hidden" name="billcountry" value="{{ billcountry }}" />
+  <input type="hidden" name="billprovince" value="{{ billprovince }}" />
+  <input type="hidden" name="billcity" value="{{ billcity }}" />
+  <input type="hidden" name="billpost" value="{{ billpost }}" />
+  <input type="hidden" name="deliveryname" value="{{ deliveryname }}" />
+  <input type="hidden" name="deliveryaddress" value="{{ deliveryaddress }}" />
+  <input type="hidden" name="deliverycity" value="{{ deliverycity }}" />
+  <input type="hidden" name="deliverycountry" value="{{ deliverycountry }}" />
+  <input type="hidden" name="deliveryprovince" value="{{ deliveryprovince }}" />
+  <input type="hidden" name="deliveryemail" value="{{ deliveryemail }}" />
+  <input type="hidden" name="deliveryphone" value="{{ deliveryphone }}" />
+  <input type="hidden" name="deliverypost" value="{{ deliverypost }}" />
+  
+  <div class="buttons">
+    <div class="right">
+      <input type="submit" value="{{ lang('button_confirm') }}" class="button" />
+    </div>
+  </div>
+</form>

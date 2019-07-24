@@ -1,0 +1,38 @@
+<div id="content">
+    <!-- breadcrumb -->
+    <div class="breadcrumb-page">
+        <ol class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="active">{{ breadcrumb['text'] }}</li>
+                {% else %}
+                    <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </div> <!-- breadcrumb -->
+
+    <div class="page-title-base">
+        <h1 class="title-base">{{ heading_title ? heading_title : lang('heading_title') }}</h1>
+    </div>
+
+    <br>
+
+    <br>
+
+    <div class="content">{{ text_message ? text_message : lang('text_message') }}</div>
+
+    <br>
+
+    <br>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="pull-left">
+                <a href="{{ continue }}" class="btn btn-inline">{{ lang('button_continue') }}</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<!-- 
+ * @package Zopim Live Chat
+ * @version 0.2.2
+ -->
+
+<!--Start of Zendesk Chat Script-->
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="https://v2.zopim.com/?{{ code }}";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+</script>
+<!--End of Zendesk Chat Script-->
+
+<script type="text/javascript"> 
+$zopim( function() {
+	$zopim.livechat.setLanguage('{{ language }}');
+	$zopim.livechat.setName('{{ username }}');
+    $zopim.livechat.setEmail('{{ useremail }}');
+	$zopim.livechat.button.setPosition('{{ position }}');
+	{% if theme and theme in ['simple', 'classic'] %}
+		$zopim.livechat.theme.setTheme('{{ theme }}');
+    {% endif %}
+    $zopim.livechat.theme.setColor('{% if color %}{{ color }}{% else %}#555555{% endif %}');
+	$zopim.livechat.bubble.setTitle('{{ bubbleTitle|addslashes}}');
+	$zopim.livechat.bubble.setText('{{ bubbleText|addslashes}}');
+    {% if bubbleEnable == 'show' %}
+	$zopim.livechat.bubble.show(true);
+    {% endif %}
+    {% if bubbleEnable == 'hide' %}
+	$zopim.livechat.bubble.hide(true);
+    {% endif %}
+	$zopim.livechat.setGreetings({
+		  'online' : ['{{ OnlineShort|addslashes }}', '{{ OnlineLong|addslashes }}'],
+		  'offline': ['{{ OfflineShort|addslashes }}', '{{ OfflineLong|addslashes }}'],
+		  'away'   : ['{{ AwayShort|addslashes }}', '{{ AwayLong|addslashes }}']
+	  });
+    {% if hideonoffline %}
+	$zopim.livechat.button.setHideWhenOffline(true);
+    {% endif %}
+})
+</script>

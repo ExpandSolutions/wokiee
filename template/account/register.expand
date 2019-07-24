@@ -1,0 +1,349 @@
+{{ script('js/jquery/colorbox/jquery.colorbox-min.js') }}
+{{ style('js/jquery/colorbox/colorbox.css') }}
+
+{% if error_warning %}
+<br>
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{ error_warning }}
+</div>
+{% endif %}
+
+<div id="content">
+    <!-- breadcrumb -->
+    <div class="tt-breadcrumb">
+            <div class="container">
+                <ul>
+                    {% for breadcrumb in breadcrumbs %}
+                        {% if loop.last %}
+                            <li class="active">{{ breadcrumb['text'] }}</li>
+                        {% else %}
+                            <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    <!-- breadcrumb -->
+
+    <div class="page-title-base hidden">
+        <h2 class="title-base">{{ lang('heading_title') }}</h2>
+    </div>
+
+    <p>{{ lang('text_account_already')|format(link('account/login', '', 'SSL')) }}</p>
+
+    <br>
+    <!--<?php if($d_social_login_enabled) echo $d_social_login; ?>-->
+    {% if d_social_login_enabled %}{{ d_social_login }}{% endif %}
+    <form action="{{ link('account/register', '', 'SSL') }}" method="post" id="signup" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="page-title-base">
+                    <h4 class="title-base">{{ lang('text_your_details') }}</h4>
+                </div>
+
+                <div class="form-group {{ error_firstname ? 'text-danger' : '' }}">
+                    <label for="firstname">{{ entry_firstname }} <span class="required">*</span></label>
+                    <input type="text" name="firstname" class="form-control" id="firstname" value="{{ firstname }}"/>
+                    {% if error_firstname %}
+                    <div class="text-danger">{{ error_firstname }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ error_lastname ? 'text-danger' : '' }}">
+                    <label for="lastname">{{ entry_lastname }} <span class="required">*</span></label>
+                    <input type="text" name="lastname" class="form-control" id="lastname" value="{{ lastname }}"/>
+                    {% if error_lastname %}
+                    <div class="text-danger">{{ error_lastname }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ error_email ? 'text-danger' : '' }}">
+                    <label for="email">{{ entry_email }} <span class="required">*</span></label>
+                    <input type="text" name="email" class="form-control" id="email" value="{{ email }}"/>
+                    {% if error_email %}
+                    <div class="text-danger">{{ error_email }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ error_password ? 'text-danger' : '' }}">
+                    <label for="password">{{ entry_password }} <span class="required">*</span></label>
+                    <input type="password" name="password" class="form-control" id="password" value="{{ password }}"/>
+                    {% if error_password %}
+                    <div class="text-danger">{{ error_password }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ error_confirm ? 'text-danger' : '' }}">
+                    <label for="confirm">{{ entry_confirm }} <span class="required">*</span></label>
+                    <input type="password" name="confirm" class="form-control" id="confirm" value="{{ confirm }}"/>
+                    {% if error_confirm %}
+                    <div class="text-danger">{{ error_confirm }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ error_telephone ? 'text-danger' : '' }}">
+                    <label for="telephone">{{ entry_telephone }} <span class="required">*</span></label>
+                    <input type="text" name="telephone" class="form-control" id="telephone" value="{{ telephone }}"/>
+                    {% if error_telephone %}
+                    <div class="text-danger">{{ error_telephone }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="fax">{{ entry_fax }}</label>
+                    <input type="text" name="fax" class="form-control" id="fax" value="{{ fax }}"/>
+                </div>
+
+                <fieldset class="form-group">
+                    <label>{{ lang('text_newsletter') }}</label>
+
+                    {% if newsletter %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="newsletter" id="default1" value="1" checked="checked">
+                            {{ lang('text_yes') }}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="newsletter" id="default2" value="0">
+                            {{ lang('text_no') }}
+                        </label>
+                    </div>
+                    {% else %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="newsletter" id="default1" value="1">
+                            {{ lang('text_yes') }}
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="newsletter" id="default2" value="0" checked="checked">
+                            {{ lang('text_no') }}
+                        </label>
+                    </div>
+                    {% endif %}
+                </fieldset>
+            </div>
+
+            <div class="col-md-6">
+                <div class="page-title-base">
+                    <h4 class="title-base">{{ lang('text_your_address') }}</h4>
+                </div>
+
+                <div class="form-group">
+                    <label for="company">{{ entry_company }}</label>
+                    <input type="text" name="company" class="form-control" id="company" value="{{ company }}"/>
+                </div>
+
+                <fieldset class="form-group" style="{{ customer_groups|length > 1 ? '' : 'display: none;' }}">
+                    <label>{{ entry_customer_group }}</label>
+
+                    {% for customer_group in customer_groups %}
+                        {% if customer_group['customer_group_id'] == customer_group_id %}
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="customer_group_id" id="customer_group_id{{ customer_group['customer_group_id'] }}" value="{{ customer_group['customer_group_id'] }}" checked="checked">
+                                    {{ customer_group['name'] }}
+                                </label>
+                            </div>
+                        {% else %}
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="customer_group_id" id="customer_group_id{{ customer_group['customer_group_id'] }}" value="{{ customer_group['customer_group_id'] }}">
+                                    {{ customer_group['name'] }}
+                                </label>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </fieldset>
+
+                <div class="form-group {{ error_company_id ? 'text-danger' : '' }}" id="company-id-display">
+                    <label for="company_id">{{ entry_company_id }} <span id="company-id-required" class="required">*</span></label>
+                    <input type="text" name="company_id" class="form-control" id="company_id" value="{{ company_id }}"/>
+                    {% if error_company_id %}
+                    <div class="text-danger">{{ error_company_id }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ error_tax_id ? 'text-danger' : '' }}" id="tax-id-display">
+                    <label for="tax_id">{{ entry_tax_id }} <span id="tax-id-required" class="required">*</span></label>
+                    <input type="text" name="tax_id" class="form-control" id="tax_id" value="{{ tax_id }}"/>
+                    {% if error_tax_id %}
+                    <div class="text-danger">{{ error_tax_id }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ error_address_1 ? 'text-danger' : '' }}">
+                    <label for="address_1">{{ entry_address_1 }} <span class="required">*</span></label>
+                    <input type="text" name="address_1" class="form-control" id="address_1" value="{{ address_1 }}"/>
+                    {% if error_address_1 %}
+                    <div class="text-danger">{{ error_address_1 }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="address_2">{{ entry_address_2 }}</label>
+                    <input type="text" name="address_2" class="form-control" id="address_2" value="{{ address_2 }}"/>
+                </div>
+
+                <div class="form-group {{ error_city ? 'text-danger' : '' }}">
+                    <label for="city">{{ entry_city }} <span class="required">*</span></label>
+                    <input type="text" name="city" class="form-control" id="city" value="{{ city }}"/>
+                    {% if error_city %}
+                    <div class="text-danger">{{ error_city }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ error_postcode ? 'text-danger' : '' }}">
+                    <label for="postcode">{{ entry_postcode }} <span id="postcode-required" class="required">*</span></label>
+                    <input type="text" name="postcode" class="form-control" id="postcode" value="{{ postcode }}"/>
+                    {% if error_postcode %}
+                    <div class="text-danger">{{ error_postcode }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ error_country ? 'text-danger' : '' }}">
+                    <label for="country_id">{{ entry_country }} <span class="required">*</span></label>
+                    <select name="country_id" class="form-control" id="country_id">
+                        <option value="">{{ lang('text_select') }}</option>
+                        {% for country in countries %}
+                        {% if country['country_id'] == country_id %}
+                        <option value="{{ country['country_id'] }}"
+                                selected="selected">{{ country['name'] }}</option>
+                        {% else %}
+                        <option value="{{ country['country_id'] }}">{{ country['name'] }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    {% if error_country %}
+                    <div class="text-danger">{{ error_country }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group {{ error_zone ? 'text-danger' : '' }}">
+                    <label for="zone_id">{{ entry_zone }} <span class="required">*</span></label>
+                    <select name="zone_id" class="form-control" id="zone_id"></select>
+                    {% if error_zone %}
+                    <div class="text-danger">{{ error_zone }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                {% if text_agree %}
+                    <div class="pull-left">
+                        {% if agree %}
+                            <input type="checkbox" name="agree" value="1" checked="checked" />
+                        {% else %}
+                            <input type="checkbox" name="agree" value="1" />
+                        {% endif %}
+                        {{ text_agree }}<span class="required">*</span>
+                    </div>
+                {% endif %}
+                <div class="pull-right">
+                    <input type="submit" value="{{ lang('button_continue') }}"
+                           class="btn btn-inline" {{ text_agree ? 'step="margin:0 10px;"' : '' }}/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+$(document).on('change', 'input[name=\'customer_group_id\']:checked', function() {
+	var customer_group = [];
+
+{% for customer_group in customer_groups %}
+	customer_group[{{ customer_group['customer_group_id'] }}] = [];
+	customer_group[{{ customer_group['customer_group_id'] }}]['company_id_display'] = '{{ customer_group['company_id_display'] }}';
+	customer_group[{{ customer_group['customer_group_id'] }}]['company_id_required'] = '{{ customer_group['company_id_required'] }}';
+	customer_group[{{ customer_group['customer_group_id'] }}]['tax_id_display'] = '{{ customer_group['tax_id_display'] }}';
+	customer_group[{{ customer_group['customer_group_id'] }}]['tax_id_required'] = '{{ customer_group['tax_id_required'] }}';
+{% endfor %}
+
+	if (customer_group[this.value]) {
+		if (customer_group[this.value]['company_id_display'] == '1') {
+			$('#company-id-display').show();
+		} else {
+			$('#company-id-display').hide();
+		}
+
+		if (customer_group[this.value]['company_id_required'] == '1') {
+			$('#company-id-required').show();
+		} else {
+			$('#company-id-required').hide();
+		}
+
+		if (customer_group[this.value]['tax_id_display'] == '1') {
+			$('#tax-id-display').show();
+		} else {
+			$('#tax-id-display').hide();
+		}
+
+		if (customer_group[this.value]['tax_id_required'] == '1') {
+			$('#tax-id-required').show();
+		} else {
+			$('#tax-id-required').hide();
+		}
+	}
+});
+
+$('input[name=\'customer_group_id\']:checked').trigger('change');
+</script>
+<script type="text/javascript">
+$('select[name=\'country_id\']').bind('change', function() {
+	$.ajax({
+		url: 'index.php?route=account/register/country&country_id=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'country_id\']').after('<span class="wait">&nbsp;<img src="{{ asset('image/loading.gif') }}" alt="" /></span>');
+		},
+		complete: function() {
+			$('.wait').remove();
+		},
+		success: function(json) {
+			if (json['postcode_required'] == '1') {
+				$('#postcode-required').show();
+			} else {
+				$('#postcode-required').hide();
+			}
+
+			html = '<option value="">{{ lang('text_select') }}</option>';
+
+			if (json['zone'] != '') {
+				for (i = 0; i < json['zone'].length; i++) {
+        			html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+					if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {
+	      				html += ' selected="selected"';
+	    			}
+
+	    			html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			} else {
+				html += '<option value="0" selected="selected">{{ lang('text_none') }}</option>';
+			}
+
+			$('select[name=\'zone_id\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('select[name=\'country_id\']').trigger('change');
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.colorbox').colorbox({
+		width: 640,
+		height: 480
+	});
+});
+</script>

@@ -1,0 +1,82 @@
+{% if fields.sectiontype.field_value == 'getLatestProducts' %}
+  {% set sliderProducts = getLatestProducts(8, 350, 350) %}
+
+{% elseif fields.sectiontype.field_value == 'getBestSellerProducts' %}
+  {% set sliderProducts = getBestSellerProducts(8, 350, 350) %}
+
+{% elseif fields.sectiontype.field_value == 'getSpecialProducts' %}
+  {% set sliderProducts = getSpecialProducts(8, 350, 350) %}
+
+{% elseif fields.sectiontype.field_value == 'getProductsByCategoryId' %}
+{% set allFeaturedCategories = getFeaturedCategories(fields['categories']['field_value'], 350, 350) %}
+{% set Cats = allFeaturedCategories|length %}
+{% set sliderProducts = getProductsByCategoryId(fields['categories']['field_value'], 20, 350, 350) %}
+{% elseif fields.sectiontype.field_value == 'getFeaturedProducts' %}
+  {% set sliderProducts = getFeaturedProducts(fields['products']['field_value'], 350, 350) %}
+{% endif %}
+
+{% set items_count = sliderProducts|length %}
+{% if items_count > 0 %}
+<div class="container-indent">		
+		<div class="container container-fluid-custom-mobile-padding margin-top-section">
+			{% if fields.displaysectiontitle.field_value == '1' %}
+			<div class="tt-block-title">
+				<h1 class="tt-title">{{fields.sectiontitle.field_value}}</h1>
+				<div class="tt-description">{{fields.sectiontitle2.field_value}}</div>
+			</div>
+			{%endif%}			
+			<div class="row tt-layout-product-item">	
+				{% for item_product in sliderProducts %}		
+				<div class="col-6 col-md-4 col-lg-3">
+					<div class="tt-product thumbprod-center">
+						<div class="tt-image-box">
+							<a href="{{ item_product.href }}" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView" data-tooltip="{{lang('view')}}" data-tposition="{{lang('lang_webtt')}}"></a>                            
+							<a onclick="addToWishList('{{ item_product.product_id }}'); return false;" class="action wishlist-link tt-btn-wishlist"
+								href="#" title="{{ lang('button_wishlist') }}" data-tooltip="{{ lang('button_wishlist') }}" data-tposition="{{lang('lang_webtt')}}">                            
+							</a>
+							<a onclick="addToCompare('{{ product_id }}'); return false;" class=" tt-btn-compare iconFix actioncompare-link" href="#" title="{{ lang('button_compare') }}"
+								data-tooltip="{{ lang('button_compare') }}" data-tposition="{{lang('lang_webtt')}}">
+							</a>                           
+							<!-- <a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"	data-tooltip="Quick View" data-tposition="left"></a>
+							<a href="#" class="tt-btn-wishlist" data-tooltip="Add to Wishlist" data-tposition="left"></a>
+							<a href="#" class="tt-btn-compare" data-tooltip="Add to Compare" data-tposition="left"></a> -->
+							<a href="{{ item_product.href }}">
+								<span class="tt-img">
+									<img src="{{ asset('images/loader.svg') }}" data-src="{{ item_product.thumb }}" alt="{{ item_product.name }}">
+								</span>
+								<span class="tt-img-roll-over">
+									<img src="{{ asset('images/loader.svg') }}" data-src="{{ item_product.thumb }}" alt="{{ item_product.name }}">
+								</span>
+							</a>
+						</div>
+						<div class="tt-description">
+							<div class="tt-row">
+								<ul class="tt-add-info">
+									<!-- <li><a href="#">T-SHIRTS</a></li> -->
+								</ul>
+								<div class="tt-rating">
+										<img src="{{ asset('image/stars-' ~ item_product.rating ~ '.png') }}" alt="{{ lang('text_reviews')|format(reviews_count) }}"/>
+								</div>
+							</div>
+							<h2 class="tt-title">
+									<a href="{{ item_product.href}}">{{ item_product.name}}</a>
+							</h2>
+							<div class="tt-price">
+									{{ item_product.price}}
+							</div>							
+							<div class="tt-product-inside-hover">
+								<div class="tt-row-btn">								
+									<a  onclick="event.preventDefault(); addToCart({{ item_product.product_id }},1, {{ ('-1' in item_product.price) or ('-1' in item_product.special) ? 'true' : 'false' }}); return false;" 
+											href="#" class="tt-btn-addtocart thumbprod-button-bg">
+										{{ ('-1' in item_product.price) or ('-1' in item_product.special) ? lang('button_req_quote') : lang('button_cart') }}
+									</a>
+								</div>								
+							</div>							
+						</div>
+					</div>
+				</div>				
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% endif %}

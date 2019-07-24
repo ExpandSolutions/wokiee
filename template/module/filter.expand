@@ -1,0 +1,40 @@
+<div class="block-product-sidebar-opt8">
+  <div class="block-title heading-opt2"><span class="title">{{ lang('heading_title') }}</span></div>
+  <div class="box-content filter-options-content block-content">
+    <ul class="box-filter">
+      {% for filter_group in filter_groups %}
+      <li><span id="filter-group{{ filter_group['filter_group_id'] }}">{{ filter_group['name'] }}</span>
+        <ul>
+          {% for filter in filter_group['filter'] %}
+          {% if filter['filter_id'] in filter_category %}
+          <li>
+            <input type="checkbox" value="{{ filter['filter_id'] }}" id="filter{{ filter['filter_id'] }}" checked="checked" />
+            <label for="filter{{ filter['filter_id'] }}">{{ filter['name'] }}</label>
+          </li>
+          {% else %}
+          <li>
+            <input type="checkbox" value="{{ filter['filter_id'] }}" id="filter{{ filter['filter_id'] }}" />
+            <label for="filter{{ filter['filter_id'] }}">{{ filter['name'] }}</label>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </li>
+      {% endfor %}
+    </ul>
+      <div class="action">
+        <button id="button-filter" class="btn  btn-inline default">{{ lang('button_filter') }}</button>
+      </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#button-filter').bind('click', function() {
+	filter = [];
+	
+	$('.box-filter input[type=\'checkbox\']:checked').each(function(element) {
+		filter.push(this.value);
+	});
+	
+	location = '{{ action }}&filter=' + filter.join(',');
+});
+//--></script> 

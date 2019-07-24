@@ -1,0 +1,4 @@
+<form action="{{ action }}" method="post" id="payment">
+{{ fields }}
+<div class="buttons"><div class="right"><a onclick="$('#payment').submit();" class="button"><span>{{ lang('button_confirm') }}</span></a></div></div>
+</form>

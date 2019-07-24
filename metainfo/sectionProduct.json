@@ -1,0 +1,109 @@
+{
+    "code": "sectionProduct",
+    "name": "section Product",
+    "type": ["available", "live"],
+    "state": "enabled",
+    "is-collection": 0,
+    "description": {
+        "name": "@locales.sectionProduct",
+        "description": "",
+        "collection-name": "",
+        "item-name": "",
+        "button-name": "",
+        "image": "N/A",
+        "thumbnail": "N/A"
+    },
+    "fields": [
+        {
+            "code": "sectiontitle",
+            "type": "text",
+            "option-id": "",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.sectionProduct_sectiontitle",
+                "description": "",
+                "value": "@locales.sectionProduct_sectiontitle_val"
+            }
+        },
+        {
+            "code": "sectiontitle2",
+            "type": "text",
+            "option-id": "",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.sectionProduct_sectiontitle2",
+                "description": "",
+                "value": "@locales.sectionProduct_sectiontitle2_val"
+            }
+        },
+        {
+            "code": "displaysectiontitle",
+            "type": "checkbox",
+            "option-id": "",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.sectionProduct_displaysectiontitle",
+                "description": "",
+                "value": "1"
+            }
+        },
+        {
+            "code": "sectiontype",
+            "type": "sselect-lookup",
+            "option-id": "blockFN",
+            "look-up-key": "blockFN",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.productslide_sectiontype",
+                "description": "",
+                "value": "getLatestProducts"
+            }
+        },
+        {
+            "code": "categories",
+            "type": "tags-category",
+            "option-id": "", 
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.productslide_categories",
+                "description": "",
+                "value": "0,0,0"
+            }
+        },
+        {
+            "code": "products",
+            "type": "tags-product",
+            "option-id": "", 
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.productslide_products",
+                "description": "",
+                "value": "0,0,0,0,0,0,0,0,0"
+            }
+        }
+    ],
+    "locales": {
+        "en": {
+            "sectionProduct": "Section Product",
+            "sectionProduct_sectiontitle": "Section Title",
+            "sectionProduct_sectiontitle2":"title two",
+            "sectionProduct_sectiontitle_val": "TRENDING",
+            "sectionProduct_sectiontitle2_val":"TOP VIEW IN THIS WEEK",
+            "sectionProduct_displaysectiontitle": "Display Section Title",
+            "productslide_sectiontype":"select type section",
+            "productslide_categories":"categories",
+            "productslide_products":"products"
+        },
+        "ar": {
+            "sectionProduct": "منتجات القسم",
+            "sectionProduct_sectiontitle": "عنوان القسم",
+            "sectionProduct_sectiontitle2":"العنوان الثاني",
+            "sectionProduct_sectiontitle_val": "العروض الشائعة",
+            "sectionProduct_sectiontitle2_val":"أعلى عرض في هذا الأسبوع",
+            "sectionProduct_displaysectiontitle": "عرض عنوان القسم",
+            "productslide_sectiontype":"اختر نوع القسم",
+            "productslide_categories":"الاقسام",
+            "productslide_products":"منتجات"
+        }
+    }
+}

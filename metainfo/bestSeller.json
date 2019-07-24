@@ -1,0 +1,152 @@
+{
+    "code": "bestSeller",
+    "name": "best Seller",
+    "type": ["available","live"],
+    "state": "enabled",
+    "is-collection": 0,
+    "description": {
+        "name": "@locales.bestSeller",
+        "description": "",
+        "collection-name": "",
+        "item-name": "",
+        "button-name": "",
+        "image": "N/A",
+        "thumbnail": "N/A"
+    },
+    "fields": [
+        {
+            "code": "sectiontitle",
+            "type": "text",
+            "option-id": "",            
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.bestSeller_sectiontitle",
+                "description": "",
+                "value": "@locales.bestSeller_sectiontitle_val"
+            }
+        },
+        {
+            "code": "sectiontitle2",
+            "type": "text",
+            "option-id": "",            
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.bestSeller_sectiontitle2",
+                "description": "",
+                "value": "@locales.bestSeller_sectiontitle2_val"
+            }
+        },
+        {
+            "code": "displaysectiontitle",
+            "type": "checkbox",
+            "option-id": "",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.bestSeller_displaysectiontitle",
+                "description": "",
+                "value": "1"
+            }
+        },
+        {
+            "code": "sectionsubtitle",
+            "type": "text",
+            "option-id": "",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.bestSeller_sectionsubtitle",
+                "description": "",
+                "value": "@locales.bestSeller_sectionsubtitle_val"
+            }
+        },
+        {
+            "code": "sectionbottom",
+            "type": "text",
+            "option-id": "",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.bestSeller_sectionbottom",
+                "description": "",
+                "value": "@locales.bestSeller_sectionbottom_val"
+            }
+        },
+        {
+            "code": "sectionbottomhref",
+            "type": "text",
+            "option-id": "",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.bestSeller_sectionbottomhref",
+                "description": "",
+                "value": "#"
+            }
+        },
+        {
+            "code": "sectiontype",
+            "type": "sselect-lookup",
+            "option-id": "blockFN",
+            "look-up-key": "blockFN",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.bestSeller_sectiontype",
+                "description": "",
+                "value": "getLatestProducts"
+            }
+        },
+        {
+            "code": "categories",
+            "type": "tags-category",
+            "option-id": "", 
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.bestSeller_categories",
+                "description": "",
+                "value": "0,0,0"
+            }
+        },
+        {
+            "code": "products",
+            "type": "tags-product",
+            "option-id": "", 
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.bestSeller_products",
+                "description": "",
+                "value": "0,0,0,0,0,0,0,0,0"
+            }
+        }   
+    ],
+    "locales": {
+        "en": {
+            "bestSeller": "bestSeller",
+            "bestSeller_sectiontitle": "Section Title",
+            "bestSeller_sectiontitle_val": "bestSeller",
+            "bestSeller_displaysectiontitle": "Display Section Title",
+            "bestSeller_sectiontype":"select type section",
+            "bestSeller_categories":"categories",
+            "bestSeller_products":"products",
+            "bestSeller_sectionsubtitle":"sub Title",
+            "bestSeller_sectionsubtitle_val":"New arrivals",
+            "bestSeller_sectionbottom":"Button",
+            "bestSeller_sectionbottom_val":"Shop this collection",
+            "bestSeller_sectionbottomhref":"Link Buttom",
+            "bestSeller_sectiontitle2":"title two",
+            "bestSeller_sectiontitle2_val":"TOP SALE IN THIS WEEK"
+        },
+        "ar": {
+            "bestSeller": "الأكثر مبيعا",
+            "bestSeller_sectiontitle": "عنوان القسم",
+            "bestSeller_sectiontitle_val": "العروض الخاصة",
+            "bestSeller_displaysectiontitle": "عرض عنوان القسم",
+            "bestSeller_sectiontype":"اختر نوع القسم",
+            "bestSeller_categories":"الاقسام",
+            "bestSeller_products":"منتجات",
+            "bestSeller_sectionsubtitle":"العنوان الفرعي",
+            "bestSeller_sectionsubtitle_val":"الوافدون الجدد",
+            "bestSeller_sectionbottom":"زر",
+            "bestSeller_sectionbottom_val":"تسوق هذه المجموعة",
+            "bestSeller_sectionbottomhref":"زر الرابط",
+            "bestSeller_sectiontitle2":"العنوان الثاني",
+            "bestSeller_sectiontitle2_val":"مجموعة"
+        }
+    }
+}

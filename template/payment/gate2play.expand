@@ -1,0 +1,29 @@
+<style>
+  form {
+    display:block;
+  }
+</style>
+
+<script>
+    var wpwlOptions = {
+        style: "{{ formStyle }}"
+    }
+</script>
+
+<script>
+    $.ajaxSetup({
+        // Disable caching of AJAX responses
+        cache: true
+    });
+</script>
+
+<script src="{{ scriptURL }}"></script>
+
+<div>
+  <form action="{{ postbackURL }}" class="paymentWidgets">
+    {{ payment_brands }}
+  </form>
+</div>
+<div class="buttons" style="display:none;">
+  <div class="right"><a id="button-confirm" class="button" onclick="$('#payment').submit();"><span>{{ lang('button_confirm') }}</span></a></div>
+</div>

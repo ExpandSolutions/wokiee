@@ -1,0 +1,33 @@
+{% if error %}
+<div class="warning">{{ error }}</div>
+{% endif %}
+{% if testmode %}
+  <div class="warning">{{ lang('text_testmode') }}</div>
+{% endif %}
+<form action="{{ action }}" method="post" id="checkout-form">
+  {% for key,value in hidden_fields %}
+    <input type="hidden" name="{{ key }}" value="{{ value }}" />
+  {% endfor %}
+  {% if text_fields %}
+    {% for key,value in text_fields %}
+    <input type="text" name="{{ key }}" value="{{ value }}" />
+    {% endfor %}
+  {% endif %}
+</form>
+<div class="buttons" style="text-align: right;min-height:20px;">
+  <div class="right">
+    <?php /* <a id="button-confirm" class="button"><span>{{ lang('button_continue') }}</span></a> */ ?>
+	<input type="button" value="{{ lang('button_continue') }}" id="button-confirm" class="button" />
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#button-confirm').bind('click', function() {
+	$.ajax({
+		type: 'GET',
+		url: 'index.php?route=payment/onecard/confirm',
+		success: function() {
+			$('#checkout-form').submit();
+		}
+	});
+});
+//--></script>

@@ -1,0 +1,161 @@
+{
+    "code": "banners",    
+    "name": "banners collection",
+    "type": "available",
+    "state": "enabled",
+    "is-collection": 1,
+    "description": {
+        "name": "@locales.banners",
+        "description": "",
+        "collection-name": "@locales.banners-store",
+        "item-name": "@locales.banners-store-item",
+        "button-name": "@locales.banners-store-button",
+        "image": "N/A",
+        "thumbnail": "N/A"
+    },
+    "collections":[
+        {
+            "name": "My Banner",
+            "thumbnail": "N/A",
+            "is-default": 1,
+            "fields":[
+                {
+                    "code": "bannerimage",
+                    "type": "image",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.bannerimage",
+                        "description": "",
+                        "value": "data/custom-wokiee/banner.jpg"
+                    }
+                },
+                {
+                    "code": "bannerwidth",
+                    "type": "sselect-lookup",
+                    "option-id": "base-banner-width",
+                    "look-up-key": "base-banner-width",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.bannerwidth",
+                        "description": "",
+                        "value": "100%"
+                    }
+                },
+                {
+                    "code": "bannerlink",
+                    "type": "text",
+                    "option-id": "",                    
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.bannerlink",
+                        "description": "",
+                        "value": "#"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "My Banner 1",
+            "thumbnail": "N/A",
+            "is-default": 0,
+            "fields":[
+                {
+                    "code": "bannerimage",
+                    "type": "image",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.bannerimage",
+                        "description": "",
+                        "value": "data/souq/1.jpg"
+                    }
+                },
+                {
+                    "code": "bannerwidth",
+                    "type": "sselect-lookup",
+                    "option-id": "base-banner-width",
+                    "look-up-key": "base-banner-width",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.bannerwidth",
+                        "description": "",
+                        "value": "1/2"
+                    }
+                },
+                {
+                    "code": "bannerlink",
+                    "type": "text",
+                    "option-id": "",                    
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.bannerlink",
+                        "description": "",
+                        "value": "#"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "My Banner 2",
+            "thumbnail": "N/A",
+            "is-default": 0,
+            "fields":[
+                {
+                    "code": "bannerimage",
+                    "type": "image",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.bannerimage",
+                        "description": "",
+                        "value": "data/souq/2.jpg"
+                    }
+                },
+                {
+                    "code": "bannerwidth",
+                    "type": "sselect-lookup",
+                    "option-id": "base-banner-width",
+                    "look-up-key": "base-banner-width",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.bannerwidth",
+                        "description": "",
+                        "value": "1/2"
+                    }
+                },
+                {
+                    "code": "bannerlink",
+                    "type": "text",
+                    "option-id": "",                    
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.bannerlink",
+                        "description": "",
+                        "value": "#"
+                    }
+                }
+            ]
+        }
+    ],
+    "locales": {
+        "en": {
+            "banners":"banners",
+            "banners-store":"banners store",
+            "banners-store-item":"banners store item",
+            "banners-store-button":"add Banner",
+            "bannerimage":"banner Image",
+            "bannerwidth":"bannerwidth",
+            "bannerlink":"banner link"
+        },
+        "ar": {
+            "banners":"لافتات",
+            "banners-store":"مخزن لافتات",
+            "banners-store-item":"لافتات مخزن البند",
+            "banners-store-button":"أضف لافتات",
+            "bannerimage":"صورة لافتات",
+            "bannerwidth":"عرض لافتات",
+            "bannerlink":"رابط لافتات  "
+        }
+    }
+}

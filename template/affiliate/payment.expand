@@ -1,0 +1,134 @@
+<div id="content">
+    <!-- breadcrumb -->
+    <div class="breadcrumb-page">
+        <ol class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="active">{{ breadcrumb['text'] }}</li>
+                {% else %}
+                    <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </div> <!-- breadcrumb -->
+
+    <div class="page-title-base">
+        <h1 class="title-base">{{ lang('text_your_payment') }}</h1>
+    </div>
+
+    <form action="{{ link('affiliate/payment', '', 'SSL') }}" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="tax">{{ lang('entry_tax') }}</label>
+                    <input type="text" name="tax" class="form-control" id="tax" value="{{ tax }}"/>
+                </div>
+
+                <fieldset class="form-group">
+                    <label>{{ lang('entry_payment') }}</label>
+
+                    {% if payment == 'cheque' %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="payment" id="cheque" value="cheque" checked="checked">
+                            {{ lang('text_cheque') }}
+                        </label>
+                    </div>
+                    {% else %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="payment" id="cheque" value="cheque">
+                            {{ lang('text_cheque') }}
+                        </label>
+                    </div>
+                    {% endif %}
+
+                    {% if payment == 'paypal' %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="payment" id="paypal" value="paypal" checked="checked">
+                            {{ lang('text_paypal') }}
+                        </label>
+                    </div>
+                    {% else %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="payment" id="paypal" value="paypal">
+                            {{ lang('text_paypal') }}
+                        </label>
+                    </div>
+                    {% endif %}
+
+                    {% if payment == 'bank' %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="payment" id="bank" value="bank" checked="checked">
+                            {{ lang('text_bank') }}
+                        </label>
+                    </div>
+                    {% else %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="payment" id="bank" value="bank">
+                            {{ lang('text_bank') }}
+                        </label>
+                    </div>
+                    {% endif %}
+                </fieldset>
+
+                <div class="form-group payment" id="payment-cheque">
+                    <label for="tax">{{ lang('entry_cheque') }}</label>
+                    <input type="text" name="cheque" class="form-control" id="cheque-text" value="{{ cheque }}"/>
+                </div>
+
+                <div class="form-group payment" id="payment-paypal">
+                    <label for="tax">{{ lang('entry_paypal') }}</label>
+                    <input type="text" name="paypal" class="form-control" id="paypal-text" value="{{ paypal }}"/>
+                </div>
+
+                <div id="payment-bank" class="payment">
+                    <div class="form-group">
+                        <label for="bank_name">{{ lang('entry_bank_name') }}</label>
+                        <input type="text" name="bank_name" class="form-control" id="bank_name-text" value="{{ bank_name }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="bank_branch_number">{{ lang('entry_bank_branch_number') }}</label>
+                        <input type="text" name="bank_branch_number" class="form-control" id="bank_branch_number-text" value="{{ bank_branch_number }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="bank_swift_code">{{ lang('entry_bank_swift_code') }}</label>
+                        <input type="text" name="bank_swift_code" class="form-control" id="bank_swift_code-text" value="{{ bank_swift_code }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="bank_account_name">{{ lang('entry_bank_account_name') }}</label>
+                        <input type="text" name="bank_account_name" class="form-control" id="bank_account_name-text" value="{{ bank_account_name }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="bank_account_number">{{ lang('entry_bank_account_number') }}</label>
+                        <input type="text" name="bank_account_number" class="form-control" id="bank_account_number-text" value="{{ bank_account_number }}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-left">
+                    <a href="{{ link('affiliate/account', '', 'SSL') }}" class="btn btn-inline">{{ lang('button_back') }}</a>
+                </div>
+                <div class="pull-right">
+                    <input type="submit" value="{{ lang('button_continue') }}" class="btn btn-inline"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript"><!--
+$('input[name=\'payment\']').bind('change', function() {
+	$('.payment').hide();
+	
+	$('#payment-' + this.value).show();
+});
+
+$('input[name=\'payment\']:checked').trigger('change');
+//--></script>

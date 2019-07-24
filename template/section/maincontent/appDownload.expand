@@ -1,0 +1,36 @@
+<div class="container-indent app-download">
+        <div class="container-fluid-custom">
+            <div class="row tt-layout-promo-box">
+                    <div class="col-sm-12 col-md-12 text-center">
+                        <div class="tt-block-title">
+                            {% if fields.headerTitle.field_value != '' %}
+                            <h1 class="tt-title"> {{fields.headerTitle.field_value}} </h1>
+                            {% endif %}
+                            {% if fields.headersubTitle.field_value != '' %}
+                            <div class="tt-description">{{fields.headersubTitle.field_value}}</div>
+                            {% endif %}
+                        </div>
+                        {% if fields.AppParagraph.field_value != '' %}
+                        <p>
+                            {{fields.AppParagraph.field_value}}
+                        </p>
+                        {% endif %}
+
+                        {% if fields.GoogleApp.field_value != '' and  fields.AppPlay.field_value != ''%}
+                        <div class="app-img">
+                            {% if fields.GoogleApp.field_value != '' %}
+                            <a href="{{fields.linkGoogleApp.field_value}}">
+                                <img src="{{fields.GoogleApp.field_value}}">
+                            </a>
+                            {% endif %}
+                            {% if fields.AppPlay.field_value != '' %}
+                            <a href="{{fields.linkAppPlay.field_value}}">
+                                <img src="{{fields.AppPlay.field_value}}">
+                            </a>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>                                            
+            </div>
+        </div>
+    </div>

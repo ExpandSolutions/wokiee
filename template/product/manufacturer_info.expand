@@ -1,0 +1,1 @@
+{{ include('manymore/template/product/manufacturer_info.expand') }}

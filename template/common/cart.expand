@@ -1,0 +1,158 @@
+<form>
+    {% if cart_items_count > 0 %}
+        <!--- Start Cart --->
+        <div class="tt-cart-content mini-cart-content">
+            <div class="tt-cart-list">
+                {% for product in products %}
+                <div class="tt-item">                                                                    
+                    <a href="{{ product.href }}" title="{{ product.name }}">
+                        {% if product.thumb != '' %}
+                        <div class="tt-item-img">
+                            <img src="{{ product.thumb }}"  alt="{{ product.name }}">
+                        </div>
+                        {% endif%}
+                        <div class="tt-item-descriptions">
+                            <h2 class="tt-title">{{ product.name }}</h2>
+                            <ul class="tt-add-info">
+                                {% for option in product.option %}                                    
+                                    <li>{{ option.name }}: {{ option.value }}</li>
+                                {% endfor %}                                
+                            </ul>
+                            {% if product['rentData'] %}
+                            <div>
+                                {{ lang('product_for_rent_from') }}
+                                {{ product['rentData']['range']['from'] }}
+                                {{ lang('product_for_rent_to') }}
+                                {{ product['rentData']['range']['to'] }}
+                                {{ lang('product_for_rent_for') }}
+                                {{ product['rentData']['diff'] }}
+                                {{ lang('text_day') }}
+                            </div>
+                            {% endif %}
+                            <div class="tt-quantity">{{ product.quantity }} X</div>
+                             <div class="tt-price"> {{ product.price }}</div>
+                        </div>
+                    </a>
+                    <div class="tt-item-close">                        
+                        <a class="action delete delete-mini-cart-item tt-btn-close"  
+                            href="#" id="{{ product.key }}" title="{{ lang('button_remove') }}">                            
+                        </a>
+                    </div>
+                </div>                
+                {% endfor %}
+            </div>
+            {% for total in totals %}
+            <div class="tt-cart-total-row">
+                <div class="tt-cart-total-title">{{ total.title }}:</div>
+                <div class="tt-cart-total-price">{{ total.text }}</div>
+            </div>
+            {% endfor %}
+            {% for voucher in vouchers %}
+                <li class="product-item">
+                    <div class="product-item-details">
+                        <strong class="product-item-name">
+                            <a href="#">{{ voucher.description }}</a>
+                        </strong>
+                        <div class="product-item-qty">
+                            <span class="label">{{ lang('text_qty') }}</span><span class="number"> 1</span>
+                        </div>
+                        <div class="product-item-price">
+                            <span class="price">{{ voucher.amount }}</span>
+                        </div>
+                        <div class="product-item-actions">
+                            <a class="action delete" href="#" id="{{ voucher.key }}" title="{{ lang('button_remove') }}">
+                                <span>{{ lang('button_remove') }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            <div class="tt-cart-btn">
+                <div class="tt-item">
+                    <a class="btn" href="{{ link('checkout/cart') }}" title="{{ lang('text_cart') }}">
+                        {{ lang('text_cart') }}
+                    </a>                    
+                </div>
+                <div class="tt-item">
+                    <a class="btn-link-02 tt-hidden-mobile" href="{{ link('checkout/checkout', '', 'SSL') }}" title="{{ lang('text_checkout') }}">{{ lang('text_checkout') }}</a>
+                    <a class="btn btn-border tt-hidden-desctope" href="{{ link('checkout/checkout', '', 'SSL') }}" title="{{ lang('text_checkout') }}">{{ lang('text_checkout') }}</a>                                        
+                </div>
+            </div>
+        </div>
+        <!--- End Cart --->
+       {# <div class="mini-cart-content">
+            <h2>{{lang('text_items')|format(cart_items_count)}}</h2>
+            <ul class="list-mini-cart-item list-unstyled">
+                {% for product in products %}
+                <li>
+                    <div class="mini-cart-edit">
+                        <a class="action delete delete-mini-cart-item"  href="#" id="{{ product.key }}" title="{{ lang('button_remove') }}"><i class="fa fa-trash-o"></i></a>
+                        <span class="badge" style="position: relative; left:-5px"> {{ product.quantity }}</span>
+                    </div>
+                    {% if product.thumb != '' %}
+                    <div class="mini-cart-thumb">
+                        <a href="{{ product.href }}" title="{{ product.name }}">
+                            <img src="{{ product.thumb }}" alt="{{ product.name }}" >
+                        </a>
+                    </div>
+                    {% endif %}
+                    <div class="mini-cart-info">
+                        <h3><a href="{{ product.href }}">{{ product.name }}</a></h3>
+                        {% for option in product.option %}
+                            - <small>{{ option.name }} {{ option.value }}</small><br/>
+                        {% endfor %}
+                        {% if product['rentData'] %}
+                            <div>
+                                {{ lang('product_for_rent_from') }}
+                                {{ product['rentData']['range']['from'] }}
+                                {{ lang('product_for_rent_to') }}
+                                {{ product['rentData']['range']['to'] }}
+                                {{ lang('product_for_rent_for') }}
+                                {{ product['rentData']['diff'] }}
+                                {{ lang('text_day') }}
+                            </div>
+                        {% endif %}
+                        <div class="info-price">
+                            <ins>{{ product.total }}</ins>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% for total in totals %}
+            <div class="mini-cart-total">
+                <label>{{ total.title }}</label>
+                <span>{{ total.text }}</span>
+            </div>
+            {% endfor %}
+            {% for voucher in vouchers %}
+                <li class="product-item">
+                    <div class="product-item-details">
+                        <strong class="product-item-name">
+                            <a href="#">{{ voucher.description }}</a>
+                        </strong>
+                        <div class="product-item-qty">
+                            <span class="label">{{ lang('text_qty') }}</span><span class="number"> 1</span>
+                        </div>
+                        <div class="product-item-price">
+                            <span class="price">{{ voucher.amount }}</span>
+                        </div>
+                        <div class="product-item-actions">
+                            <a class="action delete" href="#" id="{{ voucher.key }}" title="{{ lang('button_remove') }}">
+                                <span>{{ lang('button_remove') }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            <div class="mini-cart-button">
+                <a class="mini-cart-view" href="{{ link('checkout/cart') }}" title="{{ lang('text_cart') }}">{{ lang('text_cart') }} </a>
+                <a class="mini-cart-checkout" href="{{ link('checkout/checkout', '', 'SSL') }}" title="{{ lang('text_checkout') }}">{{ lang('text_checkout') }}</a>
+            </div>
+        </div>#}
+    {% else %}
+    <div class="mini-cart-content">
+        <p>{{lang('text_empty')}}</p>
+    </div>
+    {% endif %}
+</form>

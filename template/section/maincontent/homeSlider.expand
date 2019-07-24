@@ -1,0 +1,45 @@
+<div class="container-indent nomargin">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="slider-revolution revolution-default">
+                <div class="tp-banner-container">
+                    <div class="tp-banner revolution">
+                        <ul>
+                            {% for collection in collections %}
+                            <li data-thumb="{{collection.slideimage.field_value}}" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
+                                {% if collection.displayBackgroundOnly.field_value == '1' %}
+                                <a href="{{ collection.backgroundlink.field_value }}">
+                                    <img src="{{collection.slideimage.field_value}}"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" >
+                                </a>
+                                {% else %}
+                                <img src="{{collection.slideimage.field_value}}"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" >                                
+                                <div class="tp-caption tp-caption1 lft stb"
+                                    data-x="center"
+                                    data-y="center"
+                                    data-hoffset="0"
+                                    data-voffset="0"
+                                    data-speed="600"
+                                    data-start="900"
+                                    data-easing="Power4.easeOut"
+                                    data-endeasing="Power4.easeIn">
+
+                                    <div class="tp-caption1-wd-1 tt-base-color">{{collection.mainheading.field_value}}</div>
+                                    <div class="tp-caption1-wd-2">{{collection.subheading.field_value}}<br>{{collection.subheading2.field_value}}</div>
+                                    <div class="tp-caption1-wd-3">{{collection.pargheading.field_value}}</div>
+
+                                    <div class="tp-caption1-wd-4">
+                                        <a href="{{collection.slidelink.field_value}}" target="_blank" class="btn btn-xl" data-text="SHOP NOW!">
+                                                {{ lang('shop_now') }}
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+{% if success %}
+<br>
+<div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{ success }}
+</div>
+{% endif %}
+
+{% if error_warning %}
+<br>
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{ error_warning }}
+</div>
+{% endif %}
+
+<div id="content">
+    <!-- breadcrumb -->    
+    <div class="tt-breadcrumb">
+        <div class="container">
+            <ul>
+                {% for breadcrumb in breadcrumbs %}
+                    {% if loop.last %}
+                        <li class="active">{{ breadcrumb['text'] }}</li>
+                    {% else %}
+                        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- breadcrumb -->
+    {% if d_social_login_enabled %}{{ d_social_login }}{% endif %}
+    <!-- Start Login -->
+    <div id="tt-pageContent">
+            <div class="container-indent">
+                <div class="container">
+                    <h1 class="tt-title-subpages noborder">ALREADY REGISTERED?</h1>
+                    <div class="tt-login-form">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="tt-item">
+                                    <h2 class="tt-title">{{ lang('text_new_customer') }}</h2>
+                                    <p>
+                                        {{ lang('text_register_account') }}
+                                    </p>
+                                    <div class="form-group">
+                                        <a href="{{ link('account/register', '', 'SSL') }}" class="btn btn-top btn-border">
+                                            {{ lang('button_continue') }}
+                                        </a>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="tt-item">
+                                    <h2 class="tt-title">LOGIN</h2>
+                                    If you have an account with us, please log in.
+                                    <div class="form-default form-top">
+                                        <form action="{{ link('account/login', '', 'SSL') }}" method="post" enctype="multipart/form-data" id="login" novalidate="novalidate">
+                                            <div class="form-group">
+                                                <label for="loginInputName">USERNAME OR E-MAIL *</label>
+                                                <div class="tt-required">* Required Fields</div>
+                                                <!-- <input type="text" name="name" class="form-control" id="loginInputName" placeholder="Enter Username or E-mail"> -->
+                                                <input type="text" name="email" class="form-control" id="loginInputName" placeholder="{{ lang('entry_email') }}" value="{{ email }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="loginInputEmail">PASSWORD *</label>
+                                                <!-- <input type="text" name="passowrd" class="form-control" id="loginInputEmail" placeholder="Enter Password"> -->
+                                                <input type="password" name="password" class="form-control" id="loginInputEmail" placeholder="{{ lang('entry_password') }}" value="{{ password }}">
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-auto mr-auto">
+                                                    <div class="form-group">
+                                                        <!-- <button class="btn btn-border" type="submit">LOGIN</button> -->
+                                                        <button type="submit" class="btn btn-border">
+                                                            {{ lang('button_login') }}
+                                                        </button>                                                        
+                                                        {% if redirect %}
+                                                            <input type="hidden" name="redirect" value="{{ redirect }}" />
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto align-self-end">
+                                                    <div class="form-group">
+                                                        <ul class="additional-links">
+                                                            <li>
+                                                                <!-- <a href="#">Lost your password?</a> -->
+                                                                <a href="{{ link('account/forgotten', '', 'SSL') }}">{{ lang('text_forgotten') }}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>        
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- End Login -->    
+</div>
+
+<script type="text/javascript">
+    $('#login input').keydown(function(e) {
+        if (e.keyCode == 13) {
+            $('#login').submit();
+        }
+    });
+</script>

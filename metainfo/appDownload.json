@@ -1,0 +1,123 @@
+{
+    "code": "appDownload",
+    "name": "app Download",
+    "type": ["available","live"],
+    "state": "enabled",
+    "is-collection": 0,
+    "description": {
+        "name": "@locales.appDownload",
+        "description": "",
+        "collection-name": "",
+        "item-name": "",
+        "button-name": "",
+        "image": "N/A",
+        "thumbnail": "N/A"
+    },
+    "fields": [   
+        {
+            "code": "headerTitle",
+            "type": "text",
+            "option-id": "",                    
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.appDownload_headerTitle",
+                "description": "",
+                "value": "@locales.appDownload_headerTitle_val"
+            }
+        },
+        {
+            "code": "headersubTitle",
+            "type": "text",
+            "option-id": "",                    
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.appDownload_headersubTitle",
+                "description": "",
+                "value": "@locales.appDownload_headersubTitle_val"
+            }
+        },
+        {
+            "code": "AppParagraph",
+            "type": "textarea",
+            "option-id": "",                    
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.appDownload_AppParagraph",
+                "description": "",
+                "value": "@locales.appDownload_AppParagraph_val"
+            }
+        },        
+        {
+            "code": "GoogleApp",
+            "type": "image",
+            "option-id": "",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.appDownload_GoogleApp",
+                "description": "",
+                "value": "data/custom-wokiee/play-store22.png"
+            }
+        },        
+        {
+            "code": "linkGoogleApp",
+            "type": "link",
+            "option-id": "",                    
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.appDownload_linkGoogleApp",
+                "description": "",
+                "value": "#"
+            }
+        },
+        {
+            "code": "AppPlay",
+            "type": "image",
+            "option-id": "",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.appDownload_Appplay",
+                "description": "",
+                "value": "data/custom-wokiee/app-store11.png"
+            }
+        },
+        {
+            "code": "linkAppPlay",
+            "type": "link",
+            "option-id": "",                    
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.appDownload_LinkAppplay",
+                "description": "",
+                "value": "#"
+            }
+        }       
+    ],
+    "locales": {
+        "en": {
+            "appDownload": "appDownload",
+            "appDownload_headerTitle": "Section Title",            
+            "appDownload_headerTitle_val": "Wekiee App",
+            "appDownload_headersubTitle":"Sub Title",
+            "appDownload_headersubTitle_val":"Google Play / App Play",
+            "appDownload_AppParagraph":"Section Paragraph",
+            "appDownload_AppParagraph_val":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+            "appDownload_GoogleApp":"Image Google App",          
+            "appDownload_linkGoogleApp":"Link Google App",
+            "appDownload_Appplay":"Image App play",
+            "appDownload_LinkAppplay":"Link App play"
+        },
+        "ar": {
+            "appDownload": "تنزيل التطبيق",
+            "appDownload_headerTitle": "عنوان القسم",            
+            "appDownload_headerTitle_val": "تطبيق Wekiee",
+            "appDownload_headersubTitle":"العنوان الفرعي",
+            "appDownload_headersubTitle_val":"Google Play / App Play",
+            "appDownload_AppParagraph":"قسم الفقرة",
+            "appDownload_AppParagraph_val":"هو النص الوهمي القياسي في هذه الصناعة منذ القرن الخامس عشر الميلادي ، عندما أخذت طابعة غير معروفة لوحًا من الورق وتدافعت عليه لصنع كتاب نموذج للعينات",
+            "appDownload_GoogleApp":"صورة Google App",          
+            "appDownload_linkGoogleApp":"ربط تطبيق Google",
+            "appDownload_Appplay":"صورة App Play",
+            "appDownload_LinkAppplay":"ربط App Play"
+        }
+    }
+}

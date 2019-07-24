@@ -1,0 +1,326 @@
+{% if link_data %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<style type="text/css">
+		body {
+			background-image: url(data:image/png;base64,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);
+		}
+		#payment-link-button {
+			background: linear-gradient(#7CE, #08D 85%, #39E);
+			border-radius: 5px;
+			box-shadow: 0 1px 1px #000;
+			color: #FFF;
+			cursor: pointer;
+			font: bold 24px Helvetica;
+			padding: 10px 20px;
+			margin-left: 45%;
+			position: relative;
+			top: 200px;
+		}
+		.alert {
+			background-color: #FFE;
+			border: 1px solid #EE8;
+			color: #333;
+			padding: 10px;
+		}
+	</style>
+{% endif %}
+
+{% if ( settings['use_checkout'] == 'all' or settings['use_checkout'] == 'desktop' and not is_mobile ) or embed %}
+	<div id="payment"></div>
+	<script>
+		var handler;
+		
+		$.getScript('https://checkout.stripe.com/checkout.js', function(data) {
+			handler = StripeCheckout.configure({
+				// Required
+				key:				'{{ settings[settings['transaction_mode'] ~ '_publishable_key'] }}',
+				token:				function(token, args) { displayWait(); chargeToken(token, args, ''); },
+				
+				// Highly Recommended
+				name:				'{{ checkout_title|replace({"'": "\'"}) }}',
+				amount:				{{ checkout_amount }},
+			{% if checkout_image %}
+				image:				'{{ checkout_image }}',
+			{% endif %}
+			{% if checkout_description %}
+				description:		'{{ checkout_description|replace({"'": "\'"}) }}',
+			{% endif %}
+				
+				// Optional
+			{% if checkout_button %}
+				panelLabel:			'{{ checkout_button|replace({"'": "\'", "[amount]": amount}) }}',
+			{% endif %}
+				currency:			'{{ currency|lower }}',
+				billingAddress:		{{ settings['checkout_billing'] ? 'true' : 'false' }},
+				shippingAddress:	{{ settings['checkout_shipping'] ? 'true' : 'false' }},
+				email:				'{{ settings['checkout_bitcoin'] ? '' : order_info['email'] }}',
+				allowRememberMe:	{{ settings['checkout_remember_me'] ? 'true' : 'false' }},
+				alipay:				{{ settings['checkout_alipay'] ? 'true' : 'false' }},
+				bitcoin:			{{ settings['checkout_bitcoin'] ? 'true' : 'false' }},
+			});
+		});
+		
+		function confirmOrder() {
+			{% if settings['checkout_shipping'] and no_shipping_method %}
+				alert('{{ settings['error_shipping_required_' ~ language]|replace({"'": "\'"}) }}');
+			{% else %}
+				handler.open();
+			{% endif %}
+			return false;
+		}
+	</script>
+	
+{% else %}
+	
+	<style type="text/css">
+		body .payment-stripe {
+			display: block !important; /* Journal fix */
+		}
+		#payment {
+			text-align: center;
+		}
+		#card-select, #stored-card, #new-card, #card-element, #payment label {
+			display: inline-block;
+		}
+		#card-select {
+			width: 200px;
+			margin: 0 10px 10px 0;
+		}
+		#stored-card {
+			margin-top: 10px;
+			padding: 5px;
+		}
+		#card-element {
+			background: #FFF;
+			border: 1px solid #DDD;
+			border-radius: 10px;
+			margin-right: 10px;
+			padding: 0 15px;
+			vertical-align: middle;
+			width: 300px;
+		}
+		.StripeElement--complete {
+			border: 1px solid #0C0 !important;
+		}
+		#payment label {
+			cursor: pointer;
+		}
+		#store-card {
+			cursor: pointer;
+			margin-top: 10px;
+		}
+		.alert {
+			margin-top: 10px;
+		}
+		.buttons {
+			margin-bottom: 10px;
+		}
+
+			#payment fieldset {
+				margin-bottom: 25px !important;
+			}
+			#payment legend {
+				font-size: 18px !important;
+			}
+		</style>
+	
+	<form id="payment" class="form-horizontal">
+		<fieldset id="card-fieldset">
+			<legend>{{ settings['text_card_details_' ~ language]|html_entity_decode }}</legend>
+		{% if customer %}
+			<select id="card-select" class="form-control" onchange="if ($('#new-card').css('display') == 'none') { $('#stored-card').fadeOut(400, function(){$('#new-card').fadeIn()}); } else { $('#new-card').fadeOut(400, function(){$('#stored-card').fadeIn()}); }">
+				<option value="stored">{{ settings['text_use_your_stored_card_' ~ language]|html_entity_decode }}</option>
+				<option value="new">{{ settings['text_use_a_new_card_' ~ language]|html_entity_decode }}</option>
+			</select>
+			<div id="stored-card">
+				{{ customer['default_source']['brand'] ~ ' ' ~ settings['text_ending_in_' ~ language]|html_entity_decode ~ customer['default_source']['last4'] }}
+				({{ customer['default_source']['exp_month']|strpad(2, '0') ~ "/" ~ customer['default_source']['exp_year']|slice(2) }})
+			</div>
+			<div id="new-card" style="display: none">
+		{% else %}
+			<div id="new-card">
+		{% endif %}
+				<div id="card-element"></div>
+				{% if logged_in and settings['allow_stored_cards'] and settings['send_customer_data'] == 'choice' %}
+					<label>{{ settings['text_store_card_' ~ language]|html_entity_decode }} <input type="checkbox" id="store-card" /></label>
+				{% endif %}
+			</div>
+		</fieldset>
+	</form>
+	<script>
+		function confirmOrder() {
+			displayWait();
+			
+			if ($('#new-card').css('display') == 'none') {
+				chargeToken('', '', '');
+			} else {
+				var extraDetails = {
+					name: '{{ (order_info['firstname'] ~ ' ' ~ order_info['lastname'])|html_entity_decode|replace({"'": "\'"}) }}',
+					address_line1: '{{ order_info['payment_address_1']|html_entity_decode|replace({"'": "\'"}) }}',
+					address_line2: '{{ order_info['payment_address_2']|html_entity_decode|replace({"'": "\'"}) }}',
+					address_city: '{{ order_info['payment_city']|html_entity_decode|replace({"'": "\'"}) }}',
+					address_state: '{{ order_info['payment_zone']|html_entity_decode|replace({"'": "\'"}) }}',
+					address_zip: '{{ order_info['payment_postcode']|html_entity_decode|replace({"'": "\'"}) }}',
+					address_country: '{{ order_info['payment_country']|html_entity_decode|replace({"'": "\'"}) }}'
+				};
+				stripe.createToken(card, extraDetails).then(function(result){
+					if (result.error) {
+						displayError(stripe_errors[result.error.code] ? stripe_errors[result.error.code] : result.error.message);
+					} else {
+						chargeToken(result.token, '', '');
+					}
+				});
+			}
+		}
+	</script>
+	
+{% endif %}
+
+<div id="payment-buttons" class="buttons">
+	<div class="right pull-right">
+		<a id="button-confirm" onclick="confirmOrder()" class="{{ settings['button_class'] }}" style="{{ settings['button_styling'] }}">
+			{{ settings['button_text_' ~ language] }}
+		</a>
+	</div>
+</div>
+
+<script>
+	{% if settings['transaction_mode'] == 'production' %}
+		if (window.location.protocol != 'https:') {
+			displayError('You are in LIVE mode but are not on a secure (https) connection! Payment info is not secure!');
+		}
+	{% endif %}
+	
+	var stripe;
+	var card;
+	
+	$.getScript('https://js.stripe.com/v3/', function(data) {
+		stripe = Stripe('{{ settings[settings['transaction_mode'] ~ '_publishable_key'] }}');
+		stripeElements = stripe.elements({locale: '{{ language|slice(0, 2) }}'});
+		card = stripeElements.create('card', {
+			hidePostalCode: true,
+			//iconStyle: 'solid', // use solid if you are on a dark background
+			style: {
+				base: {
+					// full styling options are available at https://stripe.com/docs/stripe.js#element-options
+					color: '#444',
+					fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+					fontSize: '15px',
+					iconColor: '#66F',
+					lineHeight: '40px',
+					'::placeholder': {
+						color: '#CCC',
+					},
+				},
+			}
+		});
+		if($("#card-element").length)
+		card.on('change', function(event){
+			/*
+			$('.alert').remove();
+			if (event.error) {
+				displayError(event.error.message);
+			}
+			*/
+		}).mount('#card-element');
+
+		{% if settings['applepay'] is not empty %}
+			Stripe.applePay.checkAvailability(function(available) {
+				if (available) {
+					$('#apple-pay-fieldset').show();
+					$('#payment-buttons').appendTo('#card-fieldset');
+				}
+			});
+		{% endif %}
+	});
+	
+	var stripe_errors = {
+		{% for stripe_error in stripe_errors %}
+			{{ stripe_error }}: '{{ settings['error_' ~ stripe_error ~ '_' ~ language]|html_entity_decode|replace({"'": "\'"}) }}',
+		{% endfor %}
+	}
+	
+	function displayWait() {
+		$('#button-confirm').removeAttr('onclick').attr('disabled', 'disabled');
+		$('#card-select').attr('disabled', 'disabled');
+		$('.alert').remove();
+		$('#payment').after('<div class="attention alert alert-warning" style="display: none">{{ settings['text_please_wait_' ~ language]|html_entity_decode|replace({"'": "\'"}) }}</div>');
+		$('.attention').fadeIn();
+	}
+	
+	function displayError(message) {
+		$('.alert').remove();
+		$('#payment').after('<div class="warning alert alert-danger" style="display: none">' + message.trim() + '</div>');
+		$('.warning').fadeIn();
+		$('#button-confirm').attr('onclick', 'confirmOrder()').removeAttr('disabled');
+		$('#card-select').removeAttr('disabled');
+	}
+	
+	function chargeToken(token, addresses, applepay) {
+		$.ajax({
+			type: 'POST',
+			url: 'index.php?route={{ type ~ '/' ~ name ~ '/' ~ (link_data ? 'chargeLink&link_data=' ~ link_data : 'chargeToken') }}',
+			data: {token: token.id, email: token.email, addresses: addresses, store_card: $('#store-card').is(':checked'), embed: {{ embed ? embed : '0' }} },
+			success: function(error) {
+				if (error.trim()) {
+					if (applepay) {
+						applepay(ApplePaySession.STATUS_FAILURE);
+					}
+					displayError(error);
+				} else {
+					if (applepay) {
+						applepay(ApplePaySession.STATUS_SUCCESS);
+					}
+					{% if link_data %}
+						alert('Success!');
+						location = '{{ checkout_success }}';
+					{% else %}
+						completeOrder();
+					{% endif %}
+				}
+			},
+			error: function(xhr, status, error) {
+				displayError(xhr.responseText ? xhr.responseText : error);
+			}
+		});
+	}
+	
+	function completeOrder() {
+		$.ajax({
+			url: 'index.php?route={{ type }}/{{ name }}/completeOrder',
+			success: function(error) {
+				if (error.trim()) {
+					completeWithError(error.trim());
+				} else {
+					location = '{{ checkout_success }}';
+				}
+			},
+			error: function(xhr, status, error) {
+				completeWithError(xhr.responseText ? xhr.responseText : error);
+			}
+		});
+	}
+	
+	function completeWithError(errorMessage) {
+		$.ajax({
+			type: 'POST',
+			url: 'index.php?route={{ type }}/{{ name }}/completeWithError',
+			data: {error_message: errorMessage},
+			success: function(error) {
+				if (error.trim()) {
+					triggerFatalError(error);
+				} else {
+					location = '{{ checkout_success }}';
+				}
+			},
+			error: function(xhr, status, error) {
+				triggerFatalError(xhr.responseText ? xhr.responseText : error);
+			}
+		});
+	}
+	
+	function triggerFatalError(errorMessage) {
+		$('.alert').remove();
+		$('#payment').after('<div class="warning alert alert-danger"><strong>Fatal Error:</strong> Your payment was completed successfully, but the system encountered a fatal error when trying to complete your order. Please do not resubmit your order! Instead, please <a target="_blank" href="index.php?route=information/contact">contact the store administrator</a> with your order number (#{{ order_info['order_id'] }}) and the following error message:<br /><br />' + errorMessage.trim() + '</div>');
+	}
+</script>

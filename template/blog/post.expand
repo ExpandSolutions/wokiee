@@ -1,0 +1,162 @@
+
+{% if success %}
+    
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ success }}
+    </div>
+{% endif %}
+
+{% if error_warning %}    
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ error_warning }}
+    </div>
+{% endif %}
+<div id="content row" class="container">    
+    <!-- Breadcrumb -->
+    <div class="tt-breadcrumb">
+        <div class="container">
+            <ul>
+                {% for breadcrumb in breadcrumbs %}
+                    {% if loop.last %}
+                        <li class="active">{{ breadcrumb['text'] }}</li>
+                    {% else %}
+                        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb -->  
+    <!--- Start Post -->  
+    <div id="tt-pageContent">
+        <div class="container-indent">
+            <div class="container container-fluid-custom-mobile-padding">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-md-10 col-lg-8 col-md-auto">
+                        <div class="tt-post-single">                            
+                            <h1 class="tt-title">
+                                {{ post['name'] }}
+                            </h1>
+                            <div class="tt-autor">{{ post['created_at']|date("m/d/Y") }}</div>
+                            <div class="tt-post-content">
+                                <img src="{{ post['post_image'] }}" alt="">                                
+                                {{ post['content'] }}    
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        {% if relatedPosts %}
+        <div class="container-indent">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-md-10 col-lg-8 col-md-auto">
+                        <div class="comments-single-post">
+                            <h6 class="tt-title-border">{{ lang('blog_related_posts') }}</h6>
+                            <div class="tt-blog-thumb-list">
+                                <div class="row">
+                                    {% for post in relatedPosts %}
+                                    <div class="col-sm-6">
+                                        <div class="tt-blog-thumb">
+                                            <div class="tt-img">
+                                                <a href="{{ link('blog/post', '&post_id=' ~ post['post_id'], 'SSL') }}" target="_blank">
+                                                    <img src="{{ image(post['post_image']) }}" alt="{{ post['name'] }}">
+                                                </a>
+                                            </div>
+                                            <div class="tt-title-description">
+                                                <div class="tt-background"></div>
+                                                <div class="tt-tag">
+                                                    {{ post['created_at']|date("m/d/Y") }}
+                                                </div>
+                                                <div class="tt-title">
+                                                    <a href="{{ link('blog/category', '&category_id=' ~ post['category_id'], 'SSL') }}">{{ post['category_name'] }}</a>
+                                                </div>
+                                                <div class="tt-title">
+                                                    <a href="{{ link('blog/post', '&post_id=' ~ post['post_id'], 'SSL') }}">
+                                                        <h3>{{ post['name'] }}</h3>
+                                                        <p>{{ htmlEntityDecode(post['description'])|slice(0, 249) }}</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if showComments %}
+        <div class="container-indent">
+            <div class="container container-fluid-custom-mobile-padding">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-md-10 col-lg-8 col-md-auto">
+                        <h6 class="tt-title-border">COMMENTS</h6>
+                        <div class="tt-comments-layout">                                                        
+                            {% for comment in comments %}                            
+                            <div class="tt-item">
+                                <div class="tt-comments-level-1">
+                                    <div class="tt-avatar"></div>
+                                    <div class="tt-content">
+                                        <div class="tt-comments-title">
+                                            <span class="username">by <span>{{ comment['name'] }}</span></span>
+                                            <span class="time">{{ comment['created_at'] }}</span>
+                                        </div>
+                                        <p>
+                                                {{ comment['comment']|nl2br }}
+                                        </p>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% if enableCommenting %}
+        <div class="container-indent">
+            <div class="container container-fluid-custom-mobile-padding">
+                <div class="row justify-content-center">
+                    <div class="col-xs-12 col-md-10 col-lg-8 col-md-auto">
+                        <div class="form-single-post">
+                            <h6 class="tt-title-border">{{ lang('blog_add_comment') }}</h6>
+                            <div class="form-default">
+                                <form action="{{ link('blog/comment/submit', '&post_id=' ~ post['post_id'], 'SSL') }}" method="post">
+                                    <div class="form-group">
+                                        <label for="inputName" class="control-label">YOUR NAME *</label>                                        
+                                        <input type="text" name="comment[name]" class="form-control" id="inputName"
+                                               placeholder="{{ lang('entry_name') }}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail" class="control-label">E-MAIL *</label>
+                                        <input type="email" class="form-control" id="inputEmail" name="comment[email]"
+                                               placeholder="{{ lang('entry_email') }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="textarea" class="control-label">YOUR COMMENT *</label>
+                                        <textarea class="form-control"  name="comment[comment]" rows="8"
+                                                 id="textarea" placeholder="{{ lang('entry_comment') }}" ></textarea>                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn">{{ lang('button_send') }}</button>                                        
+                                    </div>
+                                    <input type="hidden" name="comment[customer_id]" value="{{ customer_id }}" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <!--End Post -->   
+</div>

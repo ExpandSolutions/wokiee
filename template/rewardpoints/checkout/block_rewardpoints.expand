@@ -1,0 +1,36 @@
+<div class="content" style="overflow: hidden">
+    <div class="box_rewardpoints">
+        <h2>
+            <span class='icon'>
+                <img src="expandish/view/javascript/rewardpoints/image/icon_gift.png" alt="reward points icon" style="width: 22px; vertical-align: middle" />
+            </span>
+            {{ lang('entry_title') }}
+        </h2>
+        <div class="form">
+	        {% if total_reward_points > 0 %}
+            {{ lang('text_you_awarded_total')|format(total_reward_points|number_format, config('text_points_' ~ lang('code'))) }}
+	        {% endif %}
+            <ul style="">
+                {{ html_awarded }}
+            </ul>
+            <div style="float:left;border-top: 1px dashed;min-width: 99%;padding: 10px 0;">
+                {% if is_logged %}
+                {{ lang('text_customer_point_available')|format(customer_reward_points, config('text_points_' ~ lang('code'))) }}<br>
+                <span style="margin-top:5px;display: block">({{ exchange_rate['point'] }} {{ config('text_points_' ~ lang('code')) }} = {{ exchange_rate['rate'] }})</span>
+	                <div style="margin: 10px 0;">
+                </div>
+                <div id="range"></div>
+                <div style="clear: both"></div>
+                <div style="margin: 51px 0 0 0;">{{ lang('entry_point_redeem') }} <input type="text" size="5" id="input-with-keypress"/></div>
+                <div style="margin: 10px 10px 0 -5px" class="box_check_use_maxium">
+                    <input type="checkbox" class="use_maxium" {% if session_data['points_to_checkout'] == max_redeem_point %}checked="checked"{% endif %} value="{{ max_redeem_point }}"/><span>{{ lang('entry_maximum_redeem')|format(max_redeem_point|number_format, config('text_points_'~lang('code'))) }}</span>
+                </div>
+                {% else %}
+                    {{ lang('entry_login_redeem')|format(link("account/account", "", 'SSL'), config('text_points_' ~ lang('code'))) }}
+                {% endif %}
+            </div>
+
+
+        </div>
+    </div>
+</div>

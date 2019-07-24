@@ -1,0 +1,104 @@
+<div id="content">
+  <div class="middle">
+  <div>
+          <table class="prods" width="100%">
+          		<tr>
+                	<td colspan="2">
+                    	<div>{{ store_loc_txt_add }}</div>
+                    	<div>
+                        <form id='locForm' name='locForm' action="{{ actionURL }}" method="get">
+	                       <input type="hidden" name="route" value="common/store_locations" />
+                           <input type="hidden" id="lat" name="lat" disabled="disabled" value="" />
+                           <input type="hidden" id="lon" name="lon" disabled="disabled" value="" />
+                        	<input type="text" name="address" id="address" size="80" value="{{ address }}" />&nbsp;
+                            <select id="distance" name="distance" >
+                            	<option value="50" {% if distance == '50' %} 'selected' {% endif %}>50 Miles</option>
+                                <option value="100" {% if distance == '100' %} 'selected' {% endif %}>100 Miles</option>
+                                <option value="150" {% if distance == '150' %} 'selected' {% endif %} >150 Miles</option>
+                                <option value="200" {% if distance == '200' %} 'selected' {% endif %} >200 Miles</option>
+                                <option value="500" {% if distance == '500' %} 'selected' {% endif %} >500 Miles</option>
+                            </select>
+                             <input type="submit" value="{{ store_loc_find_store }}" style="width:100px;" />
+						</form>
+                        </div>
+                    </td>
+                </tr>
+                {% if Locations %}
+          		<tr>
+                	<td colspan="2" style="padding-top:5px;padding-bottom:5px;" class="gmapstyle">
+                    {{ gmapHeaderJS }}
+                    {{ gmapJS }}
+                    {{ gmaponLoad }}
+                    {{ gmapHtml }}
+                    </td>
+                </tr>
+                {% for sLocation in Locations %}
+                    <tr>
+                        <td style="width:20%" valign="top">
+                           <a href="{{ sLocation['href'] }}" ><img src="{{ sLocation['thumb'] }}" alt="{{ sLocation['Name'] }}"  /></a>
+                        </td>
+                        <td style="width:80%" valign="top">
+                            <div><a href="{{ sLocation['href'] }}" ><b>{{ sLocation['Name'] }}</b></a></div>
+                            <div>{{ sLocation['Address'] }}</div>
+                            <div> {{ sLocation['Details'] }}</div>
+                            <br  />
+                            <div><a href="{{ sLocation['href'] }}" >{{ store_loc_txt_readmore }}</a></div>
+                        </td>
+                    </tr>
+                    <tr style="height:10px;">
+                    <td colspan="2"></td>
+                    </tr>
+                {% endfor %}
+                    <tr>
+                        <td colspan="2">
+                            {% for i in 0..noOfPages %}
+                                <span class="content"><a href="{{ pageLink }}&pno={{ i+1 }}" title="Page No {{ i+1 }}">{{ i+1 }}</a></span>
+                            {% endfor %}
+                        </td>
+                	</tr>
+            {% else %}
+             <tr>
+                <td colspan="2" style="text-align:center">
+                    <div style="font-weight:bold;padding-top:10px;">{{ store_loc_no_store }}</div>
+                </td>
+            </tr>
+            {% endif %}
+        </table>
+        </div>
+  </div>
+  <script language="javascript">
+  	
+	function getAdd(pLink) {
+		//alert( encodeURI($("#stAddress").val()));
+		window.location =  encodeURI(pLink + "&stAddress=" + $("#stAddress").val());
+	}
+	
+	function detectLocation() {
+		//if($('#lat').val() == '' && $('#lon').val() == '') {
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(detectionSuccess, noFound, {maximumAge:60000, timeout:5000});
+			}
+		//}
+	}
+	
+	function detectionSuccess(position) {
+		
+		var lat = position.coords.latitude;
+		var lng = position.coords.longitude;
+		$('#lat').attr('disabled', false);
+		$('#lon').attr('disabled', false);
+		$('#lat').attr('value', lat);
+		$('#lon').attr('value', lng);
+		$('#locForm').submit();
+		
+	}
+	
+	function noFound() {
+		alert('unable to detect your location');
+	}
+	
+	{{ detectLoc }}
+	
+  </script>
+   {{ content_bottom }}
+   </div>

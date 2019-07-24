@@ -1,0 +1,74 @@
+
+{% if success %}
+    <br>
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{ success }}
+    </div>
+{% endif %}
+
+<div id="content row" class="container">
+
+    <!-- Breadcrumb -->
+    <div class="tt-breadcrumb">
+        <div class="container">
+            <ul>
+                {% for breadcrumb in breadcrumbs %}
+                    {% if loop.last %}
+                        <li class="active">{{ breadcrumb['text'] }}</li>
+                    {% else %}
+                        <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- Breadcrumb --> 
+    <!--- New Categories -->   
+    <div id="tt-pageContent">
+        <div class="container-indent">
+            <div class="container container-fluid-custom-mobile-padding">
+                <h1 class="tt-title-subpages noborder">{{ lang('blog_categories') }}</h1>
+                {# Get Latest Posts / All Posts #}
+                <div class="row">
+                    <div class="col-12">
+                        {% for category in categories %}
+                        <div class="tt-listing-post tt-half">
+                            <div class="tt-post">
+                                <div class="tt-post-img">
+                                    <a href="{{ link('blog/category', '&category_id=' ~ category['category_id'], 'SSL') }}">
+                                        <img src="{{ image(category['category_image']) }}"  alt="{{ category['name'] }}">
+                                    </a>
+                                </div>
+                                <div class="tt-post-content">
+                                    <!-- <div class="tt-tag"><a href="blog-single-post.html">FASHION</a></div> -->
+                                    <h2 class="tt-title">
+                                        <a href="{{ link('blog/category', '&category_id=' ~ category['category_id'], 'SSL') }}">
+                                                {{ category['name'] }}
+                                        </a>
+                                    </h2>
+                                    <div class="tt-description">
+                                            {{ category['description']|slice(0,250) }}
+                                    </div>
+                                    <div class="tt-meta">
+                                        <div class="tt-autor">
+                                            {{ lang('blog_category_post_count') }}: {{ category['postCount'] }}
+                                        </div>
+                                        <!-- <div class="tt-comments">
+                                            <a href="#"><i class="tt-icon icon-f-88"></i>7</a>
+                                        </div> -->
+                                    </div>
+                                    <div class="tt-btn">
+                                        <a href="{{ link('blog/category', '&category_id=' ~ category['category_id'], 'SSL') }}" class="btn">READ MORE</a>
+                                    </div>
+                                </div>
+                            </div>                                                      
+                        </div>
+                        {% endfor%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- End New Categories -->       
+</div>

@@ -1,0 +1,307 @@
+{
+    "code": "boxPromo",
+    "name": "section box Promo",
+    "type": "available",
+    "state": "enabled",
+    "is-collection": 1,
+    "description": {
+        "name": "@locales.boxPromo",
+        "description": "",
+        "collection-name": "@locales.boxPromo_cn",
+        "item-name": "@locales.boxPromo_in",
+        "button-name": "@locales.boxPromo_bn",
+        "image": "N/A",
+        "thumbnail": "N/A"
+    },
+    "collections": [
+        {
+            "name": "my Promo",
+            "thumbnail": "N/A",
+            "is-default": 1,
+            "fields": [
+                {
+                    "code": "backgroundpromo",
+                    "type": "image",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_backgroundsection",
+                        "description": "",
+                        "value": "data/custom-wokiee/promo1.jpg"
+                    }
+                },        
+                {
+                    "code":"PromoTitlesmall",
+                    "type": "text",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_PromoTitlesmall",
+                        "description": "",
+                        "value": "@locales.boxPromo_PromoTitlesmall_val"
+                    }
+                },
+                {
+                    "code":"PromoTitleLarge",
+                    "type": "text",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_PromoTitleLarge",
+                        "description": "",
+                        "value": "@locales.boxPromo_PromoTitleLarge_val"
+                    }
+                },                   
+                {
+                    "code":"Promolink",
+                    "type": "link",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_superPromobutton1link",
+                        "description": "",
+                        "value": "#"
+                    }
+        
+                }        
+            ]
+        },
+        {
+            "name": "my Promo",
+            "thumbnail": "N/A",
+            "is-default": 0,
+            "fields":[
+                {
+                    "code": "backgroundpromo",
+                    "type": "image",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_backgroundsection",
+                        "description": "",
+                        "value": "data/custom-wokiee/promo1.jpg"
+                    }
+                },        
+                {
+                    "code":"PromoTitlesmall",
+                    "type": "text",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_PromoTitlesmall",
+                        "description": "",
+                        "value": "@locales.boxPromo_PromoTitlesmall_val"
+                    }
+                },
+                {
+                    "code":"PromoTitleLarge",
+                    "type": "text",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_PromoTitleLarge",
+                        "description": "",
+                        "value": "@locales.boxPromo_PromoTitleLarge_val"
+                    }
+                },                
+                {
+                    "code":"Promolink",
+                    "type": "link",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_superPromobutton1link",
+                        "description": "",
+                        "value": "#"
+                    }
+        
+                }        
+            ]
+        },
+        {
+            "name": "my Promo",
+            "thumbnail": "N/A",
+            "is-default": 0,
+            "fields": [
+                {
+                    "code": "backgroundpromo",
+                    "type": "image",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_backgroundsection2",
+                        "description": "",
+                        "value": "data/custom-wokiee/promo2.jpg"
+                    }
+                },
+                {
+                    "code":"PromoTitlesmall",
+                    "type": "text",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_PromoTitlesmall",
+                        "description": "",
+                        "value": "@locales.boxPromo_PromoTitlesmall_val2"
+                    }
+                },
+                {
+                    "code":"PromoTitleLarge",
+                    "type": "text",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_PromoTitleLarge",
+                        "description": "",
+                        "value": "@locales.boxPromo_PromoTitleLarge_val2"
+                    }
+                },
+                {
+                    "code":"buttomPromo",
+                    "type": "text",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_PromoHeader2",
+                        "description": "",
+                        "value": "@locales.boxPromo_PromoHeader_val2"
+                    }
+                },       
+                {
+                    "code":"Promolink",
+                    "type": "link",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_superPromobutton1link2",
+                        "description": "",
+                        "value": "#"
+                    }
+        
+                }
+            ]
+        },
+        {
+            "name": "my Promo",
+            "thumbnail": "N/A",
+            "is-default": 0,
+            "fields": [
+                {
+                    "code": "backgroundpromo",
+                    "type": "image",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_backgroundsection3",
+                        "description": "",
+                        "value": "data/custom-wokiee/promo4.jpg"
+                    }
+                },        
+                {
+                    "code":"PromoTitlesmall",
+                    "type": "text",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_PromoTitlesmall",
+                        "description": "",
+                        "value": "@locales.boxPromo_PromoTitlesmall_val3"
+                    }
+                },
+                {
+                    "code":"PromoTitleLarge",
+                    "type": "text",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_PromoTitleLarge",
+                        "description": "",
+                        "value": "@locales.boxPromo_PromoTitleLarge_val3"
+                    }
+                },                
+                {
+                    "code":"buttomPromo",
+                    "type": "text",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_PromoHeader3",
+                        "description": "",
+                        "value": "@locales.boxPromo_PromoHeader_val3"
+                    }
+                },       
+                {
+                    "code":"Promolink",
+                    "type": "link",
+                    "option-id": "",            
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.boxPromo_superPromobutton1link3",
+                        "description": "",
+                        "value": "#"
+                    }
+        
+                }                 
+            ]
+        }
+    ],    
+    "locales": {
+        "en": {
+            "boxPromo":"Box Promo",
+            "boxPromo_cn": "Box Promo",
+            "boxPromo_in": "Promo",
+            "boxPromo_bn": "Add New promo",
+            "boxPromo_backgroundsection": "Background promo 1",            
+            "boxPromo_PromoHeader_val":"SALE",
+            "boxPromo_PromoTitlesmall":"text small",
+            "boxPromo_PromoTitleLarge":"text large ",  
+            "boxPromo_PromoBaseColor":"text base color",
+            "boxPromo_PromoTitlesmall_val":"FALL-WINTER CLEARANCE SALES",    
+            "boxPromo_PromoTitleLarge_val":"GET UP TO ",  
+            "boxPromo_PromoBaseColor_val":"50% OFF",
+            "boxPromo_PromoTitlesmall_val2":"SUMMER ",    
+            "boxPromo_PromoTitleLarge_val2":"NEW ARRIVALS",  
+            "boxPromo_PromoBaseColor_val2":"2018",
+            "boxPromo_PromoTitlesmall_val3":"NEW COLLECTION",                
+            "boxPromo_PromoTitleLarge_val3":"HANDBAGS",
+            
+            "boxPromo_superPromobutton1link":"link promo ",
+            "boxPromo_backgroundsection2": "Background promo 2",
+            "boxPromo_PromoHeader2":"button",
+            "boxPromo_PromoHeader_val2":"NEW",
+            "boxPromo_superPromobutton1link2":"link promo ",
+            "boxPromo_backgroundsection3": "Background promo 3",
+            "boxPromo_PromoHeader3":"button",
+            "boxPromo_PromoHeader_val3":"WOMEN",
+            "boxPromo_superPromobutton1link3":"link promo "
+        },
+        "ar": {
+            "boxPromo":"صندوق الترويجي",
+            "boxPromo_cn": "صندوق الترويجي",
+            "boxPromo_in": " الترويجي",
+            "boxPromo_bn": "أضف عرض ترويجي جديد",
+            "boxPromo_backgroundsection": "عرض الخلفية ",            
+            "boxPromo_PromoHeader_val":"تخفيض السعر",
+            "boxPromo_PromoTitlesmall":"نص صغير",
+            "boxPromo_PromoTitleLarge":"نص كبير",  
+            "boxPromo_PromoBaseColor":" النص الملون ",
+            "boxPromo_PromoTitlesmall_val":" مبيعات المقايضة",    
+            "boxPromo_PromoTitleLarge_val":"احصل على",  
+            "boxPromo_PromoBaseColor_val":"خصم 50",
+            "boxPromo_PromoTitlesmall_val2":"الصيف",    
+            "boxPromo_PromoTitleLarge_val2":"الوصايا الجديدة",  
+            "boxPromo_PromoBaseColor_val2":"2018",
+            "boxPromo_PromoTitlesmall_val3":"مجموعة جديدة",
+            "boxPromo_PromoTitleLarge_val3":"حقيبة يد",
+            "boxPromo_superPromobutton1link":"رابط الترويجي",
+            "boxPromo_backgroundsection2": "عرض الخلفية 2",
+            "boxPromo_PromoHeader2":"زر",
+            "boxPromo_PromoHeader_val2":"رجالي",
+            "boxPromo_superPromobutton1link2":"رابط الترويجي",
+            "boxPromo_backgroundsection3": "عرض الخلفية 3",
+            "boxPromo_PromoHeader3":"زر",
+            "boxPromo_PromoHeader_val3":"نساء",
+            "boxPromo_superPromobutton1link3":"رابط الترويجي"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+{{ include('manymore/template/quickcheckout/payment_address.expand') }}

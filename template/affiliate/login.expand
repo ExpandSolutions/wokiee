@@ -1,0 +1,85 @@
+{% if success %}
+<br>
+<div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{ success }}
+</div>
+{% endif %}
+
+{% if error_warning %}
+<br>
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    {{ error_warning }}
+</div>
+{% endif %}
+
+<div id="content">
+    <!-- breadcrumb -->
+    <div class="breadcrumb-page">
+        <ol class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="active">{{ breadcrumb['text'] }}</li>
+                {% else %}
+                    <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </div> <!-- breadcrumb -->
+
+    <div class="page-title-base">
+        <h1 class="title-base">{{ lang('heading_title') }}</h1>
+    </div>
+
+    <div>
+        <div class="block-form-login row">
+            <!-- block Create an Account -->
+            <div class="block-form-create  col-md-6">
+                <div class="block-title">
+                    {{ lang('text_new_affiliate') }}
+                </div>
+                <div class="block-content">
+                    <p>{{ lang('text_register_account') }}</p>
+                    <a href="{{ link('affiliate/register', '', 'SSL') }}" class="btn btn-inline">{{ lang('button_continue') }}</a>
+                </div>
+            </div><!-- block Create an Account -->
+
+            <!-- block Registered-->
+            <div class="block-form-registered  col-md-6">
+                <div class="block-title">
+                    {{ lang('text_returning_affiliate') }}
+                </div>
+                <div class="block-content">
+                    <p>{{ lang('text_i_am_returning_affiliate') }}</p>
+                    <form action="{{ link('affiliate/login', '', 'SSL') }}" method="post" enctype="multipart/form-data" id="login">
+                        <div class="form-group">
+                            <input type="text" name="email" class="form-control" placeholder="{{ lang('entry_email') }}" value="{{ email }}">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="{{ lang('entry_password') }}" value="{{ password }}">
+                        </div>
+                        <button type="submit" class="btn btn-inline">{{ lang('button_login') }}</button>
+
+                        {% if redirect %}
+                        <input type="hidden" name="redirect" value="{{ redirect }}" />
+                        {% endif %}
+                    </form>
+                </div>
+            </div><!-- block Registered-->
+        </div>
+        <hr>
+        <!-- Forgot your password -->
+        <div class="block-forgot-pass col-md-12 text-center">
+            <a class="btn btn-warning" href="{{ link('affiliate/forgotten', '', 'SSL') }}">{{ lang('text_forgotten') }}</a>
+        </div><!-- Forgot your password -->
+    </div>
+</div>
+
+<script type="text/javascript"><!--
+    $('#login input').keydown(function(e) {
+        if (e.keyCode == 13) {
+            $('#login').submit();
+        }
+    });
+//--></script>

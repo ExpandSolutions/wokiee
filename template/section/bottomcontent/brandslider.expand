@@ -1,0 +1,24 @@
+<!-- End Pop Cat -->
+<section class="brand-section">
+<div class="container" id="section-{{ section_id }}">
+  <div class="popcat13 list-brand13">
+    {% if fields.displaysectiontitle.field_value == '1' %}
+        <div class="title-cat13">
+          <h2 class="title14">
+            {{ fields.sectiontitle.field_value }}
+        </h2>
+      </div>
+    {% endif %}
+    <div class="popcat-slider13">
+      <div class="wrap-item" data-pagination="false" data-navigation="false" data-autoplay="true"
+      data-itemscustom="[[0,1],[360,2],[768,3],[980,4],[1200,5]]">
+        {% for collection in collections %}
+        <div class="item-cat13">
+          <a href="{{ collection.imagelink.field_value }}"><img class="pulse" src="{{ collection.slideimage.field_value }}" alt="" /></a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+</section>

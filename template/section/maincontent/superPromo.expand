@@ -1,0 +1,78 @@
+<div class="container-indent0">
+    <div class="container-fluid">
+        <div class="row tt-layout-promo-box">
+            <div class="col-sm-12 col-md-6">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="{{ fields.Promolink.field_value }}" class="tt-promo-box tt-one-child hover-type-2">
+                            <img src="{{ asset('images/loader.svg') }}" data-src="{{ fields.backgroundpromo.field_value }}" alt="">
+                            <div class="tt-description">
+                                <div class="tt-description-wrapper">
+                                    <div class="tt-background"></div>
+                                    <div class="tt-title-small">{{fields.buttomPromo.field_value}}</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="{{ fields.Promolink2.field_value }}" class="tt-promo-box tt-one-child hover-type-2">
+                            <img src="{{ asset('images/loader.svg') }}" data-src="{{ fields.backgroundpromo2.field_value }}" alt="">
+                            <div class="tt-description">
+                                <div class="tt-description-wrapper">
+                                    <div class="tt-background"></div>
+                                    <div class="tt-title-small">{{fields.buttomPromo2.field_value}}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="{{ fields.Promolink2.field_value }}" class="tt-promo-box tt-one-child hover-type-2">
+                            <img src="{{ asset('images/loader.svg') }}" data-src="{{ fields.backgroundpromo3.field_value }}" alt="">
+                            <div class="tt-description">
+                                <div class="tt-description-wrapper">
+                                    <div class="tt-background"></div>
+                                    <div class="tt-title-small">{{fields.buttomPromo3.field_value}}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="{{ fields.Promolink4.field_value }}" class="tt-promo-box tt-one-child hover-type-2">
+                            <img src="{{ asset('images/loader.svg') }}" data-src="{{ fields.backgroundpromo4.field_value }}" alt="">
+                            <div class="tt-description">
+                                <div class="tt-description-wrapper">
+                                    <div class="tt-background"></div>
+                                    <div class="tt-title-small">{{fields.buttomPromo4.field_value}}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="{{ fields.Promolink5.field_value }}" class="tt-promo-box tt-one-child hover-type-2">
+                            <img src="{{ asset('images/loader.svg') }}" data-src="{{ fields.backgroundpromo5.field_value }}" alt="">
+                            <div class="tt-description">
+                                <div class="tt-description-wrapper">
+                                    <div class="tt-background"></div>
+                                    <div class="tt-title-small">{{fields.buttomPromo5.field_value}}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-12">
+                        <a href="{{ fields.Promolink6.field_value }}" class="tt-promo-box tt-one-child">
+                            <img src="{{ asset('images/loader.svg') }}" data-src="{{ fields.backgroundpromo6.field_value }}" alt="">
+                            <div class="tt-description">
+                                <div class="tt-description-wrapper">
+                                    <div class="tt-background"></div>
+                                    <div class="tt-title-small">{{fields.buttomPromo6.field_value}}</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>

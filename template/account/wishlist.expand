@@ -1,0 +1,107 @@
+{% if success %}
+<br>
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{ success }}
+</div>
+{% endif %}
+
+<div id="content">
+    <!-- breadcrumb -->
+    <div class="breadcrumb-page">
+        <ol class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="active">{{ breadcrumb['text'] }}</li>
+                {% else %}
+                    <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </div> <!-- breadcrumb -->
+
+    <div class="page-title-base">
+        <h1 class="title-base">{{ lang('heading_title') }}</h1>
+    </div>
+
+  {% if products %}
+  <div class="wishlist-info">
+    <table class="table  table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class="image">{{ lang('column_image') }}</th>
+          <th class="name">{{ lang('column_name') }}</th>
+          <th class="model">{{ lang('column_model') }}</th>
+          <th class="rating">{{ lang('column_rating') }}</th>
+          <th class="stock">{{ lang('column_stock') }}</th>
+          <th class="price">{{ lang('column_price') }}</th>
+          <th class="action">{{ lang('column_action') }}</th>
+        </tr>
+      </thead>
+      {% for product in products %}
+      <tbody id="wishlist-row{{ product['product_id'] }}">
+        <tr>
+          <td class="image">
+            {% if product['thumb'] %}
+            <a href="{{ product['href'] }}"><img src="{{ product['thumb'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" /></a>
+            {% endif %}
+          </td>
+          <td class="name"><a href="{{ product['href'] }}">{{ product['name'] }}</a></td>
+          <td class="model">{{ product['model'] }}</td>
+          <td class="rating"> <img src="{{ asset('image/stars-' ~ product["rating"] ~ '.png') }}" </td>
+          <td class="stock">{{ product['stock'] }}</td>
+          {% if ('-1' not in product.price) and ('-1' not in product.special) %}
+          <td class="price">
+            {% if product['price'] %}
+            <div class="price">
+              {% if not product['special'] %}
+              {{ product['price'] }}
+              {% else %}
+              <s>{{ product['price'] }}</s> <b>{{ product['special'] }}</b>
+              {% endif %}
+            </div>
+            {% endif %}
+          </td>
+          <td class="action">
+              <a href="#" class="btn btn-primary" onclick="addToCart('{{ product['product_id'] }}'); return false;">
+                  {{ lang('button_cart') }}
+              </a>
+              <a href="{{ product['remove'] }}" class="" title="{{ lang('button_remove') }}">
+                  &nbsp;&nbsp;<i class="fa fa-close"></i>
+              </a>
+          </td>
+          {% else %}
+            <td class="action">
+                <a href="#" class="btn btn-primary" onclick="contact_us('{{ product.product_id }}'); return false;">
+                    {{ lang('button_req_quote') }}
+                </a>
+                <div id="enquiry-{{ product.product_id }}"  style="display:none">{{ product.name }}:</div>
+            </td>
+          {% endif %}
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+
+  {% else %}
+    <br>
+
+    <br>
+
+    <div class="content">{{ lang('text_empty') }}</div>
+
+    <br>
+
+    <br>
+
+    <br>
+  {% endif %}
+    <div class="row">
+        <div class="col-md-7">
+            <div class="pull-left">
+                <a href="{{ link('account/account', '', 'SSL') }}" class="btn btn-inline">{{ lang('button_continue') }}</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<form action="{{ action|replace({'&': '&amp;'}) }}" method="post" id="okpay_checkout">
+  <input type="hidden" name="ok_receiver" value="{{ ok_receiver }}" />
+  <input type="hidden" name="ok_return_success" value="{{ ok_return_success }}" />
+  <input type="hidden" name="ok_return_fail" value="{{ ok_return_fail }}" />
+  <input type="hidden" name="ok_ipn" value="{{ ok_ipn }}" />
+  <input type="hidden" name="ok_invoice" value="{{ ok_invoice }}" />
+  <input type="hidden" name="ok_currency" value="{{ ok_currency }}" />
+  <input type="hidden" name="ok_item_1_price" value="{{ ok_item_1_price }}" />
+  <input type="hidden" name="ok_item_1_name" value="{{ ok_item_1_name }}" />
+</form>
+<div class="buttons">
+  <table>
+    <tr>
+      <td align="left"><a onclick="location = '{{ back|replace({'&': '&amp;'}) }}'" class="button"><span>{{ lang('button_back') }}</span></a></td>
+      <td align="right"><a id="button_confirm" onclick="" class="button"><span>{{ lang('button_confirm') }}</span></a></td>
+    </tr>
+  </table>
+  <script>
+	$(function(){
+		$('#button_confirm').bind('click',function(){
+			$('#okpay_checkout').submit();
+		});
+		
+	});
+  </script>
+</div>

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="{{ lang('code') }}" class="{{ lang('direction') == 'rtl' ? 'cms-rtl' : '' }}">
+<head>
+    <title>{{ document_title }}</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <base href="{{ base_url }}" />
+    {% if document_description != '' %}
+    <meta name="description" content="{{ document_description }}" />
+    {% endif %}
+
+    {% if document_keywords != '' %}
+    <meta name="keywords" content="{{ document_keywords }}" />
+    {% endif %}
+
+    {% if store_icon != '' %}
+    <link href="{{ store_icon }}" rel="icon" />
+    {% endif %}
+
+    {% for link in document_links %}
+        <link href="{{ link.href }}" rel="{{ link.rel }}" />
+    {% endfor %}
+
+    {% for style in document_styles %}
+        <link rel="{{ style.rel }}" type="text/css" href="{{ style.href }}" media="{{ style.media }}" />
+    {% endfor %}
+
+    {% if route == "product/product" %}
+        <meta property="og:image" content="{{ ChildData.thumb }}" />
+        <meta property="og:url"content="{{ link('product/product', 'product_id=' ~ ChildData.product_id) }}" />
+        <meta property="og:title" content="{{ ChildData.product_name }}" />
+		<meta property="og:description" content="{{ ChildData.short_description|e }}" />		
+		
+		<style>
+			.con-home,
+			.notific{
+				background-color: #fff !important;
+			}
+		</style>
+    {% endif %}
+
+
+	<!-- Style CSS  -->
+	<link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{{ csslink('css/libs/animate.css') }}" />
+	<link rel="stylesheet" type="text/css" href="index.php?route=common/style{{ isdraft == 1 ? '&isdraft=1' : '' }}">    	
+	<link rel="stylesheet" type="text/css" href="{{ csslink('css/mycustom.css') }}" />
+	{% if lang('code') == 'ar' %}
+		<link rel="stylesheet" type="text/css" href="{{ csslink('css/rtl.css') }}" />	
+	{%endif%}
+	<!-- Jquery For Wekiee New, Old Version Related By App Filter  -->
+	<!-- <script src="{{ jslink('js/external/jquery/jquery.min.js') }}"></script>  -->
+    <script type="text/javascript" src="{{ jslink('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ jslink('js/jquery-ui.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ csslink('css/jquery-ui-1.8.16.custom.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ csslink('js/jquery/ui/themes/ui-lightness/jquery-ui-1.8.16.custom.css') }}" />
+
+    {% for script in document_scripts %}
+        <script type="text/javascript" src="{{ script }}"></script>
+    {% endfor %}
+
+	<!-- Inline Script:Start -->
+    {% for script in inline_scripts %}
+        {% if script['type'] == 'callable' %}
+            {{ script['script']|base64_decode }}
+        {% endif %}
+    {% endfor %}
+	<!-- Inline Script:End -->
+
+	<!--[if IE]>
+	<style>
+		.inner-adv-color-info {
+			left:-30px;
+		}
+	</style>
+	<![endif]-->
+    {{ google_analytics }}
+</head>
+<body>
+	<div id="loader-wrapper">
+		<div id="loader">
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+	</div>
+<nav class="{{ lang('direction') == 'rtl' ? 'push-sidebar push-sidebar-right' : 'push-sidebar' }} hidden" id="sidebar-left">
+	<ul class="nav  nav-stacked sidebar ">
+
+		{% if header_data.mainMenuLink.section_state == 'enabled' %}
+		{% for collection in header_data.mainMenuLink.collections %}
+		<li class="">
+			<a href="{{ collection.itemlink.value }}">{{ collection.itemname.value }}</a>
+		</li>
+		{% endfor %}
+		{% endif %}
+		<!---Custom Nav Mobile -->
+		{% if  header_data.megaMenuLink.collections|length > 0 %}
+		{% if header_data.megaMenuLink.section_state == 'enabled' %}
+		{% for collection in header_data.megaMenuLink.collections %}
+		<li role="presentation" class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" 
+			href="{{ menu_category.href }}" role="button" aria-haspopup="true" aria-expanded="false">
+				{{ collection.ColumnTitle.value }} 
+				<i class="fa fa-angle-down"></i>
+			</a>			
+			<ul class="dropdown-menu">					
+				{% set featured_categories =  getCategoryAndChilds(collection['categories']['value'], 500, 500) %}
+				{% for item_category in featured_categories %}				
+					<li>						
+						<li class="c-navigation--primary__list-heading">
+							<a class="c-navigation__link" href="{{ item_category.href }}">
+								<span class="u-text-nowrap-pre"></span>
+								<span class="u-text-nowrap">{{ item_category.name }}</span>
+							</a>
+						</li>
+							{% for sub_categories in item_category["sub_categories"]|slice(0, 9) %}
+							<li class="c-navigation__list-item">
+								<a class="c-navigation__link" href="{{ sub_categories.href }}" title="{{ sub_categories.name }}">
+										{{ sub_categories.name }}
+								</a>
+							</li>																
+							{%endfor%}						
+					</li>				
+				{%endfor%}
+			</ul>				
+		</li>
+		{%endfor%}
+		{%endif%}
+		{%endif%}
+		<!----->
+
+		{% if header_data.megaMenuLink2.section_state == 'enabled' %}
+		{% for collection in header_data.megaMenuLink2.collections %}
+			{% set menu_item_category = getCategoryAndChilds(collection['categories']['value'], 170, 100) %}
+			{% for menu_category in menu_item_category %}
+				{% set cat_sub = menu_category["sub_categories"]|length %}
+				{% if  cat_sub == 0 %}
+					<li class="">
+						<a href="{{ menu_category.href }}">{{menu_category.name }}</a>
+					</li>
+				{% else %} 
+					<li role="presentation" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="{{ menu_category.href }}" role="button" aria-haspopup="true" aria-expanded="false">
+							{{menu_category.name }} <i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+							
+							{% for sub_category in menu_category["sub_categories"]|slice(0,9) %}
+							<li>
+								<a href="{{ sub_category.href }}">{{ sub_category.name }}</a>
+							</li>
+							{% endfor %}
+							
+						</ul>
+					</li>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+		{% endif %}
+
+		{% if header_data.mainMenuCategories.section_state == 'enabled' %}
+		{% for collection in header_data.mainMenuCategories.collections %}
+		{% set menu_item_category = getCategoryAndChilds(collection['categories']['value'], 170, 100) %}
+			{% for item_category in menu_item_category %}
+				{% set cat_sub = item_category["sub_categories"]|length %}
+				{% if  cat_sub == 0 %}
+					<li class="">
+						<a href="{{ item_category.href }}">{{item_category.name }}</a>
+					</li>
+				{% else %} 
+					<li role="presentation" class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="{{ item_category.href }}" role="button" aria-haspopup="true" aria-expanded="false">
+								{{ item_category.name }} <i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu">
+							{% for sub_category in item_category["sub_categories"]|slice(0,9) %}
+							<li>
+								<a href="{{ sub_category.href }}">{{ sub_category.name }}</a>
+							</li>
+							{%endfor%}
+						</ul>
+					</li>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+		{% endif %}
+
+		{% if header_data.mainMenuLinkEnd.section_state == 'enabled' %}
+		{% for collection in header_data.mainMenuLinkEnd.collections %}
+		<li class="">
+			<a href="{{ collection.itemlink.value }}">{{ collection.itemname.value }}</a>
+		</li>
+		{% endfor %}
+		{% endif %}
+
+
+	</ul>
+</nav>
+
+<div class="cover-nav-mob hidden"></div>
+
+<div class="wrap canvas" id="canvas">
+	<!-- Start Header -->
+	<header>
+		<!-- tt-mobile menu -->
+		<nav class="panel-menu mobile-main-menu">
+			<ul>
+				
+				{% if header_data.mainMenuLink.section_state == 'enabled' %}
+					{% for collection in header_data.mainMenuLink.collections %}
+						<li>
+							<a href="{{ collection.itemlink.value }}">{{ collection.itemname.value }}</a>
+						</li>
+					{% endfor %}
+				{% endif %}					
+				
+				{% if  header_data.megaMenuLink.collections|length > 0 %}
+				{% if header_data.megaMenuLink.section_state == 'enabled' %}
+					{% for collection in header_data.megaMenuLink.collections %}
+					<li>
+						<a href="{{ collection.ColumnLink.value }}">{{ collection.ColumnTitle.value }}</a>
+						{% set featured_categories =  getCategoryAndChilds(collection['categories']['value'], 500, 500) %}
+						<ul>
+							{% for item_category in featured_categories %}
+							<li>
+								<a href="{{ item_category.href }}">{{ item_category.name }}</a>
+								<ul>
+									{% for sub_categories in item_category["sub_categories"]|slice(0, 7) %}								
+									<li><a href="{{ sub_categories.href }}">{{ sub_categories.name }}</a></li>
+									{% endfor %}					
+								</ul>
+							</li>	
+							{% endfor %}					
+						</ul>
+					</li>				
+					{%endfor%}
+				{%endif%}
+				{%endif%}
+			</ul>
+			<div class="mm-navbtn-names">
+				<div class="mm-closebtn">{{ lang('Close') }}</div>
+				<div class="mm-backbtn">{{ lang('Back') }}</div>
+			</div>
+		</nav>
+		<!-- tt-mobile-header -->
+		<div class="tt-mobile-header">
+			<div class="container-fluid">
+				<div class="tt-header-row">
+					<div class="tt-mobile-parent-menu">
+						<div class="tt-menu-toggle">
+							<i class="icon-03"></i>
+						</div>
+					</div>
+					<!-- search -->																																																																																																										
+					<div class="tt-mobile-parent-search tt-parent-box"></div>
+					<!-- /search -->
+					<!-- cart -->
+					<div class="tt-mobile-parent-cart tt-parent-box {{ cart.countProducts() > 3 ? 'scroll-cart' : '' }}"></div>
+					<!-- /cart -->
+					<!-- account -->
+					<div class="tt-mobile-parent-account tt-parent-box"></div>
+					<!-- /account -->
+					<!-- currency -->
+					<div class="tt-mobile-parent-multi tt-parent-box"></div>
+					<!-- /currency -->
+				</div>
+			</div>
+			{% if header_data.headermain.section_state == 'enabled' %}
+			<div class="container-fluid tt-top-line">
+				<div class="row">
+					<div class="tt-logo-container">
+						<!-- mobile logo -->
+						<a class="tt-logo tt-logo-alignment" href="index.html">
+							<img src="{{ image(header_data.headermain.fields.logo.value) }}" alt="Logo Loading">
+						</a>
+						<!-- /mobile logo -->
+					</div>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+		<!-- tt-desktop-header -->
+		<div class="tt-desktop-header">
+			<div class="container">
+				<div class="tt-header-holder">
+					{% if header_data.headermain.section_state == 'enabled' %}
+					<div class="tt-col-obj tt-obj-logo">
+						<!-- logo -->
+						<a class="tt-logo tt-logo-alignment" href="index.html">
+							<img src="{{ image(header_data.headermain.fields.logo.value) }}" alt="Logo Loading">
+						</a>
+						<!-- /logo -->
+					</div>
+					{% endif %}
+					<div class="tt-col-obj tt-obj-menu">
+						<!-- tt-menu -->
+						<div class="tt-desctop-parent-menu tt-parent-box">
+							<div class="tt-desctop-menu">
+								<nav>
+									<ul>
+										{% if header_data.mainMenuLink.section_state == 'enabled' %}
+											{% for collection in header_data.mainMenuLink.collections %}
+												<li class="dropdown tt-megamenu-col-02">
+													<a href="{{ collection.itemlink.value }}">{{ collection.itemname.value }}</a>
+												</li>
+											{% endfor %}
+										{% endif %}																			
+										{% if  header_data.megaMenuLink.collections|length > 0 %}
+											{% if header_data.megaMenuLink.section_state == 'enabled' %}
+												{% for collection in header_data.megaMenuLink.collections %}
+													<li class="dropdown megamenu">
+														<a href="{{ collection.ColumnLink.value }}">
+															{{ collection.ColumnTitle.value }}
+														</a>
+														{% set featured_categories =  getCategoryAndChilds(collection['categories']['value'], 500, 500) %}
+														<div class="dropdown-menu">
+															<div class="row">
+																<div class="col-sm-8">
+																	<div class="row tt-col-list">
+																		{% for item_category in featured_categories %}
+																		<div class="col-sm-3">
+																			<a class="tt-title-submenu" href="{{ item_category.href }}">																				
+																				{{ item_category.name }}
+																			</a>																			
+																			<ul class="tt-megamenu-submenu">
+																				{% for sub_categories in item_category["sub_categories"]|slice(0, 7) %}
+																				<li><a href="{{ sub_categories.href }}">{{ sub_categories.name }}</a></li>
+																				{%endfor%}
+																			</ul>
+																		</div>
+																		{%endfor%}																		
+																		<!--- Start Brand  -->
+																		{% if collection.displayBrand.value == 1 %}
+																		<div class="col-sm-3">
+																			<a class="tt-title-submenu" href="#">
+																				{{lang('top_brand')}}
+																			</a>
+																			{% set featured_brands =  getBrands(collection['brands']['value'], 250, 200) %}
+																			<ul class="tt-listing-01">
+																				{% for item_brand  in featured_brands|slice(0,6) %}
+																				<li>
+																					<a href="{{item_brand.href}}" target="_blank">																						
+																						<img src="{{item_brand.thumb}}" alt="{{item_brand.slug}}">
+																					</a>
+																				</li>
+																				{% endfor %}
+																			</ul>
+																		</div>
+																		<!-- End Brand -->
+																		{% endif %}
+																	</div>
+																</div>
+																{% if collection.displayslider.value == 1 %}
+																{% set megaMenuProducts = getFeaturedProducts(collection['products']['value'], 165, 206) %}
+																<div class="col-sm-4">
+																	<a href="" class="tt-title-submenu">
+																		{{collection.headerslider.value}}
+																	</a>
+																	<div class="tt-menu-slider header-menu-product arrow-location-03 row">
+																		{% for product  in megaMenuProducts|slice(0,4) %}
+																		<div class="col-2">
+																			<div class="tt-product thumbprod-center">
+																				<a href="{{product.href}}">
+																					<div class="tt-image-box">
+																						<span class="tt-img">
+																							<img src="{{product.thumb}}" alt="{{product.name}}">
+																						</span>
+																						<span class="tt-img-roll-over">
+																							<img src="{{product.thumb}}" alt="">
+																						</span>
+																					</div>
+																					<div class="tt-description">
+																						<h2 class="tt-title">{{product.name}}</h2>
+																						<div class="tt-price">
+																							{{product.price}}
+																							<!-- <span class="old-price">$24</span> -->
+																						</div>
+																						<!-- <div class="tt-product-inside-hover">
+																							<div class="tt-btn-addtocart" data-toggle="modal" data-target="#modalAddToCartProduct">
+																								ADD TO CART
+																							</div>
+																							<div class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></div>
+																						</div> -->
+																					</div>
+																				</a>
+																			</div>
+																		</div>
+																		{%endfor%}
+																	</div>
+																</div>
+																{%endif%}
+																{% if collection.displayAdInside.value == 1 %}
+																<div class="col-sm-4">
+																	<a href="{{collection.AdInsideLink.value}}">
+																		<img src="{{image(collection.AdInsideimg.value)}}" alt="Loading ... ">
+																	</a>
+																</div>
+																{%endif%}
+															</div>
+															<!-- Start Ads -->															
+															<div class="row">
+																{% if collection.displaySidead.value == 1 %}
+																<div class="col-sm-6">
+																	<a href="{{collection.sidedadlink.value}}" class="tt-promo-02">
+																		<img src="{{image(collection.sideAdimg.value)}}" alt="">
+																		<div class="tt-description tt-point-h-l">
+																			<div class="tt-description-wrapper">																					
+																				<div class="tt-title-small">
+																					{{collection.sidedadsmtext.value}}
+																				</div>
+																				<div class="tt-title-large">
+																					{{collection.sidedadtext.value}}
+																				</div>
+																			</div>
+																		</div>
+																	</a>
+																</div>
+																{%endif%}
+																{% if collection.displaySidead2.value == 1 %}
+																<div class="col-sm-6">
+																	<a href="{{collection.sidedadlink2.value}}" class="tt-promo-02">
+																		<img src="{{image(collection.sideAdimg2.value)}}" alt="">
+																		<div class="tt-description tt-point-h-l">
+																			<div class="tt-description-wrapper">
+																				<div class="tt-title-small">
+																					<span class="tt-white-color">{{collection.sidedadsmtext2.value}}</span>
+																				</div>
+																				<div class="tt-title-large">
+																					<span class="tt-white-color">{{collection.sidedadtext2.value}}</span>
+																				</div>
+																			</div>
+																		</div>
+																	</a>
+																</div>
+																{%endif%}
+															</div>																														
+															<!-- End Ads -->
+														</div>
+													</li>
+												{%endfor%}
+											{%endif%}
+										{%endif%}
+									</ul>
+								</nav>
+							</div>
+						</div>
+						<!-- /tt-menu -->
+					</div>
+					<div class="tt-col-obj tt-obj-options obj-move-right">
+						<!-- tt-search -->
+						<div class="tt-desctop-parent-search tt-parent-box">
+							<div class="tt-search tt-dropdown-obj">
+								<button class="tt-dropdown-toggle" data-tooltip="{{ lang('text_searchbtn') }}" data-tposition="bottom">
+									<i class="icon-f-85"></i>
+								</button>
+								<div class="tt-dropdown-menu">
+									<div class="container">										
+										<!-- Start Form -->
+										<form class="ajax-search">												
+											<div class="tt-col" id="search">												
+												<input type="text" name="search" class="tt-search-input" placeholder=" {{ lang('text_search') }} " value="{{ search }}">
+												<div>														
+													<button class="radius tt-btn-search button-search button-search-custom" type="button">
+														<span class="hide">{{ lang('text_searchbtn') }}</span>
+													</button>
+												</div>
+											</div>
+											<div class="tt-col">
+												<button class="tt-btn-close icon-g-80"></button>
+											</div>
+											<div class="tt-info-text">
+												{{lang("What_are_you")}}
+											</div>
+											</form>
+										<!-- End Form -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /tt-search -->
+						<!-- tt-cart -->
+																								
+						<!-- start card  -->							
+						<div class="tt-desctop-parent-cart tt-parent-box box-cart-custom ">
+							<!-- <div class="tt-desctop-parent-cart tt-parent-box"></div> -->
+							<div class="mini-cart1 mini-cart-box block-minicart {{ cart.countProducts() > 3 ? 'scroll-cart' : '' }} tt-cart">
+								<a class="mini-cart-link" href="{{ link('checkout/cart') }}">
+									<!-- vv -->								
+									<span class="c-shopping-bag-label">
+										<span class="c-shopping-bag-icon mini-cart-link  tt-dropdown-obj">
+											<span class="c-shopping-bag-icon tt-dropdown-toggle">									
+												<i class="icon-f-39"></i>
+												<span class="tt-badge-cart" id="counterLabel">{{ cart.countProducts() }}</span>
+											</span>	
+										</span>										
+									</span>
+									<!-- vv -->									
+								</a>
+								<ul class="list-mini-cart-item list-unstyled" id="cartDropList">
+									{{ cart_content }}
+								</ul>						
+							</div>
+						</div>
+						<!-- end card -->
+						<!-- /tt-cart -->
+						<!-- tt-account -->
+						<div class="tt-desctop-parent-account tt-parent-box">
+								<div class="tt-account tt-dropdown-obj">
+									<button class="tt-dropdown-toggle"  data-tooltip="{{lang('Account_Account')}}" data-tposition="bottom">
+										<i class="icon-f-94"></i>
+									</button>
+									<div class="tt-dropdown-menu">
+										<div class="tt-mobile-add">
+											<button class="tt-close">{{lang('Close')}}</button>
+										</div>
+										<div class="tt-dropdown-inner">
+											<ul>
+												{% if logged == false  %}
+												<li>
+													<a href="{{ link('account/login', '', 'SSL') }}">
+														<i class="icon-f-76"></i>
+														{{ lang('Account_Login')|format(link('account/login', '', 'SSL'), link('account/register', '', 'SSL')) }}
+													</a>
+												</li>
+												<li>
+													<a href="{{ link('account/register', '', 'SSL') }}">
+														<i class="icon-f-94"></i>
+														{{ lang('Account_Register')  }}
+													</a>
+												</li>
+												{% else %}
+													<li>
+														<a href="{{ link('account/logout', '', 'SSL') }}">
+															{{ lang('AccountLogout')|format(link('account/account', '', 'SSL'), customer.getFirstName(), link('account/logout', '', 'SSL')) }}
+														</a>
+													</li>
+													<li>
+														<a href="{{ link('account/account') }}"> 
+															{{ lang('Account_Account')  }}
+														</a>
+													</li>												
+												{% endif %}
+												<li>
+													<a href="{{ link('checkout/checkout') }}" >
+														<i class="icon-f-68"></i> {{ lang('text_checkout') }}
+													</a>
+												</li>
+												<li>
+													<a href="{{ link('account/wishlist') }}">
+														<i class="icon-n-072"></i> {{ lang('textWishlist')|format(wishlist_count)  }}
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /tt-account -->						
+							<!-- tt-langue and tt-currency -->
+							<div class="tt-desctop-parent-multi tt-parent-box">
+								<div class="tt-multi-obj tt-dropdown-obj">
+									<button class="tt-dropdown-toggle" data-tooltip="{{lang('settings')}}" data-tposition="bottom"><i class="icon-f-79"></i></button>
+									<div class="tt-dropdown-menu">
+										<div class="tt-mobile-add">
+											<button class="tt-close">{{lang('Close')}}</button>
+										</div>									
+										<div class="tt-dropdown-inner">
+											<!-- <ul>
+												<li class="active"><a>{{ current_language.name }}</a></li>
+											</ul>
+											<hr class="hr"> -->
+											{% if languages|length > 1 %}
+											<form method="post" enctype="multipart/form-data">
+												<ul>
+													{% for language in languages %}
+													<li class='{{ language.name == current_language.name  ? "active" : "" }}'>
+														<a href="#" title="{{ language.name }}" 
+														onclick="$('input[name=\'language_code\']').attr('value', '{{ language.code }}'); $(this).closest('form').submit(); return false;">
+															{{ language.name }}
+														</a>
+													</li>
+													{% endfor %}
+													<input type="hidden" name="language_code" value="" />
+													<input type="hidden" name="redirect" value="{{ redirect }}" />
+												</ul>
+											</form>
+											{% endif %}
+											{% if currencies|length > 1 %}
+											<div class="currency-box">
+												<a href="#" class="currency-current">
+													<span>{{ current_currency.symbol }} 
+														<span class="hidden-sm hidden-xs">
+															- {{ current_currency.title }}
+														</span>
+													</span>
+												</a>
+												<form action="{{ link('common/home') }}" method="post" enctype="multipart/form-data">
+												<ul class="currency-list list-unstyled">
+													{% for currency in currencies %}
+													<li>
+														<a href="#" onclick="$('input[name=\'currency_code\']').attr('value', '{{ currency.code }}'); $(this).closest('form').submit(); return false;">
+															<span class="currency-index">{{ currency.symbol }}</span>
+														</a>
+													</li>
+													{% endfor %}
+													<input type="hidden" name="currency_code" value="" />
+													<input type="hidden" name="redirect" value="{{ redirect }}" />
+												</ul>
+												</form>
+											</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /tt-langue and tt-currency -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- stuck nav -->
+		<div class="tt-stuck-nav">
+			<div class="container">
+				<div class="tt-header-row ">
+					<div class="tt-stuck-parent-menu"></div>
+					<div class="tt-stuck-parent-search tt-parent-box"></div>
+					<div class="tt-stuck-parent-cart tt-parent-box"></div>
+					<div class="tt-stuck-parent-account tt-parent-box"></div>
+					<div class="tt-stuck-parent-multi tt-parent-box"></div>
+				</div>
+			</div>
+		</div>
+	</header>	
+	<!-- End Header -->
+	<div style="{{ is_home_page ? 'background-color:#FFF' : 'background-color:#fcfcfc;' }}" class="notific">
+		<div id="notification" class="container"></div>
+	</div>
+	
+	<div style="{{ is_home_page ? 'background-color:#FFF' : 'border-bottom: 1px solid #e5e5e5; background-color:#fff; padding:10px 0 15px 0'}}" class="con-home tt-pageContent">
+			{% if is_home_page %}
+				{{ regions_data.maincontent.content }}
+			{% else %}
+			<div class="container" style="padding-bottom:30px;">
+				<div class='row'>
+					{% if modules.filter.enabled or modules.mega_filter.enabled %}
+					<div class="col-md-3">					
+						{{ regions_data.sidecontent.content }}
+						{% if modules.mega_filter.enabled %}{{ modules.mega_filter.content }}{% endif %}
+						{% if modules.filter.enabled %}{{ modules.filter.content }}{% endif %}
+					</div>
+					{% endif %}
+					<div id="content" class="{{ modules.filter.enabled or modules.mega_filter.enabled ? 'col-md-9' : 'col-md-12' }}">
+						{{ page_content }}
+					</div>
+				</div>
+			</div>
+			{% endif %}
+ 	</div>
+	<div class="container bottom-content">
+        {{ regions_data.bottomcontent.content }}
+	</div>		
+	<!--new Footer -->
+	<footer>			
+		<div class="tt-footer-col tt-color-scheme-01">
+			<div class="container">
+				<div class="row">
+					{% if footer_data.columnlinks.section_state == 'enabled' %}	
+					<div class="col-md-6 col-lg-2 col-xl-3">						
+						<div class="tt-mobile-collapse">						
+							<h4 class="tt-collapse-title">
+								{{ lang('categories') }}
+							</h4>
+							<div class="tt-collapse-content">
+								<ul class="tt-list">
+									{% for collection in footer_data.columnlinks.collections %}
+										<li><a href="{{ collection.link.value }}">{{ collection.namelink.value }}</a></li>
+									{%endfor%}
+								</ul>
+							</div>
+						</div>					
+					</div>
+					{%endif%}
+					{% if footer_data.columnlinksTwo.section_state == 'enabled' %}	
+					<div class="col-md-6 col-lg-2 col-xl-3">						
+						<div class="tt-mobile-collapse">
+							<h4 class="tt-collapse-title">								
+								{{ lang('my_account') }}
+							</h4>
+							<div class="tt-collapse-content">
+								<ul class="tt-list">
+									{% for collection in footer_data.columnlinksTwo.collections %}										
+									<li><a href="{{ collection.link.value }}">{{ collection.namelink.value }}</a></li>
+									{%endfor%}
+								</ul>
+							</div>
+						</div>
+					</div>
+					{%endif%}
+					{% if footer_data.footerAbout.section_state == 'enabled' %}
+					<div class="col-md-6 col-lg-4 col-xl-3">
+						<div class="tt-mobile-collapse">
+							<h4 class="tt-collapse-title">
+									{{ lang('about') }}
+							</h4>
+							<div class="tt-collapse-content">
+								<p>
+									{{footer_data.footerAbout.fields.footerAboutText.value}}									
+								</p>
+							</div>
+						</div>
+					</div>
+					{%endif%}
+					{% if footer_data.footerContacts.section_state == 'enabled' %}
+					<div class="col-md-6 col-lg-4 col-xl-3">
+						<div class="tt-newsletter">
+							<div class="tt-mobile-collapse">
+								<h4 class="tt-collapse-title">									
+									{{ lang('contacts') }}
+								</h4>
+								<div class="tt-collapse-content">
+									<address>
+										{% if footer_data.footerContacts.fields.contactsAddress.value != '' %}
+										<p>
+											<span>{{ lang('Address') }}:</span> 
+											{{footer_data.footerContacts.fields.contactsAddress.value}}
+										</p>
+										{%endif%}
+										{% if footer_data.footerContacts.fields.contactsPhone.value != '' %}
+										<p>
+											<span>{{ lang('Phone') }}:</span> 
+											{{footer_data.footerContacts.fields.contactsPhone.value}}
+										</p>
+										{%endif%}
+										{% if footer_data.footerContacts.fields.contactsHours.value != '' %}
+										<p>
+											<span>{{ lang('Hours') }}:</span>
+											{{footer_data.footerContacts.fields.contactsHours.value}}
+										</p>
+										{%endif%}
+										{% if footer_data.footerContacts.fields.contactsEmail.value != '' %}
+										<p>
+											<span>{{ lang('email') }}:</span> 
+											<a href="mailto:{{footer_data.footerContacts.contactsEmail.value}}">
+												{{footer_data.footerContacts.fields.contactsEmail.value}}
+											</a>
+										</p>
+										{%endif%}
+									</address>
+								</div>
+							</div>
+						</div>
+					</div>
+					{%endif%}
+				</div>
+			</div>
+		</div>
+		<div class="tt-footer-custom">
+			<div class="container">
+				<div class="tt-row">
+					<div class="tt-col-left">
+						<div class="tt-col-item tt-logo-col">							
+						</div>
+						<div class="tt-col-item">
+							<!-- copyright -->
+							{% if footer_data.copyright.section_state == 'enabled' %}											
+							<div class="tt-box-copyright">																
+								{% set Content_Footer = footer_data.copyright.fields.copyrightText.value %}
+								{% set replace_value = '[year]' %}											
+								{% set Current_year =  "now"|date('Y')  %}																							
+								{{ Content_Footer|replace({ (replace_value): Current_year}) }}								
+								{% if PackageId in ['2', '3'] %}
+									{#<!-- hardcode the copyrights -->#}
+									• {{lang('Copy_Right')}}								
+								{% endif %}											
+							</div>
+							{%endif%}						
+							<!-- /copyright -->
+						</div>
+					</div>
+					{% if footer_data.payments.section_state == 'enabled' %}
+					<div class="tt-col-right">
+						<div class="tt-col-item">
+							<!-- payment-list -->
+							<ul class="tt-payment-list">
+								{% for collection in footer_data.payments.collections %}
+								<li>
+									<a href="{{ collection.link.value }}" class="wobble-vertical">
+										<img src="{{ image(collection.paymentImage.value) }}" alt="" />
+									</a>
+								</li>
+								{% endfor %}
+							</ul>
+							<!-- /payment-list -->
+						</div>
+					</div>
+					{%endif%}
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!---End New Footer -->	
+	<!-- End Footer -->
+	<!-- <a href="#" class="radius scroll-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a> -->
+	<a href="#" class="tt-back-to-top">BACK TO TOP</a>
+</div>
+
+<script type="text/javascript" src="{{ jslink('js/libs/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ jslink('js/libs/smoothscroll.js') }}"></script>
+<script type="text/javascript" src="{{ jslink('js/libs/jquery.fancybox.js') }}"></script>
+<script type="text/javascript" src="{{ jslink('js/libs/jquery-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ jslink('js/libs/owl.carousel.js') }}"></script>
+<script type="text/javascript" src="{{ jslink('js/libs/jquery.mCustomScrollbar.js') }}"></script>
+<script type="text/javascript" src="{{ jslink('js/libs/wow.js') }}"></script>
+<script type="text/javascript" src="{{ jslink('js/libs/flipclock.js') }}"></script>
+<script type="text/javascript" src="{{ jslink('js/libs/jquery.elevatezoom.js') }}"></script>
+<script type="text/javascript" src="{{ jslink('js/libs/jquery.jcarousellite.js') }}"></script>
+<script type="text/javascript" src="{{ jslink('js/libs/push.js') }}"></script>
+
+<script type="text/javascript" src="{{ jslink('js/theme.js') }}"></script>
+
+<!--  Common - ExpandCart Default 		-->
+<script type="text/javascript" src="{{ jslink('js/common.js') }}"></script>
+<script type="text/javascript" src="{{ commonLink('js/common.js') }}"></script>
+
+<script type="text/javascript" src="{{ jslink('js/main-custom.js') }}"></script>
+
+<form id="contact-form" action="{{ link('information/contact') }}"  method="POST" enctype="multipart/form-data" >
+	<input type="hidden" name="no-validate" value="1" />
+	<input type="hidden" name="name"  value="{{ (customer.getFirstname() ~ ' ' ~ customer.getLastname())|e }}"/>
+	<input type="hidden" name="email" value="{{ customer.getEmail() }}"/>
+	<input type="hidden" name="enquiry" />
+	<input type="hidden" name="captcha" />
+</form>
+<script type="text/javascript">
+    function contact_us(id) {
+        $('#contact-form input[name="enquiry"]').val($('#enquiry-'+id).html()+'\n');
+        $('#contact-form').submit();
+    }
+</script>
+<!--- Js Wokiee -->
+<!-- <script src="{{ jslink('js/external/jquery/jquery.min.js') }}"></script> -->
+<script src="{{ jslink('js/external/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ jslink('js/external/slick/slick.min.js') }}"></script>
+<script src="{{ jslink('js/external/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ jslink('js/external/panelmenu/panelmenu.js') }}"></script>
+<script src="{{ jslink('js/external/instafeed/instafeed.min.js') }}"></script>
+<script src="{{ jslink('js/external/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+<script src="{{ jslink('js/external/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+<script src="{{ jslink('js/external/countdown/jquery.plugin.min.js') }}"></script>
+<script src="{{ jslink('js/external/countdown/jquery.countdown.min.js') }}"></script>
+<script src="{{ jslink('js/external/lazyLoad/lazyload.min.js') }}"></script>
+{% if route == "product/product" %}
+	<script src="{{ jslink('js/external/elevatezoom/jquery.elevatezoom.js') }}"></script>
+	<script src="{{ jslink('js/external/magnific-popup/jquery.magnific-popup.min.js') }}"></script>	
+{% endif %}
+<script src="{{ jslink('js/main-custom.js') }}"></script>
+
+<!--- Js Wokiee -->
+    {{ body_scripts }}
+		
+</body>
+</html>

@@ -1,0 +1,36 @@
+<div id="content">
+<h1>Your payment {{ x_response_reason_text }}</h1>
+    {% if x_response_code == '0' %}
+
+<p>Your payment was processed successfully. Here is your receipt:</p>
+
+        {% if vpc_TransactionNo %}
+<p>
+Payment Status: {{ x_response_reason_text }}<br/>
+ReceiptNo: {{ vpc_ReceiptNo }}<br/>
+TransactionNo: {{ vpc_TransactionNo }}
+</p>
+    {% endif %}
+<div class="buttons">
+  <table>
+    <tr>
+      <td align="left"></td>
+      <td align="right"><a href="{{ confirm }}" class="button">{{ lang('button_confirm') }}</a></td>
+    </tr>
+  </table>
+</div>
+    {% else %}
+<p>Your payment failed.  Please try again later.</p>
+<pre>
+{{ x_response_reason_text }}
+</pre>
+<div class="buttons">
+  <table>
+    <tr>
+      <td align="left"><a href="{{ back }}" class="button">{{ lang('button_back') }}</a></td>
+      <td align="right"></td>
+    </tr>
+  </table>
+</div>
+    {% endif %}
+</div>

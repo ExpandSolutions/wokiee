@@ -1,0 +1,1 @@
+{{ include('manymore/template/quickcheckout/shipping_method.expand') }}

@@ -1,0 +1,39 @@
+<div class="container-indent">
+    <div class="container-fluid-custom margin-top-section">
+        <div class="row tt-layout-promo-box">
+            {% for collection in collections %}                        
+                {% set lengthOfPromo =  collections|length %}
+                {% set col =  0 %}
+                {% if lengthOfPromo == 1 %}                
+                    {% set col =  12 %}
+                {% elseif lengthOfPromo == 2 %}
+                    {% set col =  6 %}
+                {% elseif lengthOfPromo == 3 %}
+                    {% set col =  4 %}
+                {% elseif lengthOfPromo == 4 %}                
+                    {% set col =  3 %}
+                {% else %}                
+                    {% set col =  4 %}
+                {% endif %}                
+                <div class="col-sm-6 col-md-{{col}}">
+                    <a href="{{ collection.Promolink.field_value }}" class="tt-promo-box">
+                        <img src="{{ asset('images/loader.svg') }}" data-src="{{ collection.backgroundpromo.field_value }}" alt="">
+                        <div class="tt-description">
+                            <div class="tt-description-wrapper">
+                                <div class="tt-background"></div>
+                                <div class="tt-title-small">{{ collection.PromoTitlesmall.field_value }}</div>
+                                <div class="tt-title-large">                                
+                                    <span class="tt-base-color">
+                                        {#{ collection.PromoBaseColor.field_value }#}
+                                        {{ collection.PromoTitleLarge.field_value }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                
+                </div>                
+            {% endfor %}            
+        </div>
+    </div>
+</div>

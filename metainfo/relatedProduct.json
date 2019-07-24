@@ -1,0 +1,96 @@
+{
+    "code": "relatedProduct",
+    "name": "section Similer",
+    "type": ["available","live"],
+    "state": "enabled",
+    "is-collection": 0,
+    "description": {
+        "name": "@locales.relatedProduct",
+        "description": "",
+        "collection-name": "",
+        "item-name": "",
+        "button-name": "",
+        "image": "N/A",
+        "thumbnail": "N/A"
+    },
+    "fields": [
+        {
+            "code": "sectiontitle",
+            "type": "text",
+            "option-id": "",            
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.relatedProduct_sectiontitle",
+                "description": "",
+                "value": "@locales.relatedProduct_sectiontitle_val"
+            }
+        },
+        {
+            "code": "displaysectiontitle",
+            "type": "checkbox",
+            "option-id": "",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.relatedProduct_displaysectiontitle",
+                "description": "",
+                "value": "1"
+            }
+        },
+        {
+            "code": "sectiontype",
+            "type": "sselect-lookup",
+            "option-id": "blockFN",
+            "look-up-key": "blockFN",
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.relatedProduct_sectiontype",
+                "description": "",
+                "value": "getLatestProducts"
+            }
+        },
+        {
+            "code": "categories",
+            "type": "tags-category",
+            "option-id": "", 
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.relatedProduct_categories",
+                "description": "",
+                "value": "0,0,0"
+            }
+        },
+        {
+            "code": "products",
+            "type": "tags-product",
+            "option-id": "", 
+            "multi-lang": "1",
+            "description": {
+                "name": "@locales.relatedProduct_products",
+                "description": "",
+                "value": "0,0,0,0,0,0,0,0,0"
+            }
+        }
+
+       
+    ],
+    "locales": {
+        "en": {
+            "relatedProduct": "RELATED PRODUCT",
+            "relatedProduct_sectiontitle": "Section Title",
+            "relatedProduct_sectiontitle_val": "RELATED PRODUCT",
+            "relatedProduct_displaysectiontitle": "Display Section Title",
+            "relatedProduct_sectiontype":"select type section",
+            "relatedProduct_categories":"categories",
+            "relatedProduct_products":"products"
+        },
+        "ar": {
+            "relatedProduct": "المنتجات ذات العروض",
+            "relatedProduct_sectiontitle": "عنوان القسم",
+            "relatedProduct_sectiontitle_val": "العروض الخاصة",
+            "relatedProduct_displaysectiontitle": "عرض عنوان القسم",
+            "relatedProduct_sectiontype":"اختر نوع القسم",
+            "relatedProduct_categories":"الاقسام",
+            "relatedProduct_products":"منتجات"
+        }
+    }
+}

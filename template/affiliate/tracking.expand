@@ -1,0 +1,91 @@
+<div id="content">
+    <!-- breadcrumb -->
+    <div class="breadcrumb-page">
+        <ol class="breadcrumb">
+            {% for breadcrumb in breadcrumbs %}
+                {% if loop.last %}
+                    <li class="active">{{ breadcrumb['text'] }}</li>
+                {% else %}
+                    <li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </div> <!-- breadcrumb -->
+
+    <div class="page-title-base">
+        <h1 class="title-base">{{ lang('heading_title') }}</h1>
+    </div>
+
+    <p>{{ lang('text_description')|format(config('config_name')) }}</p>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="tracking_code">{{ lang('text_code') }}</label>
+                <textarea name="tracking_code" rows="5" class="form-control" id="tracking_code">{{ code }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="product">{{ lang('text_generator') }}</label>
+                <input type="text" name="product" class="form-control" id="product" value=""/>
+            </div>
+
+            <div class="form-group">
+                <label for="link">{{ lang('text_link') }}</label>
+                <textarea name="link" rows="5" class="form-control" id="link"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="pull-left">
+                <a href="{{ link('affiliate/account', '', 'SSL') }}" class="btn btn-inline">{{ lang('button_continue') }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .ui-helper-hidden-accessible {
+        display: none;
+    }
+
+    .ui-autocomplete {
+        border: 1px solid #ececec;
+        width: 260px;
+        background: #ececec;
+        cursor: pointer;
+    }
+
+    .ui-autocomplete > li {
+        padding: 10px;
+    }
+</style>
+<script type="text/javascript"><!--
+$('input[name=\'product\']').autocomplete({
+	delay: 500,
+	source: function(request, response) {
+		$.ajax({
+			url: 'index.php?route=affiliate/tracking/autocomplete&filter_name=' +  encodeURIComponent(request.term),
+			dataType: 'json',
+			success: function(json) {		
+				response($.map(json, function(item) {
+					return {
+						label: item.name,
+						value: item.link
+					}
+				}));
+			}
+		});
+	},
+	select: function(event, ui) {
+		$('input[name=\'product\']').attr('value', ui.item.label);
+		$('textarea[name=\'link\']').html(ui.item.value);
+						
+		return false;
+	},
+	focus: function(event, ui) {
+      return false;
+   }
+});
+//--></script>

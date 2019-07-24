@@ -1,0 +1,9 @@
+<form action="{{ action }}" id="dixipay_checkout" name="dixipay_checkout" method="post">
+    <input type="hidden" name="key" value="{{ key }}" />
+    <input type="hidden" name="order" value="{{ order }}" />
+    <input type="hidden" name="url" value="{{ url }}" />
+    <input type="hidden" name="data" value="{{ data }}" />
+    <input type="hidden" name="payment" value="{{ payment }}" />
+    <input type="hidden" name="sign" value="{{ sign }}" />
+</form>
+<script type="text/javascript">document.getElementById("dixipay_checkout").submit();</script>

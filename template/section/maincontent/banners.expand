@@ -1,0 +1,30 @@
+<!-- banner collection -->
+<div class="block-banner-main effect-banner1 container" id="section-{{ section_id }}">
+    <div class="container">
+        <div class="row">
+            {% for collection in collections %}
+                {% set banner_width = '12' %}
+
+                {% if collection['bannerwidth']['field_value'] == '1/4' %}
+                    {% set banner_width = '3' %}
+                {% elseif collection['bannerwidth']['field_value'] == '1/2' %}
+                    {% set banner_width = '6' %}
+                {% elseif collection['bannerwidth']['field_value'] == '3/4' %}
+                    {% set banner_width = '9' %}
+                {% elseif collection['bannerwidth']['field_value'] == '1/3' %}
+                    {% set banner_width = '4' %}
+                {% elseif collection['bannerwidth']['field_value'] == '2/3' %}        
+                    {% set banner_width = '8' %}
+                {% elseif collection['bannerwidth']['field_value'] == '1' %}
+                    {% set banner_width = '12' %}
+                {% endif %}
+
+            <div class="col-sm-{{ banner_width }} banner-image ">
+                <a href="{{ collection.bannerlink.field_value }}" class="box-img">
+                    <img src="{{ collection.bannerimage.field_value }}" alt="banner">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div><!-- banner collection -->

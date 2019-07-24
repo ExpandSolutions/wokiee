@@ -1,0 +1,80 @@
+{% if fields.sectiontype.field_value == 'getLatestProducts' %}
+  {% set sliderProducts = getLatestProducts(8, 280, 350) %}
+
+{% elseif fields.sectiontype.field_value == 'getBestSellerProducts' %}
+  {% set sliderProducts = getBestSellerProducts(8, 280, 350) %}
+
+{% elseif fields.sectiontype.field_value == 'getSpecialProducts' %}
+  {% set sliderProducts = getSpecialProducts(8, 280, 350) %}
+
+{% elseif fields.sectiontype.field_value == 'getProductsByCategoryId' %}
+{% set allFeaturedCategories = getFeaturedCategories(fields['categories']['field_value'], 280, 350) %}
+{% set Cats = allFeaturedCategories|length %}
+{% set sliderProducts = getProductsByCategoryId(fields['categories']['field_value'], 20, 280, 350) %}
+{% elseif fields.sectiontype.field_value == 'getFeaturedProducts' %}
+  {% set sliderProducts = getFeaturedProducts(fields['products']['field_value'], 280, 350) %}
+{% endif %}
+
+{% set items_count = sliderProducts|length %}
+{% if items_count > 0 %}
+<div class="container-indent">
+		<div class="container container-fluid-custom-mobile-padding margin-top-section">
+            {% if fields.displaysectiontitle.field_value == '1' %}
+			<div class="tt-block-title text-left">
+				<h3 class="tt-title-small"> {{ fields.sectiontitle.field_value }}</h3>
+            </div>
+            {%endif%}
+			<div class="tt-carousel-products row arrow-location-right-top tt-alignment-img tt-layout-product-item slick-animated-show-js">				
+                {% for item_product in sliderProducts %}
+				<div class="col-2 col-md-4 col-lg-3">
+					<div class="tt-product thumbprod-center">
+						<div class="tt-image-box">
+                            <a href="{{ item_product.href }}" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView" data-tooltip="{{lang('view')}}" data-tposition="{{lang('lang_webtt')}}"></a>                            
+                            <a onclick="addToWishList('{{ item_product.product_id }}'); return false;" class="action wishlist-link tt-btn-wishlist"
+                                href="#" title="{{ lang('button_wishlist') }}" data-tooltip="{{ lang('button_wishlist') }}" data-tposition="{{lang('lang_webtt')}}">                            
+                            </a>
+                            <a onclick="addToCompare('{{ product_id }}'); return false;" class=" tt-btn-compare iconFix actioncompare-link" href="#" title="{{ lang('button_compare') }}"
+                                data-tooltip="{{ lang('button_compare') }}" data-tposition="{{lang('lang_webtt')}}">
+                            </a> 
+							<a href="{{item_product.href}}">
+								<span class="tt-img">
+                                    <img src="{{ item_product.thumb }}" alt="{{ item_product.name }}">
+                                </span>
+								<span class="tt-img-roll-over">
+                                    <img src="{{ item_product.thumb }}" alt="{{ item_product.name }}">
+                                </span>
+							</a>
+						</div>
+						<div class="tt-description">
+							<div class="tt-row">
+								<ul class="tt-add-info">
+									<!-- <li><a href="#">T-SHIRTS</a></li> -->
+								</ul>
+								<div class="tt-rating">
+                                    <img src="{{ asset('image/stars-' ~ item_product.rating ~ '.png') }}" alt="{{ lang('text_reviews')|format(reviews_count) }}"/>
+								</div>
+							</div>
+							<h2 class="tt-title">
+                                <a href="{{ item_product.href}}">{{ item_product.name}}</a>
+                            </h2>
+							<div class="tt-price">
+                                {{ item_product.price}}
+							</div>
+							<div class="tt-product-inside-hover">
+								<div class="tt-row-btn">
+									<a href="#" class="tt-btn-addtocart thumbprod-button-bg" data-toggle="modal" data-target="#modalAddToCartProduct">ADD TO CART</a>
+								</div>
+								<div class="tt-row-btn">
+									<a href="#" class="tt-btn-quickview" data-toggle="modal" data-target="#ModalquickView"></a>
+									<a href="#" class="tt-btn-wishlist"></a>
+									<a href="#" class="tt-btn-compare"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>				
+                {%endfor%}
+			</div>
+		</div>
+    </div>
+{% endif %}

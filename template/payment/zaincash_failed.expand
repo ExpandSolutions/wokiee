@@ -1,0 +1,3 @@
+  <h1>{{ text_failure }}</h1>
+  <h3>{{ text_failure_msg }}</h3>
+  <h3><a href="./">الرجوع للمتجر</a></h3>

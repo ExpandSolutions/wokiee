@@ -1,0 +1,58 @@
+<script type="text/javascript" src="expandish/view/javascript/payfort_fort/jquery.creditCardValidator.js"/>
+<script type="text/javascript" src="expandish/view/javascript/payfort_fort/payfort_fort.js"/>
+
+<div id="payfort_fort_msg" class="warning" style="display:none"></div>
+<form id="frm_payfort_fort_payment" class="payfort-fort-confirmation-form form-horizontal" method="POST" action="{{ payment_request_params['url'] }}">
+    {% for k, v in payment_request_params['params'] %}
+        <input type="hidden" name="{{ k }}" value="{{ v }}">
+    {% endfor %}
+        <div class="content" id="payment">
+            <table class="form">
+              <tr>
+                <td>{{ lang('text_card_holder_name') }}</td>
+                <td><input type="text" id="payfort_fort_card_holder_name" name="card_holder_name" value="" autocomplete="off" maxlength="50" /></td>
+              </tr>
+              <tr>
+                <td>{{ lang('text_card_number') }}</td>
+                <td><input type="text" id="payfort_fort_card_number" name="card_number" value="" autocomplete="off" maxlength="16" /></td>
+              </tr>
+              <tr>
+                <td>{{ lang('text_expiry_date') }}</td>
+                <td><select id="payfort_fort_expiry_month">
+                    {% for month in months %}
+                    <option value="{{ month['value'] }}">{{ month['value'] ~ ' - ' ~ month['text'] }}</option>
+                    {% endfor %}
+                  </select>
+                  /
+                  <select id="payfort_fort_expiry_year">
+                    {% for year in year_expire %}
+                    <option value="{{ year['value'] }}">{{ year['text'] }}</option>
+                    {% endfor %}
+                  </select>
+                  <input type="hidden" id="payfort_fort_expiry" name="expiry_date"/>
+                </td>
+              </tr>
+              <tr>
+                <td>{{ lang('text_cvc_code') }}</td>
+                <td><input type="text" id="payfort_fort_card_security_code" name="card_security_code" value="" size="3" maxlength="4" autocomplete="off" /><br> {{ lang('help_cvc_code') }}</td>
+              </tr>
+            </table>
+        </div>
+</form>
+<div class="buttons">
+  <div class="right">
+    <input type="button" value="{{ lang('button_confirm') }}" id="button-confirm" class="button" />
+  </div>
+</div>
+<script type="text/javascript"><!--
+    var arr_messages = [];
+    {{ arr_js_messages }}
+ //--></script>   
+<script type="text/javascript"><!--
+$('#button-confirm').bind('click', function () {
+    var isValid = payfortFortMerchantPage2.validateCcForm();
+    if(isValid) {
+        $('#frm_payfort_fort_payment').submit();
+    }
+});
+//--></script>

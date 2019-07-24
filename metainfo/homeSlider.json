@@ -1,0 +1,429 @@
+{
+    "code": "homeSlider",
+    "name": "Multiple Widgets",
+    "type": ["available", "live"],
+    "state": "enabled",
+    "is-collection": 1,
+    "description": {
+        "name": "@locales.homeSlider",
+        "description": "",
+        "collection-name": "@locales.homeSlider_cn",
+        "item-name": "@locales.homeSlider_in",
+        "button-name": "@locales.homeSlider_bn",
+        "image": "N/A",
+        "thumbnail": "N/A"
+    },
+    "collections": [
+        {
+            "name": "My Slide",
+            "thumbnail": "N/A",
+            "is-default": 1,
+            "fields": [
+                {
+                    "code": "mainheading",
+                    "type": "text",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_mainheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_mainheading_val"
+                    }
+                },
+                {
+                    "code": "subheading",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_subheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_subheading_val"
+                    }
+                },
+                {
+                    "code": "subheading2",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_subheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_subheading2_val"
+                    }
+                },
+                {
+                    "code": "pargheading",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_pargheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_pargheading_val"
+                    }
+                },                
+                {
+                    "code": "slidelink",
+                    "type": "link",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_slidelink",
+                        "description": "",
+                        "value": "#"
+                    }
+                },
+                {
+                    "code": "displayBackgroundOnly",
+                    "type": "checkbox",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_BackgroundOnly",
+                        "description": "",
+                        "value": "0"
+                    }
+                },
+                {
+                    "code": "backgroundlink",
+                    "type": "link",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_backgroundlink",
+                        "description": "",
+                        "value": "#"
+                    }
+                },
+                {
+                    "code": "slideimage",
+                    "type": "image",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_slideimage",
+                        "description": "",
+                        "value": "data/custom-wokiee/slide13a.jpg"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "My Slide",
+            "thumbnail": "N/A",
+            "is-default": 0,
+            "fields": [
+                {
+                    "code": "mainheading",
+                    "type": "text",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_mainheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_mainheading_val"
+                    }
+                },
+                {
+                    "code": "subheading",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_subheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_subheading_val"
+                    }
+                },
+                {
+                    "code": "subheading2",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_subheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_subheading2_val"
+                    }
+                },
+                {
+                    "code": "pargheading",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_pargheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_pargheading_val"
+                    }
+                },                
+                {
+                    "code": "slidelink",
+                    "type": "link",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_slidelink",
+                        "description": "",
+                        "value": "#"
+                    }
+                },
+                {
+                    "code": "displayBackgroundOnly",
+                    "type": "checkbox",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_BackgroundOnly",
+                        "description": "",
+                        "value": "0"
+                    }
+                },
+                {
+                    "code": "backgroundlink",
+                    "type": "link",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_backgroundlink",
+                        "description": "",
+                        "value": "#"
+                    }
+                },
+                {
+                    "code": "slideimage",
+                    "type": "image",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_slideimage",
+                        "description": "",
+                        "value": "data/custom-wokiee/homeslider1.png"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "My Slide",
+            "thumbnail": "N/A",
+            "is-default": 0,
+            "fields": [
+                {
+                    "code": "mainheading",
+                    "type": "text",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_mainheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_mainheading_val_2"
+                    }
+                },
+                {
+                    "code": "subheading",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_subheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_subheading_val_2"
+                    }
+                },
+                {
+                    "code": "subheading2",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_subheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_subheading2_val_2"
+                    }
+                },
+                {
+                    "code": "pargheading",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_pargheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_pargheading_val_2"
+                    }
+                },                
+                {
+                    "code": "slidelink",
+                    "type": "link",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_slidelink",
+                        "description": "",
+                        "value": "#"
+                    }
+                },
+                {
+                    "code": "displayBackgroundOnly",
+                    "type": "checkbox",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_BackgroundOnly",
+                        "description": "",
+                        "value": "0"
+                    }
+                },
+                {
+                    "code": "slideimage",
+                    "type": "image",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_slideimage",
+                        "description": "",
+                        "value": "data/custom-wokiee/homeslider2.png"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "My Slide",
+            "thumbnail": "N/A",
+            "is-default": 0,
+            "fields": [
+                {
+                    "code": "mainheading",
+                    "type": "text",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_mainheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_mainheading_val_2"
+                    }
+                },
+                {
+                    "code": "subheading",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_subheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_subheading_val_2"
+                    }
+                },
+                {
+                    "code": "subheading2",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_subheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_subheading2_val_2"
+                    }
+                },
+                {
+                    "code": "pargheading",
+                    "type": "textarea",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_pargheading",
+                        "description": "",
+                        "value": "@locales.homeSlider_pargheading_val_2"
+                    }
+                },                
+                {
+                    "code": "slidelink",
+                    "type": "link",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_slidelink",
+                        "description": "",
+                        "value": "#"
+                    }
+                },
+                {
+                    "code": "displayBackgroundOnly",
+                    "type": "checkbox",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_BackgroundOnly",
+                        "description": "",
+                        "value": "1"
+                    }
+                },
+                {
+                    "code": "backgroundlink",
+                    "type": "link",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_backgroundlink",
+                        "description": "",
+                        "value": "#"
+                    }
+                },
+                {
+                    "code": "slideimage",
+                    "type": "image",
+                    "option-id": "",
+                    "multi-lang": "1",
+                    "description": {
+                        "name": "@locales.homeSlider_slideimage",
+                        "description": "",
+                        "value": "data/custom-wokiee/homeslider2.png"
+                    }
+                }
+            ]
+        }       
+    ],
+    "locales": {
+        "en": {
+            "homeSlider": "Slide Show",
+            "homeSlider_cn": "Slide Show",
+            "homeSlider_in": "Slide",
+            "homeSlider_bn": "Add New Slide",
+            "homeSlider_mainheading": "Main Title",
+            "homeSlider_mainheading_val": "Multipurpose",
+            "homeSlider_subheading": "Sub Title",
+            "homeSlider_subheading_val": "Premium",
+            "homeSlider_subheading2_val":"Html Template",
+            "homeSlider_slidelink": "Slide Link",
+            "homeSlider_slideimage": "Slide Image",
+            "homeSlider_BackgroundOnly": "Display Background Only",
+            "homeSlider_backgroundlink":"link background",
+            "homeSlider_mainheading_val_2": "Ready To",
+            "homeSlider_subheading2_val_2": "Demos",
+            "homeSlider_subheading_val_2": "Use Unique",
+            "homeSlider_subheading_val_3": "CES 2016 Honours<br>For Headphones Innovation",            
+            "homeSlider_pargheading":"paragraph slider",
+            "homeSlider_pargheading_val":"30 skins, powerful features, great support, exclusive offer",
+            "homeSlider_pargheading_val_2":"Optimized for speed, website that sells"
+        },
+        "ar": {
+            "homeSlider": "عرض الشرائح",
+            "homeSlider_cn": "عرض الشرائح",
+            "homeSlider_in": " الشرائح",
+            "homeSlider_bn": "أضف شريحة جديدة",
+            "homeSlider_mainheading": "العنوان الرئيسي",
+            "homeSlider_mainheading_val": "مطبخ فيكتوريا الكبرى",
+            "homeSlider_subheading": "العنوان الفرعي",
+            "homeSlider_subheading_val": "إشتري أثاث بتصميم عصري",
+            "homeSlider_slidelink": "رابط الشريحة",
+            "homeSlider_slideimage": "صورة الشريحة",
+            "homeSlider_BackgroundOnly": "عرض الخلفية فقط",
+            "homeSlider_backgroundlink":"رابط الخلفية",
+            "homeSlider_mainheading_val_2": "كرسي فيكتوريا الشبح",
+            "homeSlider_mainheading_val_3": "إشعر بالطبول",
+            "homeSlider_subheading_val_2": "إشتري أثاث بتصميم عصري",
+            "homeSlider_subheading_val_3": "جائزة 2016<br>لإبتكارات السماعات"
+        }
+    }
+}

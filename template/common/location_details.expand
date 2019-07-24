@@ -1,0 +1,75 @@
+<div id="content">
+  <div class="middle">
+  <div>
+          <table class="prods" width="100%">
+          		{% if no_location %}
+                	<tr>
+                    	<td colspan="2">
+                        <div class="warning">{{ lang('txtWrong_loc_id') }}</div>
+                        </td>
+                    </tr>
+                {% else %}
+          		<tr>
+                	<td width="60%">
+                    	<div><img src="{{ Location['thumb'] }}" /> </div>
+                        {% if images %}
+                          <div class="image-additional">
+                            {% for image in images %}
+                            <a href="{{ image['popup'] }}" title="{{ heading_title }}" class="fancybox" rel="fancybox"><img src="{{ image['thumb'] }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a>
+                            {% endfor %}
+                          </div>
+                          {% endif %}
+                    </td>
+                    <td width="40%" valign="top">
+                    	<table class="prod">
+                        	<tr>
+                            	<td style="width:50px;vertical-align:top;font-weight:bold;">{{ lang('store_loc_address') }}</td>
+                                <td>{{ Location['Address'] }}</td>
+                            </tr>
+                            <tr>
+                            	<td style="width:50px;vertical-align:top;font-weight:bold;">{{ lang('store_loc_offers') }}</td>
+                                <td>{{ Location['SpecialOffers'] }}</td>
+                            </tr>
+                            <tr>
+                            	<td style="width:50px;vertical-align:top;font-weight:bold;">{{ lang('store_loc_timing') }}</td>
+                                <td>{{ Location['Timing'] }}</td>
+                            </tr>
+                            <tr>
+                            	<td style="width:50px;vertical-align:top;font-weight:bold;">{{ lang('store_loc_phone') }}</td>
+                                <td>{{ Location['Phone'] }}</td>
+                            </tr>
+                             <tr>
+                            	<td style="width:50px;vertical-align:top;font-weight:bold;">{{ lang('store_loc_email') }}</td>
+                                <td><a href="mailto:{{ Location['Email'] }}">{{ Location['Email'] }}</a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                	<td valign="top">{{ Location['Details'] }}
+                    <div id="mapDirections"></div>
+                    </td>
+                    <td valign="top" class="gmapstyle"> 
+                    	{{ gmapHeaderJS }}
+                      {{ gmapJS }}
+                      {{ gmaponLoad }}
+                      {{ gmapHtml }}
+                    </td>
+                </tr>
+                {% endif %}
+        </table>
+        </div>
+  </div>
+    <script type="text/javascript" src="expandish/view/javascript/jquery/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    <link rel="stylesheet" type="text/css" href="expandish/view/javascript/jquery/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+  <script language="javascript">
+  	function getAdd(pLink) {
+		//alert( encodeURI($("#stAddress").val()));
+		window.location =  encodeURI(pLink + "&stAddress=" + $("#stAddress").val());
+	}
+  </script>
+  <script type="text/javascript"><!--
+$('.fancybox').fancybox({cyclic: true});
+//--></script> 
+ {{ content_bottom }}
+   </div>

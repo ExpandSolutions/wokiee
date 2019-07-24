@@ -1,0 +1,11 @@
+<form action="{{ action }}" method="post" id="ccavenuepay_standard_checkout" name="redirect">
+	<input type="hidden" name="encRequest" id="encRequest" value="{{ encrypted_data }}" />
+	<input type="hidden" name="access_code" id="access_code" value="{{ access_code }}" />
+</form>
+<div class="buttons">
+	<div class="right">
+		<a id="button-confirm" class="button" onclick="$('#ccavenuepay_standard_checkout').submit();">
+			<span>{{ button_confirm }}</span>
+		</a>
+	</div>
+</div>

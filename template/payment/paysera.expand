@@ -1,0 +1,125 @@
+<style type="text/css">
+
+.w2p-table {
+	width: 100%;
+}
+
+.w2p-table img {
+	cursor: pointer;
+}
+
+.w2p-table td.radio {
+	width: 30px;
+}
+
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#w2p-cs').change(function() {
+			var value = $('#w2p-cs option:selected').val();
+			$('input[name="pmethod"]').each(function(){
+				$(this).attr('checked', false);
+			});
+			$('.w2p-table').each(function(){
+		        var tid = $(this).attr('rel');
+		        if(tid == value) {
+		        	$(this).css({'display' : 'block'});
+		        } else {
+		        	$(this).css({'display' : 'none'});
+		        }
+		    });
+		});
+		$('tr').click(function(){
+			$(this).children('td').children('input').attr('checked', true);
+		});
+	});
+</script>
+
+<div class="content">
+	<form action="{{ action }}" method="post" id="wtp-checkout">
+        <table>
+            <tr>
+                <td colspan=2">
+                    <h2>{{ lang('text_chosen') }}</h2></td>
+            </tr>
+
+            {% if paysera_display_payments == 1 %}
+                {% if payment_country %}
+                    {% set country_iso = payment_country|lower %}
+                    {% set countries = evp_countries %}
+                    {% if not countries[country_iso] %}
+                        {% set country_iso = default_country %}
+                    {% endif %}
+                {% endif %}
+            <tr>
+                <td></td>
+                <td>
+                    <select id="w2p-cs">
+                    {% for country in countries %}
+                        {% if country.getCode() == country_iso %}
+                        <option value="{{ country.getCode() }}" selected="selected">{{ country.getTitle() }}</option>
+                        {% else %}
+                        <option value="{{ country.getCode() }}">{{ country.getTitle() }}</option>
+                        {% endif %}
+                    {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            {% endif %}
+
+
+
+
+
+
+        </table>
+        {% if paysera_display_payments == 1 %}
+        <div style="float: left; width: 100%;" >
+            {% for country in countries %}
+            <table rel="{{ country.getCode() }}" class="w2p-table" style="display: {{ country.getCode() == country_iso ? 'block' : 'none' }};">
+                {% for group in country.getGroups() %}
+                <tr>
+                    <td colspan="2"><b>{{ group.getTitle() }}</b></td>
+                </tr>
+                {% for paymentMethod in group.getPaymentMethods() %}
+                {% if paymentMethod.getLogoUrl() %}
+                <tr>
+                    <td class="radio">
+                        <input type="radio" class="radio" name="payment" value="{{ paymentMethod.getKey() }}" />
+                    </td>
+                    <td>
+                        <img src="{{ paymentMethod.getLogoUrl() }}"
+                             title="{{ paymentMethod.getTitle() }}"
+                             alt="{{ paymentMethod.getTitle() }}"
+                                />
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+            </table>
+            {% endfor %}
+        </div>
+        {% endif %}
+    	<div style="clear:both;"></div>
+	</form>
+</div>
+<div class="buttons">
+    <div class="pull-right">
+                <button id="button-confirm" class="btn btn-primary" style="text-indent: 0px;">{{ button_confirm }}</button>
+
+    </div>
+
+
+<script type="text/javascript"><!--
+$('.confirm-button').on('click', function() {
+	$('#wtp-checkout').submit();
+});
+$('#button-confirm').on('click', function() {
+	$('#wtp-checkout').submit();
+});
+//--></script>
+
+
+
+</div>

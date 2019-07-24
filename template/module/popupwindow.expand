@@ -1,0 +1,241 @@
+<script type="text/javascript">
+	var uri = location.pathname + location.search;
+	var documentReady = false;
+	var windowLoad = false;
+	var isBodyClicked = false;
+	var timeout = 500;
+	var isExitEvent = false;
+	var alreadyscrolled = false;
+
+		
+	$(document).ready(function() {
+		documentReady = true;
+	});
+	
+	$(window).load(function() {
+		windowLoad = true;
+	});
+	
+	//var exitEvent = function (){
+		
+//	};	
+										
+	
+	$.ajax({
+		url: '{{ url }}',
+		type: 'GET',
+		data: {'uri' : uri},
+		dataType: 'json',
+		success: function (response) {
+
+			for(entry in response) {
+				if(response[entry].match) {
+					console.log(response);
+					repeat = response[entry].repeat;
+					popup_id = response[entry].id;
+					
+					if(response[entry].seconds>0) {
+						timeout += (response[entry].seconds*1000);
+					}
+
+					if(response[entry].event == 0) { // Document ready event  		
+						if (documentReady) {					
+							showPopup(response[entry].popup_id, response[entry].content, response[entry].width, response[entry].height, response[entry].animation, response[entry].prevent_closing);
+						} else {
+							$(document).ready(function(){   
+								showPopup(response[entry].popup_id, response[entry].content, response[entry].width, response[entry].height, response[entry].animation, response[entry].prevent_closing);
+							});
+						}
+					}
+					
+					
+					if(response[entry].event == 1) { // Window load event
+						if(windowLoad) {
+							showPopup(response[entry].popup_id, response[entry].content, response[entry].width, response[entry].height, response[entry].animation, response[entry].prevent_closing);
+						}
+						else {
+							$(window).load(function() {
+								showPopup(response[entry].popup_id, response[entry].content, response[entry].width, response[entry].height, response[entry].animation, response[entry].prevent_closing);
+							});
+						}
+					 
+					}
+				 
+					if(response[entry].event == 2) { // Body click event
+						$('body').click(function() {
+							if(isBodyClicked == false) {
+								showPopup(response[entry].popup_id, response[entry].content, response[entry].width, response[entry].height, response[entry].animation, response[entry].prevent_closing);
+								isBodyClicked = true;
+							}	
+						});
+					}
+					
+					if(response[entry].event == 3) { // Exit intent
+						 var bootstrap_enabled = (typeof $().modal == 'function');
+							
+						 if (!bootstrap_enabled) {
+						 	$('head').append('<link rel="stylesheet" type="text/css" href="expandish/view/javascript/popupwindow/modal/dol_bootstrap.min.css" />');
+						 	$('head').append('<script type="text/javascript" src="expandish/view/javascript/popupwindow/modal/dol_bootstrap.min.js"><'+'/script>');
+						 }
+	
+						 var prevY = -1;
+	
+						 $(document).bind("mouseout", function(e) {
+						 	e.preventDefault();
+						 	e.stopPropagation();
+						 	if(prevY == -1) {
+						 		prevY = e.pageY;
+						 		console.log(prevY);
+						 		return;    
+						 	}
+						 	if (!isExitEvent && (e.pageY<prevY) && (e.pageY - $(window).scrollTop() <= 1)) {  						
+								
+						 		prevY = -1;
+								showPopup(response[entry].popup_id, response[entry].content, response[entry].width, response[entry].height, response[entry].animation, response[entry].prevent_closing,response[entry].auto_size, response[entry].auto_resize,response[entry].aspect_ratio);
+								isExitEvent = true;
+						 		//showPopup(response[entry].popup_id, response[entry].content, response[entry].width, response[entry].height, response[entry].animation, response[entry].prevent_closing);
+						 	} else {
+						 		prevY = e.pageY;
+						 	}
+						 });
+										
+					}		
+					
+					if(response[entry].event == 4) { // Scroll from top event
+						$(window).scroll(function() {	
+							
+							//variables to be used				
+							
+							var startDistance = 0;
+							var percentageValue = response[entry].percentage_value;
+							var scrollAmount = $(window).scrollTop();
+							var documentHeight = $(window).height();
+						 
+							// calculate the percentage the user has scrolled down the page
+							var scrollPercent = (scrollAmount / documentHeight) * 100;	
+							
+							// detecting the percentage scrolled and calling the pop up	
+							if (!alreadyscrolled && scrollPercent > percentageValue && scrollPercent < percentageValue + 1) {
+							   showPopup(response[entry].popup_id, response[entry].content, response[entry].width, response[entry].height, response[entry].animation, response[entry].prevent_closing,response[entry].auto_size, response[entry].auto_resize,response[entry].aspect_ratio);
+							   alreadyscrolled=true;
+
+							} 
+							
+							console.log (scrollPercent)
+							console.log (percentageValue)						    
+
+						});
+					}						
+					
+
+					if(response[entry].event == 5) { // CSS Selector
+
+						$(response[entry].css_selector).addClass('fancybox');
+						$(response[entry].css_selector).addClass('fancybox.iframe');
+						showSelectorPopup(response[entry].popup_id, response[entry].content, response[entry].width, response[entry].height, response[entry].animation, response[entry].prevent_closing, response[entry].css_selector);
+							
+					}
+
+			  	}
+
+			}
+			
+		}
+	});
+
+	var showSelectorPopup = function (popup_id, content,width,height,animation,prevent_closing, cssSelector) {
+		var overlay_close = true;
+		var escape_close = true;
+		if(prevent_closing==1) {
+			overlay_close = false;
+			escape_close = null;
+		}
+		else {
+			overlay_close = true;
+			escape_close = [27];
+		}
+
+		$(cssSelector).fancybox({
+			content: content,
+			width: width,
+			height: height,
+			autoSize: false,
+			openEffect : 'fade',
+			openSpeed  : 150,
+			closeBtn  : true,
+			wrapCSS: 'animated ' + animation,
+
+			
+			helpers : { 
+			  overlay : {closeClick: overlay_close}
+			},
+			keys : {
+			    close  : escape_close
+			},
+			afterShow: function () {
+				$.ajax({
+					url: '{{ updateImpressionsURL }}',
+					type: 'GET',
+					data: {popup_id : popup_id},
+					dataType: 'json',
+					success: function (response) {
+						}
+				});
+			}
+		});
+	}
+	
+	
+</script>
+
+<script>
+
+var showPopup = function (popup_id, content,width,height,animation,prevent_closing,auto_size,auto_resize,aspect_ratio) { 
+		var overlay_close = true;
+		var escape_close = true;
+		if(prevent_closing==1) {
+			overlay_close = false;
+			escape_close = null;
+		}
+		else {
+			overlay_close = true;
+			escape_close = [27];
+		}
+		
+		setTimeout(function() {
+			$.fancybox.open({
+				content: content,
+				width: width,
+				height: height,
+				autoSize:false,
+				openEffect : 'fade',
+				openSpeed  : 150,
+				closeBtn  : true,	
+				wrapCSS : 'animated '+ animation,
+				autoResize: auto_resize === "false" ? false : true,
+				aspectRatio: aspect_ratio === "false" ? false : true,
+				
+				helpers : { 
+				  overlay : {closeClick: overlay_close}
+				},
+				keys : {
+				    close  : escape_close
+				},
+				afterShow: function () {
+					$.ajax({
+						url: '{{ updateImpressionsURL }}',
+						type: 'GET',
+						data: {popup_id : popup_id},
+						dataType: 'json',
+						success: function (response) {
+							}
+					});
+				}
+			});	
+												
+		}, timeout);
+		
+		
+	};
+
+</script>
