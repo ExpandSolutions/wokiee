@@ -1368,6 +1368,7 @@
         var specialNumber = '{{ rental_special ? rental_special : rental_price }}';
         var priceNumber = '{{ rental_price  }}';
         var maxRentDays = '{{ max_rental_days }}';
+        var disabledDates = '{{ disabled_days }}';
         var currencySymbols = JSON.parse('{{ currency_symbols|json_encode }}');
     </script>
     <script type="text/javascript" src="{{ commonLink('js/products/rentalProducts.js') }}"></script>
