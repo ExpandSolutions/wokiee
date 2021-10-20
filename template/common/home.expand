@@ -79,6 +79,8 @@
 	<![endif]-->
     {{ google_analytics }}
 </head>
+{% if modules.socialslides.enabled %}{{ modules.socialslides.content }}{% endif %}
+{% if modules.popupwindow.enabled %}{{ modules.popupwindow.content }}{% endif %}
 <body>
 	<div id="loader-wrapper">
 		<div id="loader">
@@ -805,11 +807,75 @@
 				</div>
 			</div>
 		</div>
+		{% if store_reviews_app_is_activated %}
+                            <div class="totalstore-review" style="margin-top: 2rem;">
+                                <h2 class="title14" style="font-weight: 400;margin-bottom: 20px;">{{ lang('entry_rating') }} </h2>
+                                <div><i class="fa fa-star rate-star" style="color: #d2d2d2;font-size: 22px;" data-order="1"></i>
+                                    <i class="fa fa-star rate-star" style="color: #d2d2d2;font-size: 22px;" data-order="2"></i>
+                                    <i class="fa fa-star rate-star" style="color: #d2d2d2;font-size: 22px;" data-order="3"></i>
+                                    <i class="fa fa-star rate-star" style="color: #d2d2d2;font-size: 22px;" data-order="4"></i>
+                                    <i class="fa fa-star rate-star" style="color: #d2d2d2;font-size: 22px;" data-order="5"></i>
+                                    <span style="font-size: 16px;color: #333;">({{store_rate}})</span>
+                                    <i class="fa fa-angle-down rates-collapse" style="margin-right: 8px;font-size: 18px;cursor: pointer;"></i>
+                                </div>
+                                <p>{{lang('entry_out_of_stars')|format(overall_rate)}}</p>
+                                <div class="form-group total_store_review" style="display: none;">
+                                    <div style="margin-bottom: 8px;">
+                                        5 <i class="fa fa-star"></i> <progress style="vertical-align: middle;"
+                                            value="{{store_rate == 0 ? 0 : (store_rate5/store_rate) * 100}}" max="100"> {{store_rate5}} </progress>
+                                        %{{(store_rate == 0 ? 0 : (store_rate5/store_rate) * 100) | number_format(2)}}
+                                    </div>
+                                    <div style="margin-bottom: 8px;">
+                                        4 <i class="fa fa-star"></i> <progress style="vertical-align: middle;"
+                                            value="{{store_rate == 0 ? 0 : (store_rate4/store_rate) * 100}}" max="100"> {{store_rate4}} </progress>
+                                        %{{(store_rate == 0 ? 0 : (store_rate4/store_rate) * 100) | number_format(2)}}
+                                    </div>
+                                    <div style="margin-bottom: 8px;">
+                                        3 <i class="fa fa-star"></i> <progress style="vertical-align: middle;"
+                                            value="{{store_rate == 0 ? 0 : (store_rate3/store_rate) * 100}}" max="100"> {{store_rate3}} </progress>
+                                        %{{(store_rate == 0 ? 0 : (store_rate3/store_rate) * 100) | number_format(2)}}
+                                    </div>
+                                    <div style="margin-bottom: 8px;">
+                                        2 <i class="fa fa-star"></i> <progress style="vertical-align: middle;"
+                                            value="{{store_rate == 0 ? 0 : (store_rate2/store_rate) * 100}}" max="100"> {{store_rate2}} </progress>
+                                        %{{(store_rate == 0 ? 0 : (store_rate2/store_rate) * 100) | number_format(2)}}
+                                    </div>
+                                    <div style="margin-bottom: 8px;">
+                                        1 <i class="fa fa-star"></i> <progress style="vertical-align: middle;"
+                                            value="{{store_rate == 0 ? 0 : (store_rate1/store_rate) * 100}}" max="100"> {{store_rate1}} </progress>
+                                        %{{(store_rate == 0 ? 0 : (store_rate1/store_rate) * 100) | number_format(2)}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% if customer_can_rate %}
+                            <div class="store-review" style="margin-top: 1rem;">
+                                <button style="background: none;border-radius: 3px;padding: 3px;font-weight: bold;" id="add-rate-btn">
+                                    {{ lang('entry_put_rating') }}
+                                </button>
+                                <div style="margin-top: 15px;display:none;" id="user-review-form">
+                                    <i class="fas fa-star rate-star-select" style="color: #d2d2d2;font-size: 22px;" data-order="1"></i>
+                                    <i class="fas fa-star rate-star-select" style="color: #d2d2d2;font-size: 22px;" data-order="2"></i>
+                                    <i class="fas fa-star rate-star-select" style="color: #d2d2d2;font-size: 22px;" data-order="3"></i>
+                                    <i class="fas fa-star rate-star-select" style="color: #d2d2d2;font-size: 22px;" data-order="4"></i>
+                                    <i class="fas fa-star rate-star-select" style="color: #d2d2d2;font-size: 22px;" data-order="5"></i>
+                                    <br>
+                                    <button style="background: none;border-radius: 3px;border-radius: 3px;margin-top: 8px;"
+                                        id="submit-rate">{{lang('submit')}}</button>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {{ include('default/template/module/store_review.expand') }}
+                            {% endif %}
+							{#{% if integration_settings['mn_criteo_status'] %}
+								{{ include('spring/template/module/criteo/criteo_home.expand') }}
+							{% endif %}#}
 	</footer>
 	<!---End New Footer -->	
 	<!-- End Footer -->
 	<!-- <a href="#" class="radius scroll-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a> -->
 	<a href="#" class="tt-back-to-top">BACK TO TOP</a>
+	{% include "default/template/module/gift_coupon.expand" %}
+	{% include "default/template/module/whatsapp_chat.expand" %}
 </div>
 
 <script type="text/javascript" src="{{ jslink('js/libs/bootstrap.min.js') }}"></script>
