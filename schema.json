@@ -1,6 +1,6 @@
 {
     "template": "wokiee",
-    "theme_version": "1.2",
+    "theme_version": "1.3",
     "description": {
         "name": "@locales.name",
         "description": "",
@@ -1977,11 +1977,6 @@
             "language":"en",
             "sort": 3
         },
-    
-
-
-
-
         {
             "key": "EnglishFonts",
             "name": "Hind Font",
@@ -2038,6 +2033,76 @@
             "value": "Cairo",
             "language":"ar",
             "sort": 3
+        },
+        {
+            "key": "blockFN",
+            "name": "Get Latest Products",
+            "value": "getLatestProducts",
+            "language":"en",
+            "sort": 0
+        },
+        {
+            "key": "blockFN",
+            "name": "Get Best Seller Products",
+            "value": "getBestSellerProducts",
+            "language":"en",
+            "sort": 1
+        },
+        {
+            "key": "blockFN",
+            "name": "get Special Products",
+            "value": "getSpecialProducts",
+            "language":"en",
+            "sort": 2
+        },
+        {
+            "key": "blockFN",
+            "name": "Get Products By CategoryId",
+            "value": "getProductsByCategoryId",
+            "language":"en",
+            "sort": 3
+        },
+        {
+            "key": "blockFN",
+            "name": "Get Featured Products",
+            "value": "getFeaturedProducts",
+            "language":"en",
+            "sort": 4
+        },
+        {
+            "key": "blockFN",
+            "name": "الحصول على أحدث المنتجات",
+            "value": "getLatestProducts",
+            "language":"ar",
+            "sort": 0
+        },
+        {
+            "key": "blockFN",
+            "name": "الحصول على أفضل بائع المنتجات",
+            "value": "getBestSellerProducts",
+            "language":"ar",
+            "sort": 1
+        },
+        {
+            "key": "blockFN",
+            "name": "الحصول على المنتجات الخاصة",
+            "value": "getSpecialProducts",
+            "language":"ar",
+            "sort": 2
+        },
+        {
+            "key": "blockFN",
+            "name": "الحصول على المنتجات حسب معرف الفئة",
+            "value": "getProductsByCategoryId",
+            "language":"ar",
+            "sort": 3
+        },
+        {
+            "key": "blockFN",
+            "name": "الحصول على منتجات مميزة",
+            "value": "getFeaturedProducts",
+            "language":"ar",
+            "sort": 4
         }
     ]
 }
