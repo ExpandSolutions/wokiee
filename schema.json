@@ -1,5 +1,6 @@
 {
     "template": "wokiee",
+    "theme_version": "1.3",
     "description": {
         "name": "@locales.name",
         "description": "",
@@ -140,45 +141,7 @@
                 ]
             }
         ],
-        "header": [            
-            {
-                "code": "headerPromotion",
-                "name": "header promotion",
-                "type": "live",
-                "state": "enabled",
-                "is-collection": 0,
-                "description": {
-                    "name": "@locales.headerpage_headerPromotion",
-                    "description": "",
-                    "collection-name": "",
-                    "item-name": "",
-                    "button-name": ""
-                },
-                "fields": [
-                    {
-                        "code": "promotiontext",
-                        "type": "text",
-                        "option-id": "",
-                        "multi-lang": "1",
-                        "description": {
-                            "name": "@locales.headerpage_headerPromotiontext",
-                            "description": "",
-                            "value": "@locales.headerpage_headerPromotiontext_val"
-                        }
-                    },
-                    {
-                        "code": "promotionlink",
-                        "type": "text",
-                        "option-id": "",
-                        "multi-lang": "1",
-                        "description": {
-                            "name": "@locales.headerpage_headerPromotionlink",
-                            "description": "",
-                            "value": "#"
-                        }
-                    }
-                ]
-            },
+        "header": [
             {
                 "code": "headermain",
                 "name": "header area",
@@ -1037,223 +1000,6 @@
                             }
                         ]
                     }
-                ]
-            },
-            {
-                "code": "SaleMenuLink",
-                "name": "Sale Menu",
-                "type": "live",
-                "state": "enabled",
-                "is-collection": 1,
-                "description": {
-                    "name": "@locales.SaleMenuLink",
-                    "description": "",
-                    "collection-name": "@locales.SaleMenuLink_collection_name",
-                    "item-name": "@locales.SaleMenuLink_item_name",
-                    "button-name": "@locales.SaleMenuLink_button_name"
-                },
-                "collections":[
-                    {
-                        "name": "menuLink",
-                        "thumbnail": "N/A",
-                        "is-default": 1,
-                        "fields":[
-                            {
-                                "code": "ColumnTitle",
-                                "type": "text",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.salemegaMenuLink_ColumnTitle_itemname",
-                                    "description": "",
-                                    "value": "@locales.saleMenuLink_ColumnTitle_itemname_val_1"
-                                }
-                            },
-                            {
-                                "code": "ColumnLink",
-                                "type": "link",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_ColumnLink_linkname",
-                                    "description": "",
-                                    "value": "#"
-                                }
-                            },
-                            {
-                                "code": "ColumnTitle",
-                                "type": "text",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.salemegaMenuLink_ColumnTitle_itemname",
-                                    "description": "",
-                                    "value": "@locales.saleMenuLink_ColumnTitle_itemname_val_1"
-                                }
-                            },
-                            {
-                                "code": "firstPrag",
-                                "type": "text",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_firstPrag_itemname",
-                                    "description": "",
-                                    "value": "@locales.saleMenuLink_firstPrag_itemname_val"
-                                }
-                            },
-                            {
-                                "code": "numberOfSale",
-                                "type": "text",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_numberOfSale_itemname",
-                                    "description": "",
-                                    "value": "50%"
-                                }
-                            },
-                            {
-                                "code": "lastPrag",
-                                "type": "text",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_lastPrag_itemname",
-                                    "description": "",
-                                    "value": "@locales.saleMenuLink_lastPrag_itemname_val"
-                                }
-                            },
-                            {
-                                "code": "backgroundColor",
-                                "type": "colorpicker",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_backColor_itemname",
-                                    "description": "",
-                                    "value": "#AF272F"
-                                }
-                            },
-                            {
-                                "code": "textColor",
-                                "type": "colorpicker",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_textColor_itemname",
-                                    "description": "",
-                                    "value": "#FFFFFF"
-                                }
-                            },
-                            {
-                                "code": "categories",
-                                "type": "tags-category",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_categories",
-                                    "description": "",
-                                    "value": "0,0"
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        "name": "menuLink1",
-                        "thumbnail": "N/A",
-                        "is-default": 0,
-                        "fields":[
-                            {
-                                "code": "ColumnTitle",
-                                "type": "text",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.salemegaMenuLink_ColumnTitle_itemname",
-                                    "description": "",
-                                    "value": "@locales.saleMenuLink_ColumnTitle_itemname_val_1"
-                                }
-                            },
-                            {
-                                "code": "ColumnLink",
-                                "type": "link",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_ColumnLink_linkname",
-                                    "description": "",
-                                    "value": "#"
-                                }
-                            },
-                            {
-                                "code": "firstPrag",
-                                "type": "text",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_firstPrag_itemname",
-                                    "description": "",
-                                    "value": "@locales.saleMenuLink_firstPrag_itemname_val"
-                                }
-                            },
-                            {
-                                "code": "numberOfSale",
-                                "type": "text",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_numberOfSale_itemname",
-                                    "description": "",
-                                    "value": "50%"
-                                }
-                            },
-                            {
-                                "code": "lastPrag",
-                                "type": "text",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_lastPrag_itemname",
-                                    "description": "",
-                                    "value": "@locales.saleMenuLink_lastPrag_itemname_val"
-                                }
-                            },
-                            {
-                                "code": "backgroundColor",
-                                "type": "colorpicker",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_backColor_itemname",
-                                    "description": "",
-                                    "value": "#AF272F"
-                                }
-                            },
-                            {
-                                "code": "textColor",
-                                "type": "colorpicker",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_textColor_itemname",
-                                    "description": "",
-                                    "value": "#FFFFFF"
-                                }
-                            },
-                            {
-                                "code": "categories",
-                                "type": "tags-category",
-                                "option-id": "",
-                                "multi-lang": "1",
-                                "description": {
-                                    "name": "@locales.saleMenuLink_categories",
-                                    "description": "",
-                                    "value": "0,0"
-                                }
-                            }
-                        ]
-                    }                    
                 ]
             }
         ],
@@ -2231,11 +1977,6 @@
             "language":"en",
             "sort": 3
         },
-    
-
-
-
-
         {
             "key": "EnglishFonts",
             "name": "Hind Font",
@@ -2292,6 +2033,76 @@
             "value": "Cairo",
             "language":"ar",
             "sort": 3
+        },
+        {
+            "key": "blockFN",
+            "name": "Get Latest Products",
+            "value": "getLatestProducts",
+            "language":"en",
+            "sort": 0
+        },
+        {
+            "key": "blockFN",
+            "name": "Get Best Seller Products",
+            "value": "getBestSellerProducts",
+            "language":"en",
+            "sort": 1
+        },
+        {
+            "key": "blockFN",
+            "name": "get Special Products",
+            "value": "getSpecialProducts",
+            "language":"en",
+            "sort": 2
+        },
+        {
+            "key": "blockFN",
+            "name": "Get Products By CategoryId",
+            "value": "getProductsByCategoryId",
+            "language":"en",
+            "sort": 3
+        },
+        {
+            "key": "blockFN",
+            "name": "Get Featured Products",
+            "value": "getFeaturedProducts",
+            "language":"en",
+            "sort": 4
+        },
+        {
+            "key": "blockFN",
+            "name": "الحصول على أحدث المنتجات",
+            "value": "getLatestProducts",
+            "language":"ar",
+            "sort": 0
+        },
+        {
+            "key": "blockFN",
+            "name": "الحصول على أفضل بائع المنتجات",
+            "value": "getBestSellerProducts",
+            "language":"ar",
+            "sort": 1
+        },
+        {
+            "key": "blockFN",
+            "name": "الحصول على المنتجات الخاصة",
+            "value": "getSpecialProducts",
+            "language":"ar",
+            "sort": 2
+        },
+        {
+            "key": "blockFN",
+            "name": "الحصول على المنتجات حسب معرف الفئة",
+            "value": "getProductsByCategoryId",
+            "language":"ar",
+            "sort": 3
+        },
+        {
+            "key": "blockFN",
+            "name": "الحصول على منتجات مميزة",
+            "value": "getFeaturedProducts",
+            "language":"ar",
+            "sort": 4
         }
     ]
 }
