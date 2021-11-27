@@ -20,18 +20,10 @@
         </ol>
     </div> <!-- breadcrumb -->
 
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="page-title-base">
             <h1 class="title-base">{{ lang('text_my_account') }}</h1>
         </div>
-        <div class="links-list">
-            <ul>
-                <li><i class="fa fa-pencil-square-o fa-lg"></i><a href="{{ edit }}">{{ lang('text_edit') }}</a></li>
-                <li><i class="fa fa-key fa-lg"></i><a href="{{ password }}">{{ lang('text_password') }}</a></li>
-                <li><i class="fa fa-money fa-lg"></i><a href="{{ payment }}">{{ lang('text_payment') }}</a></li>
-                <li><i class="fa fa-exchange fa-lg"></i><a href="{{ transaction }}">{{ lang('text_transaction') }}</a></li>
-                <li><i class="fa fa-map-marker fa-lg"></i><a href="{{ tracking }}">{{ lang('text_tracking') }}</a></li>
-            </ul>
-        </div>
+        {{ include("default/template/affiliate/links_list.expand") }}
     </div>
 </div>
