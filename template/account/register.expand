@@ -246,8 +246,23 @@
                     </div>
                 {% endif %}
                 <div class="pull-right">
-                    <input type="submit" value="{{ lang('button_continue') }}"
-                           class="btn btn-inline" {{ text_agree ? 'step="margin:0 10px;"' : '' }}/>
+                    {% if (recaptcha['status'] == 1 and recaptcha['page_enabled_status'] == 1 )%}
+                    <script src="https://www.google.com/recaptcha/api.js?render={{ recaptcha['site-key']  }}"
+                        type="text/javascript"></script>
+                    <script>
+                        grecaptcha.ready(function () {
+                            grecaptcha.execute("{{ recaptcha['site-key'] }}", { action: '{{ recaptchaAction }}' }, { score: '0' }).then(function (token) {
+                                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                                recaptchaResponse.value = token;
+                            });
+                        });
+                    </script>
+                    <input type="submit" value="{{ lang('button_continue') }}" class="g-recaptcha btn btn-inline" data-callback='onSubmit'
+                        data-sitekey="{{ recaptcha['site-key'] }}" {{ text_agree ? 'step="margin:0 10px;"' : '' }} />
+                    {% else %}
+                    <input type="submit" value="{{ lang('button_continue') }}" class="btn btn-inline" {{ text_agree
+                        ? 'step="margin:0 10px;"' : '' }} />
+                    {% endif %}
                 </div>
             </div>
         </div>
