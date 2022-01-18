@@ -15,7 +15,9 @@
     .modal-backdrop {
         z-index: 99 !important;
 }
+
 </style>
+
 <div id="notification"></div>
 {% if product_designer is defined and product_designer == 1 %}
 <style>
@@ -141,6 +143,8 @@
         </div>
     </div>
 {% endif %}
+{{ include('default/template/module/minimum_deposit/minimum_deposit_model.expand') }}
+
 <div id="content">
     <!-- breadcrumb -->
     <div class="tt-breadcrumb">
@@ -292,6 +296,7 @@
                                                 </div>
                                             {% endif %}
                                             <!--- End Price --->
+                                            {{ include('default/template/module/minimum_deposit/display_price.expand') }}
                                             <!--- Start Review --->
                                             {% if review_status != '' and config('config_review_status') == '1'  %}
                                             <div class="tt-review">
@@ -1211,6 +1216,19 @@
                 return;
             }
         {% endif %}
+        if(clickedBtn=="button-bundles"){
+            // add flag get_product_bundles if button-bundles is clicked to differentiate between it and add to cart button
+          $("<input />").attr("type", "hidden")
+              .attr("name", "product_bundles")
+              .attr("value", true)
+              .appendTo(".product-add-form");
+            data = $('.product-add-form input[type=\'text\'], .product-add-form input[type=\'hidden\'], .product-add-form input[type=\'radio\']:checked, .product-add-form input[type=\'checkbox\']:checked, .product-add-form select, .product-add-form textarea, #minimum_deposit_customer_price,#minimum_deposit_price');
+        }
+        else{
+            $("input[name=product_bundles]").remove();
+            data = $('.product-add-form input[type=\'text\'], .product-add-form input[type=\'hidden\'], .product-add-form input[type=\'radio\']:checked, .product-add-form input[type=\'checkbox\']:checked, .product-add-form select, .product-add-form textarea, #minimum_deposit_customer_price,#minimum_deposit_price');
+        }
+      
 
         $.ajax({
             url: 'index.php?route=checkout/cart/add',
@@ -1236,15 +1254,20 @@
                     if (json['error']['profile']) {
                         $('select[name="profile_id"]').after('<span class="error">' + json['error']['profile'] + '</span>');
                     }
+                    if (json['error']['minimum_deposit']) {
+                          $('#DepositAlert').html('<div class="alert alert-danger">' + json['error']['minimum_deposit'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                      }
                 }
 
                 if (json['success']) {
                     $('#notification').html('<br><div class="alert alert-success alert-dismissible" style="display: none;" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' + json['success'] + '</div>');
                     
                     $('.alert-success').fadeIn('slow');
-                    
                     $('#counterLabel').html(json['product_count']);
-                    $('#minicounterLabel').html(json['product_count']);
+                    $('#minicounterLabel').html(json['product_count']);        
+                     $('#myModalMinimumDeposit').modal('hide');
+
+
 
                     $.get('index.php?route=common/cart', function(html) {
                         $('#cartDropList').html(html);
@@ -1426,3 +1449,4 @@
 
 <script type="text/javascript" src="expandish/view/theme/{{ Template_Name }}/js/imagepro.js"></script>
 {% endif %}        
+{{ include('default/template/module/minimum_deposit/script.expand') }}

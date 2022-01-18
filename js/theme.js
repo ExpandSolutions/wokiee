@@ -550,3 +550,8 @@ jQuery(window).scroll(function(){
 	fixed_header();
 });
 })(jQuery); // End of use strict
+
+$( "button.btn.btn-primary,button.close ,button.btn.btn-success" ).click(function() {
+	$('#myModalMinimumDeposit').toggleClass('in-open');
+	$('#myModalMinimumDeposit').toggleClass('in');
+});

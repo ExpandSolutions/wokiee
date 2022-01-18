@@ -100,5 +100,7 @@
   "text_discount_more":"Discount",
   "top_brand": "Top Brands",
   "lang_webtt": "left",
-  "Copy_Right": "Powered by <a href='https://www.expandcart.com'><strong>ExpandCart</strong></a>"
+  "Copy_Right": "Powered by <a href='https://www.expandcart.com'><strong>ExpandCart</strong></a>",
+  "text_minimum_deposit_apply" : "  Click To Use A Deposit  ",
+  "text_minimum_deposit" : " Minimum Deposit "
 }

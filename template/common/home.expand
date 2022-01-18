@@ -930,7 +930,6 @@
 <script src="{{ jslink('js/main-custom.js') }}"></script>
 
 <!--- Js Wokiee -->
-    {{ body_scripts }}
-		
+    {{ body_scripts }}		
 </body>
 </html>
