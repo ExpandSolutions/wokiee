@@ -198,7 +198,7 @@ function refreshStep(step_number, func){
 	$.ajax({
 		url: 'index.php?route=module/quickcheckout/refresh_step'+step_number,
 		type: 'post',
-		data: $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'checkbox\'], #quickcheckout input[type=\'radio\']:checked, #quickcheckout select, #quickcheckout textarea'),
+		data: $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'number\'], #quickcheckout input[type=\'checkbox\'], #quickcheckout input[type=\'radio\']:checked, #quickcheckout select, #quickcheckout textarea'),
 		dataType: 'html',
 		beforeSend: function() {
 			
@@ -229,7 +229,7 @@ function refreshStepView(step_number, func){
 	$.ajax({
 		url: 'index.php?route=module/quickcheckout/refresh_step_view'+step_number,
 		type: 'post',
-		data: $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'checkbox\'], #quickcheckout input[type=\'radio\']:checked, #quickcheckout select, #quickcheckout textarea'),
+		data: $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'number\'], #quickcheckout input[type=\'checkbox\'], #quickcheckout input[type=\'radio\']:checked, #quickcheckout select, #quickcheckout textarea'),
 		dataType: 'html',
 		beforeSend: function() {
 			
@@ -252,7 +252,7 @@ function updateSettings(func){
 	$.ajax({
 		url: 'index.php?route=module/quickcheckout/update_settings',
 		type: 'post',
-		data: $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'checkbox\'], #quickcheckout input[type=\'radio\']:checked, #quickcheckout select,  #quickcheckout textarea'),
+		data: $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'number\'], #quickcheckout input[type=\'checkbox\'], #quickcheckout input[type=\'radio\']:checked, #quickcheckout select,  #quickcheckout textarea'),
 		dataType: 'json',
 		beforeSend: function() {
 			
@@ -273,7 +273,7 @@ function refreshAllSteps(func){
 	$.ajax({
 		url: 'index.php?route=module/quickcheckout/refresh',
 		type: 'post',
-		data: $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'checkbox\']:checked, #quickcheckout input[type=\'radio\']:checked, #quickcheckout select,  #quickcheckout textarea'),
+		data: $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'number\'], #quickcheckout input[type=\'checkbox\']:checked, #quickcheckout input[type=\'radio\']:checked, #quickcheckout select,  #quickcheckout textarea'),
 		dataType: 'html',
 		beforeSend: function() {
 			
@@ -675,7 +675,7 @@ function confirmOrderQC(func){
 	$.ajax({
 		url: 'index.php?route=module/quickcheckout/confirm_order',
 		type: 'post',
-		data:   $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'checkbox\']:checked, #quickcheckout input[type=\'radio\']:checked, #quickcheckout select'),
+		data:   $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'number\'], #quickcheckout input[type=\'checkbox\']:checked, #quickcheckout input[type=\'radio\']:checked, #quickcheckout select'),
 		dataType: 'html',
 		beforeSend: function() {
 			
@@ -930,7 +930,7 @@ function debug_update(){
 		$.ajax({
 		url: 'index.php?route=module/quickcheckout/debug',
 		type: 'post',
-		data: $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'checkbox\']:checked, #quickcheckout input[type=\'radio\']:checked, #quickcheckout select,  #quickcheckout textarea'),
+		data: $('#quickcheckout input[type=\'text\'], #quickcheckout input[type=\'password\'], #quickcheckout input[type=\'number\'], #quickcheckout input[type=\'checkbox\']:checked, #quickcheckout input[type=\'radio\']:checked, #quickcheckout select,  #quickcheckout textarea'),
 		dataType: 'html',
 		beforeSend: function() {
 			
