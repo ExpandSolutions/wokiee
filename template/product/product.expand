@@ -868,7 +868,7 @@
                                                                             <label for="captcha">{{ lang('entry_captcha') }}*</label>
                                                                             <input type="text" name="captcha" style="width: 150px" class="form-control" id="captcha" value=""/>
                                                                             <br/>
-                                                                            <img src="index.php?route=product/product/captcha" alt="" id="captcha"/>
+                                                                            <img src="index.php?route=common/captcha" alt="" id="captcha"/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
