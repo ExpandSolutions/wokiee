@@ -101,6 +101,8 @@
   "top_brand": "ارقى الماركات",
   "text_discount_more":"خصم",
   "lang_webtt": "right",
-  "Copy_Right": "بدعم من<a href='https://www.expandcart.com'><strong>إكسباند كارت</strong></a>"
+  "Copy_Right": "بدعم من<a href='https://www.expandcart.com'><strong>إكسباند كارت</strong></a>",
+  "text_minimum_deposit_apply" : "   دفع عربون   ",
+  "text_minimum_deposit" : " أقل سعر للحجز "
 
 }

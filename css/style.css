@@ -21041,3 +21041,18 @@ header .tt-cart .tt-dropdown-toggle .tt-badge-cart,
 }
 
 /** End Color **/
+.modal .modal-title {
+  margin: 0 !important;
+}
+#myModalMinimumDeposit{
+  display: none !important;
+
+}
+#myModalMinimumDeposit.in-open{
+  display: block !important;
+}
+.modal .modal-header .close {
+  right: 0 !important;
+  z-index: 999999 !important;
+  color: {{ MainColor }} !important;
+}
