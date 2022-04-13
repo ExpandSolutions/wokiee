@@ -103,6 +103,8 @@
   "lang_webtt": "right",
   "Copy_Right": "بدعم من<a href='https://www.expandcart.com'><strong>إكسباند كارت</strong></a>",
   "text_minimum_deposit_apply" : "   دفع عربون   ",
-  "text_minimum_deposit" : " أقل سعر للحجز "
+  "text_minimum_deposit" : " أقل سعر للحجز ",
+  "entry_out_of_stars": "التقييم %s من 5 نجوم",
+  "entry_put_rating": "ضع تقييمك"
 
 }
